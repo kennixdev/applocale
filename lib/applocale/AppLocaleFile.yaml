@@ -1,0 +1,8 @@
+link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
+platform: "#{platform}"
+keystr: "Key"
+langlist:
+    zh_TW: ["Chinese(Traditional)", "#{path_zh_TW}"]
+    zh_CN: ["Chinese(Simplified)", "#{path_zh_CN}"]
+    en_US: ["English", "#{path_en_US}"]
+xlsxpath: "#{xlsxpath}"
