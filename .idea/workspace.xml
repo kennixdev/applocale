@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec09422d-6652-4b66-a562-d8b12a378c77" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applocale-0.1.0.gem" afterPath="$PROJECT_DIR$/applocale-0.1.0.gem" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/AppLocale.iml" afterPath="$PROJECT_DIR$/.idea/AppLocale.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applocale.gemspec" afterPath="$PROJECT_DIR$/applocale.gemspec" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,7 +42,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="convert_to_str_file.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="convert_to_str_file.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="339">
@@ -119,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="applocale.gemspec" pinned="false" current-in-tab="false">
+      <file leaf-file-name="applocale.gemspec" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/applocale.gemspec">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="13">
-              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+            <state relative-caret-position="233">
+              <caret line="21" column="7" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="21" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -204,9 +197,9 @@
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Command/init.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" />
-        <option value="$PROJECT_DIR$/applocale.gemspec" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
+        <option value="$PROJECT_DIR$/applocale.gemspec" />
       </list>
     </option>
   </component>
@@ -675,7 +668,7 @@
       <workItem from="1494475200044" duration="14207000" />
       <workItem from="1494515639257" duration="4485000" />
       <workItem from="1494520718477" duration="460000" />
-      <workItem from="1494648783760" duration="10382000" />
+      <workItem from="1494648783760" duration="10866000" />
     </task>
     <task id="LOCAL-00001" summary="temp">
       <created>1494475242430</created>
@@ -688,7 +681,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62806000" />
+    <option name="totallyTimeSpent" value="63290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="13" y="33" width="1280" height="725" extended-state="0" />
@@ -882,14 +875,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/applocale.gemspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13">
-          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="388">
@@ -910,6 +895,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="339">
           <caret line="42" column="25" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/applocale.gemspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="21" column="7" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="21" selection-end-column="7" />
           <folding />
         </state>
       </provider>
