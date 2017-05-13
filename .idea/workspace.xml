@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ec09422d-6652-4b66-a562-d8b12a378c77" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/AppLocale.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applocale-0.1.0.gem" afterPath="$PROJECT_DIR$/applocale-0.1.0.gem" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/AppLocale.iml" afterPath="$PROJECT_DIR$/.idea/AppLocale.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applocale.gemspec" afterPath="$PROJECT_DIR$/applocale.gemspec" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,7 +19,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/AppLocale@regex_util.coverage" NAME="regex_util Coverage Results" MODIFIED="1494519916863" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/applocale/Util" MODULE_NAME="AppLocale" />
+    <SUITE FILE_PATH="coverage/AppLocale@regex_util.coverage" NAME="regex_util Coverage Results" MODIFIED="1494690450088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/applocale/Util" MODULE_NAME="AppLocale" />
     <SUITE FILE_PATH="coverage/AppLocale@parse_localized_resource__1_.coverage" NAME="parse_localized_resource (1) Coverage Results" MODIFIED="1494505471083" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile" MODULE_NAME="AppLocale" />
     <SUITE FILE_PATH="coverage/AppLocale@init.coverage" NAME="init Coverage Results" MODIFIED="1494393556323" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/applocale/Command" MODULE_NAME="AppLocale" />
     <SUITE FILE_PATH="coverage/AppLocale@parse_xml_file.coverage" NAME="parse_xml_file Coverage Results" MODIFIED="1494503915454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile" MODULE_NAME="AppLocale" />
@@ -35,21 +38,29 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="regex_util.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/applocale/Util/regex_util.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-              <folding>
-                <marker date="1494524740000" expanded="true" signature="488:636" ph="##..." />
-              </folding>
+            <state relative-caret-position="99">
+              <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_xlsx.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb">
+      <file leaf-file-name="convert_to_str_file.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="339">
+              <caret line="42" column="25" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="color_util.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Util/color_util.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -58,21 +69,71 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_strings_file.rb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings_file.rb">
+      <file leaf-file-name="error_util.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Util/error_util.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1695">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_localized_resource.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb">
+      <file leaf-file-name="file_util.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Util/file_util.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-801">
+            <state relative-caret-position="15">
+              <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lang.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Util/lang.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="platform.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Util/platform.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AppLocaleFile.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/AppLocaleFile.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="applocale.gemspec" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/applocale.gemspec">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="13">
+              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="parse_xml_file.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="388">
+              <caret line="40" column="72" lean-forward="false" selection-start-line="40" selection-start-column="72" selection-end-line="40" selection-end-column="72" />
               <folding />
             </state>
           </provider>
@@ -105,6 +166,10 @@
       <find>pu</find>
       <find>puts</find>
       <find>@@setting</find>
+      <find>removeEscape</find>
+      <find>roo</find>
+      <find>addEscape</find>
+      <find>convertToAndroid</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -127,21 +192,21 @@
         <option value="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx_module.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/setting.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/config_util.rb" />
-        <option value="$PROJECT_DIR$/applocale.gemspec" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/parse_string_file.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_string_file.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_model.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/lang.rb" />
         <option value="$USER_HOME$/Desktop/TestRuby/AppLocale/IOS/en_US.strings" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/valid_key.rb" />
-        <option value="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/error_util.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings_file.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Command/init.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" />
+        <option value="$PROJECT_DIR$/applocale.gemspec" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" />
+        <option value="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
       </list>
     </option>
   </component>
@@ -152,7 +217,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="x" value="13" />
+    <option name="y" value="33" />
     <option name="width" value="1280" />
     <option name="height" value="725" />
   </component>
@@ -190,7 +256,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -232,28 +297,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -335,6 +378,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -630,7 +674,8 @@
       <workItem from="1494472913400" duration="1252000" />
       <workItem from="1494475200044" duration="14207000" />
       <workItem from="1494515639257" duration="4485000" />
-      <workItem from="1494520718477" duration="249000" />
+      <workItem from="1494520718477" duration="460000" />
+      <workItem from="1494648783760" duration="10382000" />
     </task>
     <task id="LOCAL-00001" summary="temp">
       <created>1494475242430</created>
@@ -643,29 +688,29 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52213000" />
+    <option name="totallyTimeSpent" value="62806000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="725" extended-state="6" />
+    <frame x="13" y="33" width="1280" height="725" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3240469" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32697946" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936507" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -702,47 +747,22 @@
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Util/config_util.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/parse_string_file.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/client_secret.json" />
     <entry file="file://$PROJECT_DIR$/exe/applocale" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/file_util.rb" />
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.2.5/gems/google-api-client-0.11.1/generated/google/apis/sheets_v4/classes.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/AppLocaleFile.yaml" />
     <entry file="file://$PROJECT_DIR$/lib/applocale.rb" />
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.2.5/gems/roo-2.7.1/lib/roo/spreadsheet.rb" />
     <entry file="file://$PROJECT_DIR$/Gemfile" />
-    <entry file="file://$PROJECT_DIR$/applocale.gemspec" />
     <entry file="file://$USER_HOME$/.rvm/gems/ruby-2.2.5/gems/activesupport-5.1.0/lib/active_support/core_ext/string/access.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/google_helper.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/parse_string_file.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_string_file.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_model.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/lang.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Command/AppLocale/IOS/zh_CN.strings" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Command/AppLocale/IOS/en_US.strings" />
     <entry file="file://$USER_HOME$/Desktop/TestRuby/AppLocale/IOS/zh_CN.strings" />
     <entry file="file://$USER_HOME$/Desktop/TestRuby/AppLocale/IOS/en_US.strings" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/parse_xlsx_module.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/setting.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/platform.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/init.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/config_util.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/color_util.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/error_util.rb" />
     <entry file="file://$PROJECT_DIR$/lib/applocale/Command/init.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/regex_util.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <marker date="1494524740000" expanded="true" signature="488:636" ph="##..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb">
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -750,18 +770,146 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb">
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings_file.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-801">
+        <state relative-caret-position="1170">
+          <caret line="78" column="64" lean-forward="false" selection-start-line="78" selection-start-column="64" selection-end-line="78" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/client_secret.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings_file.rb">
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1695">
+        <state relative-caret-position="1875">
+          <caret line="125" column="37" lean-forward="false" selection-start-line="125" selection-start-column="37" selection-end-line="125" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/parse_xlsx_module.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/setting.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/init.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/google_helper.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/config_util.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/color_util.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/error_util.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/file_util.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/AppLocaleFile.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/platform.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/lang.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/applocale.gemspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="40" column="72" lean-forward="false" selection-start-line="40" selection-start-column="72" selection-end-line="40" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Util/regex_util.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="33" column="40" lean-forward="false" selection-start-line="33" selection-start-column="40" selection-end-line="33" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="42" column="25" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
           <folding />
         </state>
       </provider>

@@ -68,19 +68,7 @@ module Applocale
 
             end
           end
-
-          # row && row.cells.each {|cell|
-          #   val = cell && cell.value
-          #   puts "#{rowno} - #{colno} = #{val}"
-          #
-          #
-          #
-          #   colno += 1
-          # }
-
-
         }
-
         if sheetcontent.header_rowno.nil?
           ErrorUtil::ParseXlsxError::HeadeNotFoundError.new("Header not found in sheet: #{sheetName}").to_warn
         end
@@ -135,7 +123,7 @@ module Applocale
       if cell_value.nil?
         return ""
       else
-        return cell_value
+        return ContentUtil.addEscapedDoubleQuote(cell_value)
       end
     end
 

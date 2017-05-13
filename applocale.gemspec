@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{for mobile application to manage locale}
   spec.description   = %q{It can convert file between string and xlsx, also support download xlsx from google}
   spec.homepage      = "https://github.com/kennix426/applocale"
-
+  spec.license  = "MIT"
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
@@ -34,9 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport", "~> 5.1"
   spec.add_dependency "thor", "~> 0.19.4"
   spec.add_dependency "google-api-client", "~> 0.11.1"
-  spec.add_dependency "google_drive", "~> 2.1.3"
-  spec.add_dependency "roo", "~> 2.7.1"
+  spec.add_dependency "google_drive", '~> 2.1', '>= 2.1.3'
   spec.add_dependency "colorize", "~> 0.8.1"
-  spec.add_dependency "rubyXL", "~> 3.3.23"
-
+  spec.add_dependency "rubyXL", '~> 3.3', '>= 3.3.23'
 end

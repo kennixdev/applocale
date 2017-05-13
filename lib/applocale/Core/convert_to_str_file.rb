@@ -8,18 +8,18 @@ module Applocale
 
     def self.convert(sheetcontent_list, setting = Setting)
       setting.langlist.each do |lang, langinfo|
-        puts "Start to conver to string file for lang \"#{lang}\"...".green
+        puts "Start to convert to string file for [\"#{lang}\"] #{langinfo[:path]}...".green
         if setting.platform == Platform::IOS
-          self.convertToIOS(setting.platform, lang, langinfo[:path], sheetcontent_list)
+          self.convertToStrings(setting.platform, lang, langinfo[:path], sheetcontent_list)
         elsif setting.platform == Platform::ANDROID
-          self.convertToAndroid(lang, langinfo[:path], sheetcontent_list)
+          self.convertToXML(setting.platform,lang, langinfo[:path], sheetcontent_list)
         end
       end
 
       puts "Convert Finished !!!".green
     end
 
-    def self.convertToIOS(platform, lang, langfilepath, sheetcontent_list)
+    def self.convertToStrings(platform, lang, langfilepath, sheetcontent_list)
       FileUtils.mkdir_p(File.dirname(langfilepath))
       target = open(langfilepath, 'w')
 
@@ -40,7 +40,7 @@ module Applocale
 
     end
 
-    def self.convertToAndroid(lang, langfilepath, sheetcontent_list)
+    def self.convertToXML(platform, lang, langfilepath, sheetcontent_list)
       FileUtils.mkdir_p(File.dirname(langfilepath))
       target = open(langfilepath, 'w')
       target.puts("<resources>")
@@ -50,7 +50,7 @@ module Applocale
         contentlist = sheetcontent.getRowInfoSortByKey()
         contentlist.each do |rowinfo|
           content = rowinfo.content_dict[lang]
-          value = content
+          value = ContentUtil.addEscape(platform,content)
           target.puts("   <string name=\"#{rowinfo.key_str.downcase}\">#{value}</string>")
         end
         target.puts("")
