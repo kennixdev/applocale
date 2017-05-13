@@ -22,7 +22,36 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+	Commands:
+		+ init [platform]  # Create Config File, platform: ios | android
+		+ reverse          # Convert localization string file to xlsx
+			[--skip]  	# Skip Error
+		+ update           # Download xlsx and convert to localization strings file
+			[--local=LOCAL]  # Convert local xlsx file to localization string file
+
+
+	For XLSX To localization String files: 
+	Step1: create config file:
+		$ applocale init IOS
+	Step2: edit config file:
+		link: download link for xlsx, it support google spreadsheet
+		platform: It can be android or ios
+		keystr: header for Key in xlsx
+		langlist: header and path for different language
+		xlsxpath: local path for save or read xlsx
+	Step3: Download and convert xlsx to strings file
+		$ applocale update
+
+	For localization String files To XLSX : 
+	Step1: create config file:
+		$ applocale init IOS
+	Step2: edit config file:
+		platform: It can be android or ios
+		keystr: header for Key in xlsx
+		langlist: header and path for different language
+		xlsxpath: local path for save or read xlsx
+	Step3: convert to xlsx 
+		$ applocale reverse
 
 ## Development
 
