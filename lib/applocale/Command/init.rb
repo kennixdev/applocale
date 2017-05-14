@@ -4,6 +4,7 @@ require File.expand_path('../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../Core/setting.rb', __FILE__)
 require File.expand_path('../../Core/init.rb', __FILE__)
 require File.expand_path('../../Core/ParserStringFile/parse_localized_resource.rb', __FILE__)
+require File.expand_path('../../version', __FILE__)
 
 require 'thor'
 
@@ -50,6 +51,11 @@ module Applocale
         ConfigUtil.load_and_validate_localefile_to_xlsx()
         Setting.printlog
         Applocale::start_reverse(is_skip)
+      end
+
+      desc "version", "show the AppLocale verions"
+      def version()
+        puts Applocale::VERSION
       end
 
     end

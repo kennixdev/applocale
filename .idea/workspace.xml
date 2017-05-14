@@ -5,30 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec09422d-6652-4b66-a562-d8b12a378c77" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/applocale/Core/Compare/compare_xlsx_str.rb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/applocale/Core/client_secret.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/applocale/Core/google_helper.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx_module.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/applocale/Util/color_util.rb" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/convert_to_localefile.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/AppLocale.iml" afterPath="$PROJECT_DIR$/.idea/AppLocale.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applocale-0.1.2.gem" afterPath="$PROJECT_DIR$/applocale-0.1.2.gem" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Command/init.rb" afterPath="$PROJECT_DIR$/lib/applocale/Command/init.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings_file.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings_file.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/init.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/init.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/setting.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/setting.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/config_util.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/config_util.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/error_util.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/error_util.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/file_util.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/file_util.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/lang.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/lang.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/platform.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/platform.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" afterPath="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/version.rb" afterPath="$PROJECT_DIR$/lib/applocale/version.rb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,16 +37,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="convert_to_localefile.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/convert_to_localefile.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="30" column="12" lean-forward="false" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="error_util.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/applocale/Util/error_util.rb">
           <provider selected="true" editor-type-id="text-editor">
@@ -79,7 +47,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config_util.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config_util.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/applocale/Util/config_util.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
@@ -94,16 +62,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="555">
               <caret line="37" column="22" lean-forward="false" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="parse_xml_file.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="27" column="23" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -139,21 +97,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_xlsx.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParseXLSX/parse_xlsx.rb">
+      <file leaf-file-name="applocale.gemspec" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/applocale.gemspec">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="37" column="39" lean-forward="false" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
+            <state relative-caret-position="135">
+              <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parse_xlsx_module.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/ParseXLSX/parse_xlsx_module.rb">
+      <file leaf-file-name="init.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Core/init.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="60" column="0" lean-forward="true" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+            <state relative-caret-position="120">
+              <caret line="8" column="63" lean-forward="false" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="init.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/Command/init.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="57" column="31" lean-forward="false" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="version.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/applocale/version.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -228,7 +206,6 @@
         <option value="$PROJECT_DIR$/lib/applocale/Util/file_util.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/lang.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" />
-        <option value="$PROJECT_DIR$/lib/applocale/Command/init.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/setting.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/convert_to_str_file.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_resource.rb" />
@@ -242,6 +219,7 @@
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_strings_file.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/platform.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/config_util.rb" />
+        <option value="$PROJECT_DIR$/lib/applocale/Command/init.rb" />
       </list>
     </option>
   </component>
@@ -332,154 +310,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ParseXLSX" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ParserStringFile" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoogleHepler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="AppLocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="applocale" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Core" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Compare" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -833,7 +663,7 @@
       <workItem from="1494515639257" duration="4485000" />
       <workItem from="1494520718477" duration="460000" />
       <workItem from="1494648783760" duration="10952000" />
-      <workItem from="1494731920943" duration="13283000" />
+      <workItem from="1494731920943" duration="14015000" />
     </task>
     <task id="LOCAL-00001" summary="temp">
       <created>1494475242430</created>
@@ -846,7 +676,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76659000" />
+    <option name="totallyTimeSpent" value="77391000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="725" extended-state="6" />
@@ -973,14 +803,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/applocale.gemspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/applocale.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1001,22 +823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Command/init.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/applocale/version.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1057,14 +863,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="585">
           <caret line="39" column="8" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/init.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="63" lean-forward="false" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -1145,6 +943,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="162" column="107" lean-forward="false" selection-start-line="162" selection-start-column="107" selection-end-line="162" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/applocale.gemspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Core/init.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="63" lean-forward="false" selection-start-line="8" selection-start-column="63" selection-end-line="8" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/version.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/applocale/Command/init.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="57" column="31" lean-forward="false" selection-start-line="57" selection-start-column="31" selection-end-line="57" selection-end-column="31" />
           <folding />
         </state>
       </provider>
