@@ -53,6 +53,8 @@ Or install it yourself as:
 	Step3: convert to xlsx 
 		$ applocale reverse
 
+	*** Note that, the special character handling in xlsx is base on strings file(IOS) format.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

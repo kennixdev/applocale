@@ -6,12 +6,12 @@ require 'applocale/version'
 Gem::Specification.new do |spec|
   spec.name          = "applocale"
   spec.version       = Applocale::VERSION
-  spec.authors       = ["Kennix Chui"]
+  spec.authors       = ["Kennix"]
   spec.email         = ["kennixdev@gmail.com"]
 
   spec.summary       = %q{for mobile application to manage locale}
   spec.description   = %q{It can convert file between string and xlsx, also support download xlsx from google}
-  spec.homepage      = "https://github.com/kennix426/applocale"
+  spec.homepage      = "https://github.com/kennixdev/applocale"
   spec.license  = "MIT"
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
