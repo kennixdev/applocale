@@ -1,4 +1,4 @@
-require File.expand_path('../../Util/color_util.rb', __FILE__)
+require 'colorize'
 
 module Applocale
   class Setting
@@ -7,12 +7,13 @@ module Applocale
     end
 
     def self.printlog
-      puts " In Setting"
+      puts ' In Setting'
       puts "  link = #{self.link}"
       puts "  platform = #{self.platform}"
       puts "  keystr = #{self.keystr}"
       puts "  langlist = #{self.langlist}"
       puts "  xlsxpath = #{self.xlsxpath}"
     end
+
   end
 end

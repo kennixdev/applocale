@@ -3,9 +3,9 @@ require 'googleauth'
 require 'googleauth/stores/file_token_store'
 require 'google/apis/sheets_v4'
 require 'fileutils'
-require File.expand_path('../../Util/file_util.rb', __FILE__)
-require File.expand_path('../../Util/color_util.rb', __FILE__)
-require File.expand_path('../../Util/error_util.rb', __FILE__)
+require 'colorize'
+require File.expand_path('../../../Util/file_util.rb', __FILE__)
+require File.expand_path('../../../Util/error_util.rb', __FILE__)
 
 module Applocale
 
@@ -14,10 +14,10 @@ module Applocale
     APPLICATION_NAME = 'AppLocale'
     CLIENT_SECRETS_PATH = 'client_secret.json'
     CREDENTIALS_PATH = File.join(Dir.home, '.applan_credentials',
-                                 "drive-ruby-applocale.yaml")
+                                 'drive-ruby-applocale.yaml')
     SCOPE = [Google::Apis::DriveV3::AUTH_DRIVE_METADATA_READONLY, Google::Apis::DriveV3::AUTH_DRIVE, Google::Apis::DriveV3::AUTH_DRIVE_FILE]
 
-    def self.isGoogleLink(link)
+    def self.is_googlelink(link)
       if !link.nil? && link.length > 0
         if link.match(/https:\/\/docs.google.com\/spreadsheets\/d\/([^\/]*)/i)
           if $1.length > 0
@@ -27,18 +27,22 @@ module Applocale
       end
     end
 
-    def self.downloadSpreadSheet(spreadSheetId, filename)
-      puts "Start download from google, fileId: #{spreadSheetId} ...".green
+    def self.download_spreadsheet(spreadsheet_Id, filename)
+      puts "Start download from google, fileId: #{spreadsheet_Id} ...".green
       service = Google::Apis::DriveV3::DriveService.new
       service.client_options.application_name = APPLICATION_NAME
       service.authorization = self.authorize
-      content = service.export_file(spreadSheetId,
-                                    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                                    download_dest: filename)
-      if File.exist? filename
-        puts "Download from google finished".green
-      else
-        ErrorUtil::DownloadXlsxError.new("Cannot download from google").raise
+      begin
+        content = service.export_file(spreadsheet_Id,
+                                      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                                      download_dest: filename)
+        if File.exist? filename
+          puts 'Download from google finished'.green
+        else
+          ErrorUtil::DownloadFromGoogleFail.new.raise
+        end
+      rescue
+        ErrorUtil::DownloadFromGoogleFail.new.raise
       end
     end
 
@@ -55,8 +59,8 @@ module Applocale
       if credentials.nil?
         url = authorizer.get_authorization_url(
             base_url: OOB_URI)
-        puts "!!! Open the following URL in the browser and enter the ".red +
-                 "resulting code after authorization:".red
+        puts '!!! Open the following URL in the browser and enter the '.red +
+                 'resulting code after authorization:'.red
         puts url.blue.on_white
         code = STDIN.gets.chomp
         credentials = authorizer.get_and_store_credentials_from_code(

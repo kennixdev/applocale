@@ -11,7 +11,7 @@ module Applocale
       if devicemodel == Platform::IOS
         return !FILENAME_IOS[locale].nil? ? FILENAME_IOS[locale] : "#{locale}.strings"
       elsif devicemodel == Platform::ANDROID
-        return File.join(FILENAME_ANDROID[locale],"strings.xml")
+        return File.join(FILENAME_ANDROID[locale],'strings.xml')
       end
       return nil
     end

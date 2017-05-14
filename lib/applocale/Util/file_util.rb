@@ -4,56 +4,56 @@ require 'pathname'
 
 module Applocale
   class FileUtil
-    @@dirname_main = "AppLocale"
-    @@dirname_ios = "IOS"
-    @@dirname_android = "Android"
-    @@filename_config = "AppLocaleFile.yaml"
-    @@filename_xlsx = "string.xlsx"
+    DIRNAME_MAIN = 'AppLocale'
+    DIRNAME_IOS = 'IOS'
+    DIRNAME_ANDROID = 'Android'
+    FILENAME_CONFIG = 'AppLocaleFile.yaml'
+    FILENAME_XLSX = 'string.xlsx'
 
     def self.filename_config
-      return @@filename_config
+      return FILENAME_CONFIG
     end
 
-    def self.mainFolderPathStr
-      pathstr = File.join(Dir.pwd, @@dirname_main)
+    def self.mainfolder_pathstr
+      pathstr = File.join(Dir.pwd, DIRNAME_MAIN)
       Dir.mkdir pathstr unless File.exist?(pathstr)
       return pathstr
     end
 
-    def self.configFilePathStr
-      filename = @@filename_config
-      pathstr = File.join(self.mainFolderPathStr, filename)
+    def self.configfile_pathstr
+      filename = FILENAME_CONFIG
+      pathstr = File.join(self.mainfolder_pathstr, filename)
       return pathstr
     end
+    #
+    # def self.create_configfile_ifneed(platform)
+    #   pathstr = self.configfile_pathstr
+    #   ConfigUtil.create_configfile(platform, pathstr) unless File.exist?(pathstr)
+    # end
 
-    def self.createConfigFileIfNeed(platform)
-      pathstr = self.configFilePathStr
-      self.createConfigFile(pathstr, platform) unless File.exist?(pathstr)
-    end
-
-    def self.defaultLocaleFileRelativePathStr(platform, lang)
+    def self.get_default_localefile_relative_pathstr(platform, lang)
       if platform == Platform::IOS
-        dirname = @@dirname_ios
+        dirname = DIRNAME_IOS
       elsif platform == Platform::ANDROID
-        dirname = @@dirname_android
+        dirname = DIRNAME_ANDROID
       end
-      if !dirname.nil?
-        dirpathstr = File.join(self.mainFolderPathStr, dirname)
+      unless dirname.nil?
+        dirpathstr = File.join(self.mainfolder_pathstr, dirname)
         Dir.mkdir dirpathstr unless File.exist?(dirpathstr)
         filename = Locale.filename(platform, lang)
         filepathstr = File.join(dirpathstr, filename)
         filepath = Pathname.new(filepathstr)
-        configfilepath = Pathname.new(File.dirname(self.configFilePathStr))
+        configfilepath = Pathname.new(File.dirname(self.configfile_pathstr))
         return filepath.relative_path_from(configfilepath).to_s
       end
       return nil
     end
 
-    def self.defaultXlsxRelativePathStr
-      filename = @@filename_xlsx
-      pathstr = File.join(self.mainFolderPathStr, filename)
+    def self.get_default_xlsx_relativepath_str
+      filename = FILENAME_XLSX
+      pathstr = File.join(self.mainfolder_pathstr, filename)
       filepath = Pathname.new(pathstr)
-      configfilepath = Pathname.new(File.dirname(self.configFilePathStr))
+      configfilepath = Pathname.new(File.dirname(self.configfile_pathstr))
       return filepath.relative_path_from(configfilepath).to_s
     end
   end

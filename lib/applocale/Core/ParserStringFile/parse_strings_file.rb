@@ -27,6 +27,8 @@ module Applocale
       @in_multiline_comments = false
       keyrowno = {}
       linenum = 0
+      begin
+
       IO.foreach(strings_path, mode: 'r:bom|utf-8') {|line|
         linenum += 1
         line.strip!
@@ -64,7 +66,7 @@ module Applocale
             break
           end
 
-          if !ValidKey.isValidKey(@platform, key)
+          if !ValidKey.is_validkey(@platform, key)
             error = ErrorUtil::ParseLocalizedError::InvalidKey.new(key, strings_path, lang, linenum)
             @errorlist.push(error)
             break
@@ -76,7 +78,7 @@ module Applocale
           if @strings_keys[key][lang.to_s].nil?
             @strings_keys[key][lang.to_s] = Hash.new
             @strings_keys[key][lang.to_s][:rowno] = linenum
-            @strings_keys[key][lang.to_s][:value] = ContentUtil.removeEscape(@platform, value)
+            @strings_keys[key][lang.to_s][:value] = ContentUtil.remove_escape(@platform, value)
             keyrowno[key] = linenum
           else
             error = ErrorUtil::ParseLocalizedError::DuplicateKey.new(key, keyrowno[key], strings_path, lang, linenum)
@@ -87,6 +89,9 @@ module Applocale
           end
         end
       }
+      rescue
+        ErrorUtil::ParseLocalizedError::InvalidFile.new(strings_path).raise
+      end
     end
 
     def parse_token(linenum, line, sep, lang, file)
@@ -153,5 +158,6 @@ module Applocale
       end
       return value, line[n..-1]
     end
+
   end
 end

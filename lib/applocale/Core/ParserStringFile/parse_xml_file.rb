@@ -22,7 +22,6 @@ module Applocale
     end
 
     def to_parse_strings_file(lang, strings_path)
-      xml_doc = nil
       return if !File.exist? strings_path
       puts "Start to Parse xml file: \"#{strings_path}\" ...".green
 
@@ -38,7 +37,7 @@ module Applocale
           end
           if @strings_keys[key][lang.to_s].nil?
             @strings_keys[key][lang.to_s] = Hash.new
-            @strings_keys[key][lang.to_s][:value] = ContentUtil.removeEscape(@platform, value)
+            @strings_keys[key][lang.to_s][:value] = ContentUtil.remove_escape(@platform, value)
           else
             error = ErrorUtil::ParseLocalizedError::DuplicateKey.new(key, -1, strings_path, lang, -1)
             @errorlist.push(error)
@@ -46,6 +45,6 @@ module Applocale
         end
       end
     end
-  end
 
+  end
 end

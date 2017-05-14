@@ -4,11 +4,11 @@ require File.expand_path('../platform.rb', __FILE__)
 
 module Applocale
   class ValidKey
-    REGEX_KEYSTR_IOS = /\A[0-9a-zA-Z\_]+\z/
+    REGEX_KEYSTR_IOS = /\A[0-9a-zA-Z_]+\z/
 
-    def self.isValidKey(platfrom, key)
+    def self.is_validkey(platfrom, key)
       return false if key.nil?
-      return false if key.strip == ""
+      return false if key.strip.length <= 0
       result = !REGEX_KEYSTR_IOS.match(key).nil?
       return result
     end
@@ -18,25 +18,25 @@ module Applocale
     REGEX_ESCAPED_QUOTE = /(?<!\\)(?:\\{2})*(\\")/
     REGEX_NON_ESCAPE_QUOTE = /(?<!\\)(?:\\{2})*(")/
 
-    def self.removeEscape(platform, content)
+    def self.remove_escape(platform, content)
       if platform == Platform::IOS
-        return self.removeEscapedDoubleQuote(content)
+        return self.remove_escaped_double_quote(content)
       elsif platform == Platform::ANDROID
-        return self.removeEscapedForAndroid(content)
+        return self.remove_escaped_android(content)
       end
       return content
     end
 
-    def self.addEscape(platform, content)
+    def self.add_escape(platform, content)
       if platform == Platform::IOS
-        return self.addEscapedDoubleQuote(content)
+        return self.add_escaped_double_quote(content)
       elsif platform == Platform::ANDROID
-        return self.addEscapedForAndroid(content)
+        return self.add_escaped_android(content)
       end
       return content
     end
 
-    def self.addEscapedForAndroid(content)
+    def self.add_escaped_android(content)
       # \u \U \0 don't know
       reg = /(?<!\\)((?:\\{2})+)*\\[c-eg-mo-qsw-zA-TW-Z!$%()*+,-.\/;:>\[\]^_`{|}~89]/
       new_value = content.gsub(reg) {|match|
@@ -46,22 +46,22 @@ module Applocale
       reg = /(?<!\\)((?:\\{2})+)*(\\r)/
       new_value = new_value.gsub(reg) {|match|
         match.slice!(-1)
-        match + "n"
+        match + 'n'
       }
-      new_value = new_value.gsub(/&/, "&amp;")
-      new_value = new_value.gsub(/</, "&lt;")
+      new_value = new_value.gsub(/&/, '&amp;')
+      new_value = new_value.gsub(/</, '&lt;')
       # new_value = new_value.gsub(/>/, "&gt;")
       return new_value
     end
 
-    def self.removeEscapedForAndroid(content)
-      new_value = content.gsub(/&lt;/, "<")
-      new_value = new_value.gsub(/&amp;/, "&")
+    def self.remove_escaped_android(content)
+      new_value = content.gsub(/&lt;/, '<')
+      new_value = new_value.gsub(/&amp;/, '&')
       puts "test=#{content}==#{new_value}"
       return new_value
     end
 
-    def self.addEscapedDoubleQuote(content)
+    def self.add_escaped_double_quote(content)
       reg = /(?<!\\)((?:\\{2})+)"|(?<!\\)"|^"/
       new_value = content.gsub(reg) {|match|
           "\\" + match
@@ -69,7 +69,7 @@ module Applocale
       return new_value
     end
 
-    def self.removeEscapedDoubleQuote(content)
+    def self.remove_escaped_double_quote(content)
       reg = /(?<!\\)((?:\\{2})+)*\\"/
       new_value = content.gsub(reg) {|match|
         match.slice!(0)

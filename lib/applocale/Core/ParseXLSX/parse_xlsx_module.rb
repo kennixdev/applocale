@@ -2,41 +2,40 @@ module Applocale
 
   module ParseXLSXModule
     class SheetContent
-      attr_accessor :sheetname, :header_rowno, :keyStrWithColNo, :langWithColNo_list, :rowinfo_list, :comment
+      attr_accessor :sheetname, :header_rowno, :keyStr_with_colno, :lang_with_colno_list, :rowinfo_list, :comment
 
       def initialize(sheetname)
         self.sheetname = sheetname
-        self.rowinfo_list = Array.new()
-        self.langWithColNo_list = Array.new()
+        self.rowinfo_list = Array.new
+        self.lang_with_colno_list = Array.new
         self.comment = sheetname
       end
 
-      def getRowInfoSortByKey()
+      def get_rowInfo_sortby_key
         return self.rowinfo_list.sort_by { |obj| obj.key_str.to_s }
       end
 
-      def getRowInfoSortByRowNo()
+      def get_rowInfo_sortby_rowno
         return self.rowinfo_list.sort_by { |obj| obj.rowno.to_i }
       end
 
       def to_s
-        str_keyStrWithColNo = ""
-        if !keyStrWithColNo.nil?
-          str_keyStrWithColNo = "\n\t#{keyStrWithColNo.to_s}"
+        str_keyStr_with_colno = ''
+        unless keyStr_with_colno.nil?
+          str_keyStr_with_colno = "\n\t#{keyStr_with_colno.to_s}"
         end
-        str_langWithColNo_list = ""
-        self.langWithColNo_list.each do |langWithColNo|
-          str_langWithColNo_list += "\n\t#{langWithColNo.to_s}"
+        str_lang_with_colno_list = ''
+        self.lang_with_colno_list.each do |langWithColNo|
+          str_lang_with_colno_list += "\n\t#{langWithColNo.to_s}"
         end
-        str_contentlist = "\n"
-        self.getRowInfoSortByRowNo().each do |value|
+        str_contentlist = '\n'
+        self.get_rowInfo_sortby_rowno.each do |value|
           str_contentlist += "\t #{value.to_s}\n"
         end
-
         "sheetname = #{sheetname}\n" +
             "header_rowno = #{header_rowno}\n" +
-            "keyStrWithColNo = #{str_keyStrWithColNo}\n" +
-            "langWithColNo_list = #{str_langWithColNo_list}\n" +
+            "keyStrWithColNo = #{str_keyStr_with_colno}\n" +
+            "langWithColNo_list = #{str_lang_with_colno_list}\n" +
             "rowinfo_list = #{str_contentlist}"
       end
     end
@@ -53,7 +52,7 @@ module Applocale
       end
 
       def to_s
-        "sheetname = #{sheetname}, rowno = #{rowno}, key_str = #{key_str}, content_dict = #{content_dict}"
+        "sheetname = #{sheetname}, rowno = #{rowno+1}, key_str = #{key_str}, content_dict = #{content_dict}"
       end
 
     end
@@ -68,7 +67,7 @@ module Applocale
       end
 
       def to_s
-        "{header_str => #{header_str}, colno => #{colno}}"
+        "{header_str => #{header_str}, colno => #{colno+1}}"
       end
 
     end
@@ -83,8 +82,9 @@ module Applocale
       end
 
       def to_s
-        "{header_str => #{header_str}, lang => #{lang}, colno => #{colno}}"
+        "{header_str => #{header_str}, lang => #{lang}, colno => #{colno+1}}"
       end
+
     end
 
   end

@@ -30,7 +30,7 @@ module Applocale
           self.class.help(shell)
           ErrorUtil::CommandError.new("Invalid [platform] : ios | android ").raise
         else
-          ConfigUtil.createConfigFileIfNeed(platformsybom)
+          ConfigUtil.create_configfile_ifneed(platformsybom)
         end
       end
 
@@ -38,19 +38,18 @@ module Applocale
       option :local, :desc => "Convert local xlsx file to localization string file"
       def update()
         is_local = !options[:local].nil?
-        puts is_local
-        ConfigUtil.loadAndValidateForXlsxToStringFile(false)
+        ConfigUtil.load_and_validate_xlsx_to_localefile(is_local)
         Setting.printlog
-        Applocale.start(is_local, Applocale::Setting)
+        Applocale.start_update(is_local, Applocale::Setting)
       end
 
       desc "reverse", "Convert localization string file to xlsx"
       option :skip, :desc => "Skip Error"
       def reverse()
         is_skip = !options[:skip].nil?
-        ConfigUtil.loadAndValidateForStringFileToXlsx()
+        ConfigUtil.load_and_validate_localefile_to_xlsx()
         Setting.printlog
-        Applocale::ParseLocalizedResource.new(is_skip)
+        Applocale::start_reverse(is_skip)
       end
 
     end

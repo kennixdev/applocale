@@ -1,12 +1,11 @@
-require File.expand_path('../color_util.rb', __FILE__)
-
+require 'colorize'
 
 module Applocale
   module ErrorUtil
     class CommonError < StandardError
       def raise
         puts "** Error: #{self.message}".red
-        abort("")
+        abort('')
       end
 
       def to_warn
@@ -17,10 +16,13 @@ module Applocale
     class CommandError < CommonError;
     end
 
-    class MissingConfigFileError < CommonError;
+    class MissingConfigFile < CommonError
+      def message
+        "Missing ConfigFile"
+      end
     end
 
-    class ConfigFileValidError < CommonError
+    class ConfigFileInValid < CommonError
       def self.raiseArr(list = nil)
         if !list.nil? && list.length > 0
           puts "*** ConfigError ***".red
@@ -30,29 +32,44 @@ module Applocale
           abort("")
         end
       end
-      # attr_accessor :msg
-      # def initialize(msg)
-      #   self.msg = msg
-      # end
     end
 
-    class DownloadXlsxError < CommonError
-
+    class DownloadFromGoogleFail < CommonError
+      def message
+        "Cannot download from google"
+      end
     end
 
+    class CannotOpenXlsxFile < CommonError
+      attr_accessor :path
+      def initialize(path)
+        @path = path
+      end
+      def message
+        "Can't open xlsx file #{self.path}"
+      end
+    end
+  end
+end
+
+module Applocale
+  module ErrorUtil
 
     module ParseXlsxError
       class ParseError < CommonError
 
-        attr_accessor :rowinfo, :msg
+        attr_accessor :rowinfo
 
-        def initialize(rowinfo = nil, msg = nil)
+        def initialize(rowinfo = nil)
           @rowinfo = rowinfo
-          @msg = msg
         end
 
         def message
-          "#{rowinfo.to_s} - #{msg}"
+          self.msg
+        end
+
+        def msg
+          return rowinfo.to_s
         end
 
         def self.raiseArr(list = nil)
@@ -67,13 +84,43 @@ module Applocale
 
       end
 
-      class HeadeNotFoundError < ParseError;
+      class HeadeNotFound < ParseError
+        attr_accessor :sheetname
+        def initialize(sheetname)
+          @sheetname = sheetname
+        end
+
+        def message
+          "Header not found in sheet: #{self.sheetname}"
+        end
       end
-      class ErrorDuplicateKey < ParseError;
+
+      class DuplicateKey < ParseError
+        attr_accessor :duplicate_sheetname, :duplicate_rowno
+
+        def initialize(rowinfo, duplicate_sheetname, duplicate_rowno)
+          @rowinfo = rowinfo
+          @duplicate_sheetname = duplicate_sheetname
+          @duplicate_rowno = duplicate_rowno
+        end
+
+        def message
+          "DuplicateKey [#{self.rowinfo.key_str}] - #{self.msg} : duplicateWithSheet: #{self.duplicate_sheetname} Row: #{self.duplicate_rowno+1}"
+        end
       end
-      class ErrorInValidKey < ParseError;
+
+      class InValidKey < ParseError;
+        def message
+          "InvalidKey [#{self.rowinfo.key_str}] - #{self.msg}"
+        end
       end
     end
+  end
+end
+
+
+module Applocale
+  module ErrorUtil
 
     module ParseLocalizedError
       class ParseLocalizedError < CommonError
@@ -90,7 +137,7 @@ module Applocale
         end
 
         def msg
-          return "lang: #{lang}, rowno: #{row_no}, file: #{file}"
+          return "lang: #{self.lang}, rowno: #{self.row_no}, file: #{self.file}"
         end
 
         def raise(is_exit = true)
@@ -110,6 +157,16 @@ module Applocale
 
       end
 
+      class InvalidFile < ParseLocalizedError
+        attr_accessor :path
+        def initialize(path)
+          @path = path
+        end
+        def message
+          "Can't open file #{self.path}"
+        end
+      end
+
       class InvalidKey < ParseLocalizedError
         attr_accessor :key
 
@@ -121,7 +178,7 @@ module Applocale
         end
 
         def message
-          "InvalidKey [#{key}] - #{self.msg}"
+          "InvalidKey [#{self.key}] - #{self.msg}"
         end
       end
 
@@ -132,6 +189,7 @@ module Applocale
       end
       class DuplicateKey < ParseLocalizedError
         attr_accessor :key, :duplicate_rowno
+
         def initialize(key, duplicate_rowno, file, lang, row_no)
           @key = key
           @duplicate_rowno = duplicate_rowno
@@ -141,7 +199,7 @@ module Applocale
         end
 
         def message
-          "DuplicateKey [#{key}] - #{self.msg} : duplicateWithRow: #{duplicate_rowno}"
+          "DuplicateKey [#{self.key}] - #{self.msg} : duplicateWithRow: #{self.duplicate_rowno}"
         end
       end
     end
