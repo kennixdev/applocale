@@ -27,13 +27,20 @@ module Applocale
       end
     end
 
+    def self.reset_loginacc
+      if File.exist? CREDENTIALS_PATH
+        File.delete(CREDENTIALS_PATH)
+      end
+      puts "Account Reseted!"
+    end
+
     def self.download_spreadsheet(spreadsheet_Id, filename)
       puts "Start download from google, fileId: #{spreadsheet_Id} ...".green
       service = Google::Apis::DriveV3::DriveService.new
       service.client_options.application_name = APPLICATION_NAME
       service.authorization = self.authorize
       begin
-        content = service.export_file(spreadsheet_Id,
+        service.export_file(spreadsheet_Id,
                                       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                                       download_dest: filename)
         if File.exist? filename
@@ -41,12 +48,39 @@ module Applocale
         else
           ErrorUtil::DownloadFromGoogleFail.new.raise
         end
+      rescue Google::Apis::AuthorizationError => e
+        self.failauth(spreadsheet_Id, filename)
+      rescue Google::Apis::ClientError => e
+        self.failauth(spreadsheet_Id, filename)
+      rescue Google::Apis::ServerError => e
+        self.failauth( spreadsheet_Id, filename)
       rescue
         ErrorUtil::DownloadFromGoogleFail.new.raise
       end
     end
 
+    def self.failauth(spreadsheet_Id, filename)
+      ErrorUtil::DownloadFromGoogleFail.new.to_warn
+      self.askfor_relogin(true, spreadsheet_Id, filename)
+    end
+
     private
+    def self.askfor_relogin(is_firsttime, spreadsheet_Id, filename)
+      unless is_firsttime
+        puts "Invalid Command. Please input [Y/N]".red
+      end
+      puts "login again? [Y/N]".red
+      code = STDIN.gets.chomp.downcase
+      if code == 'y'
+        self.reset_loginacc
+        self.download_spreadsheet(spreadsheet_Id, filename)
+      elsif code == 'n'
+        exit(0)
+      else
+        self.askfor_relogin(false, spreadsheet_Id, filename)
+      end
+    end
+
     def self.authorize
 
       FileUtils.mkdir_p(File.dirname(CREDENTIALS_PATH))

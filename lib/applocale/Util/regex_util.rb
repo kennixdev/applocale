@@ -78,6 +78,16 @@ module Applocale
       return new_value
     end
 
+    def self.from_excel(content)
+      reg = /(?<!\\)((?:\\{2})+)*\\"/
+      new_value = content.gsub(reg) {|match|
+        match.slice!(0)
+        match
+      }
+      new_value = new_value.gsub(/\n/, "\\n")
+      new_value = new_value.gsub(/\t/, "\\t")
+      return new_value
+    end
   end
 end
 

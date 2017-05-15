@@ -121,7 +121,7 @@ module Applocale
       if cell_value.nil?
         return ''
       else
-        return ContentUtil.add_escaped_double_quote(cell_value)
+        return ContentUtil.from_excel(cell_value)
       end
     end
 

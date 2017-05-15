@@ -5,6 +5,7 @@ require File.expand_path('../../Core/setting.rb', __FILE__)
 require File.expand_path('../../Core/init.rb', __FILE__)
 require File.expand_path('../../Core/ParserStringFile/parse_localized_resource.rb', __FILE__)
 require File.expand_path('../../version', __FILE__)
+require File.expand_path('../../Core/GoogleHepler/google_helper', __FILE__)
 
 require 'thor'
 
@@ -58,6 +59,10 @@ module Applocale
         puts Applocale::VERSION
       end
 
+      desc "google_logout", "logout google account"
+      def google_logout()
+        GoogleHelper.reset_loginacc
+      end
     end
   end
 end
