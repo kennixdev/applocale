@@ -31,7 +31,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.0"
 
-  spec.add_dependency "activesupport", "~> 5.1"
   spec.add_dependency "thor", "~> 0.19.4"
   spec.add_dependency "google-api-client", "~> 0.11.1"
   spec.add_dependency "google_drive", '~> 2.1', '>= 2.1.3'

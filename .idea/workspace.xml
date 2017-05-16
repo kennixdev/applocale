@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ec09422d-6652-4b66-a562-d8b12a378c77" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/Core/convert_to_localefile.rb" afterPath="$PROJECT_DIR$/lib/applocale/Core/convert_to_localefile.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/applocale.gemspec" afterPath="$PROJECT_DIR$/applocale.gemspec" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/applocale/version.rb" afterPath="$PROJECT_DIR$/lib/applocale/version.rb" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +40,8 @@
       <file leaf-file-name="applocale.gemspec" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/applocale.gemspec">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+            <state relative-caret-position="495">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -112,8 +112,8 @@
       <file leaf-file-name="version.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/applocale/version.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+            <state relative-caret-position="45">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -181,7 +181,6 @@
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_localized_model.rb" />
         <option value="$USER_HOME$/Desktop/TestRuby/AppLocale/IOS/en_US.strings" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/valid_key.rb" />
-        <option value="$PROJECT_DIR$/applocale.gemspec" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/parse_xlsx_module.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb" />
@@ -201,6 +200,7 @@
         <option value="$PROJECT_DIR$/lib/applocale/Core/ParseXLSX/parse_xlsx.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Util/regex_util.rb" />
         <option value="$PROJECT_DIR$/lib/applocale/Core/convert_to_localefile.rb" />
+        <option value="$PROJECT_DIR$/applocale.gemspec" />
         <option value="$PROJECT_DIR$/lib/applocale/version.rb" />
       </list>
     </option>
@@ -744,7 +744,7 @@
       <workItem from="1494648783760" duration="10952000" />
       <workItem from="1494731920943" duration="14015000" />
       <workItem from="1494862432165" duration="2600000" />
-      <workItem from="1494916903377" duration="310000" />
+      <workItem from="1494916903377" duration="546000" />
     </task>
     <task id="LOCAL-00001" summary="temp">
       <created>1494475242430</created>
@@ -757,7 +757,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80301000" />
+    <option name="totallyTimeSpent" value="80537000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="63" width="1280" height="725" extended-state="0" />
@@ -924,14 +924,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/applocale.gemspec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/applocale/Core/init.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -985,10 +977,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/applocale.gemspec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/applocale/version.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="18" lean-forward="false" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        <state relative-caret-position="45">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
       </provider>
