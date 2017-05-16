@@ -31,7 +31,7 @@ module Applocale
         contentlist.each do |rowinfo|
           content = rowinfo.content_dict[lang]
           value = ContentUtil.add_escape(platform, content)
-          target.puts("\"#{rowinfo.key_str.downcase}\" = \"#{value}\";")
+          target.puts("\"#{rowinfo.key_str}\" = \"#{value}\";")
         end
         target.puts('')
       end
