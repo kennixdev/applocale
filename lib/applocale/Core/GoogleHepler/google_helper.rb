@@ -1,7 +1,6 @@
 require 'google/apis/drive_v3'
 require 'googleauth'
 require 'googleauth/stores/file_token_store'
-require 'google/apis/sheets_v4'
 require 'fileutils'
 require 'colorize'
 require File.expand_path('../../../Util/file_util.rb', __FILE__)

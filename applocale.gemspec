@@ -32,8 +32,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
 
   spec.add_dependency "thor", "~> 0.19.4"
-  spec.add_dependency "google-api-client", "~> 0.11.1"
-  spec.add_dependency "google_drive", '~> 2.1', '>= 2.1.3'
+  spec.add_dependency "google-api-client", '~> 0.9.2'
+  # spec.add_dependency "google_drive", '~> 2.0'
   spec.add_dependency "colorize", "~> 0.8.1"
   spec.add_dependency "rubyXL", '~> 3.3', '>= 3.3.23'
 end

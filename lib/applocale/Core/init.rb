@@ -4,7 +4,12 @@ require File.expand_path('../ParseXLSX/parse_xlsx', __FILE__)
 require File.expand_path('../convert_to_localefile', __FILE__)
 
 module Applocale
-  def self.start_update(is_localupdate, setting)
+
+  def self.start_update(is_localupdate)
+    is_local = is_localupdate
+    ConfigUtil.load_and_validate_xlsx_to_localefile(is_local)
+    Setting.printlog
+    setting = Applocale::Setting
     unless is_localupdate
       google_file_id = GoogleHelper.is_googlelink(setting.link)
       unless google_file_id.nil?

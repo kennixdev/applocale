@@ -40,9 +40,7 @@ module Applocale
       option :local, :desc => "Convert local xlsx file to localization string file"
       def update()
         is_local = !options[:local].nil?
-        ConfigUtil.load_and_validate_xlsx_to_localefile(is_local)
-        Setting.printlog
-        Applocale.start_update(is_local, Applocale::Setting)
+        Applocale.start_update(is_local)
       end
 
       desc "reverse", "Convert localization string file to xlsx"
