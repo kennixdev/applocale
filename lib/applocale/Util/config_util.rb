@@ -6,6 +6,48 @@ require File.expand_path('../../Core/setting.rb', __FILE__)
 
 require 'pathname'
 
+
+module Applocale
+  class ConfigUtil
+    attr_accessor :configfile_pathstr
+
+    def initialize(configfile_pathstr = nil)
+      self.configfile_pathstr = configfile_pathstr ||= FilePathUtil.default_configfile_pathstr
+    end
+
+
+    def load_and_validate_xlsx_to_localefile(is_local_update)
+      # config_yaml = self.load_config(path)
+      # self.validate_xlsx_to_localefile(config_yaml, is_local_update)
+    end
+
+
+    def create_configfile(platform)
+      if !File.exist?(self.configfile_pathstr)
+        src_pathstr = File.expand_path("../../#{FilePathUtil.default_filename_config}", __FILE__)
+        File.open(src_pathstr, 'r') do |form|
+          File.open(configfile_pathstr, 'w') do |to|
+            form.each_line do |line|
+              newline = line.gsub("\#{platform}", "#{platform.to_s}")
+              newline = newline.gsub("\#{path_zh_TW}", FilePathUtil.default_localefile_relative_pathstr(platform, Locale::ZH_TW))
+              newline = newline.gsub("\#{path_zh_CN}", FilePathUtil.default_localefile_relative_pathstr(platform, Locale::ZH_CN))
+              newline = newline.gsub("\#{path_en_US}", FilePathUtil.default_localefile_relative_pathstr(platform, Locale::EN_US))
+              newline = newline.gsub("\#{xlsxpath}", FilePathUtil.default_xlsx_relativepath_str)
+              to.puts(newline)
+            end
+          end
+        end
+      end
+    end
+
+    def self.create_configfile_ifneed(platform, configfile_pathstr)
+      config = ConfigUtil.new(configfile_pathstr)
+      config.create_configfile(platform)
+    end
+
+  end
+end
+
 module Applocale
   class ConfigUtil
     def self.create_configfile_ifneed(platform)
@@ -31,18 +73,18 @@ module Applocale
       end
     end
 
-    def self.load_and_validate_xlsx_to_localefile(is_local_update)
-      config_yaml = self.load_config
+    def self.load_and_validate_xlsx_to_localefile(is_local_update, path)
+      config_yaml = self.load_config(path)
       self.validate_xlsx_to_localefile(config_yaml, is_local_update)
     end
 
-    def self.load_and_validate_localefile_to_xlsx()
-      config_yaml = self.load_config
+    def self.load_and_validate_localefile_to_xlsx(path = nil)
+      config_yaml = self.load_config(path)
       self.validate_localefile_to_xlsx(config_yaml)
     end
 
     # private
-    def self.load_config
+    def self.load_config(path)
       configfile_path = FileUtil.configfile_pathstr
       unless File.exist?(configfile_path)
         ErrorUtil::MissingConfigFile.new.raise

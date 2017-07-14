@@ -5,7 +5,7 @@ require File.expand_path('../convert_to_localefile', __FILE__)
 
 module Applocale
 
-  def self.start_update(is_localupdate)
+  def self.start_update(is_localupdate, path)
     is_local = is_localupdate
     ConfigUtil.load_and_validate_xlsx_to_localefile(is_local)
     Setting.printlog

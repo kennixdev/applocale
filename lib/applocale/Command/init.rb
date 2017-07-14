@@ -40,7 +40,7 @@ module Applocale
       option :local, :desc => "Convert local xlsx file to localization string file"
       def update()
         is_local = !options[:local].nil?
-        Applocale.start_update(is_local)
+        Applocale.start_update(is_local, nil)
       end
 
       desc "reverse", "Convert localization string file to xlsx"
@@ -60,6 +60,15 @@ module Applocale
       desc "google_logout", "logout google account"
       def google_logout()
         GoogleHelper.reset_loginacc
+      end
+
+      desc "findkey", "findkey for ios and convert to xlsx"
+      option :key, :desc => "The function name for localization"
+      def findkey()
+        # is_skip = !options[:skip].nil?
+        # ConfigUtil.load_and_validate_localefile_to_xlsx()
+        # Setting.printlog
+        # Applocale::start_reverse(is_skip)
       end
     end
   end
