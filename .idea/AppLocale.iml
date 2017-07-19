@@ -3,82 +3,6 @@
   <component name="ModuleRunConfigurationManager">
     <shared />
     <local>
-      <configuration default="false" name="regex_util" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-        <module name="AppLocale" />
-        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Util" />
-        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-        <envs />
-        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-          <COVERAGE_PATTERN ENABLED="true">
-            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-          </COVERAGE_PATTERN>
-        </EXTENSION>
-        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Util/regex_util.rb" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-        <method />
-      </configuration>
-      <configuration default="false" name="parse_xml_file" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-        <module name="AppLocale" />
-        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Core/ParserStringFile" />
-        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-        <envs />
-        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-          <COVERAGE_PATTERN ENABLED="true">
-            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-          </COVERAGE_PATTERN>
-        </EXTENSION>
-        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Core/ParserStringFile/parse_xml_file.rb" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-        <method />
-      </configuration>
-      <configuration default="false" name="platform" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-        <module name="AppLocale" />
-        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Util" />
-        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-        <envs />
-        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-          <COVERAGE_PATTERN ENABLED="true">
-            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-          </COVERAGE_PATTERN>
-        </EXTENSION>
-        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Util/platform.rb" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-        <method />
-      </configuration>
-      <configuration default="false" name="find_str_key" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
-        <module name="AppLocale" />
-        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Core/FindStrKey" />
-        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
-        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
-        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
-        <envs />
-        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-          <COVERAGE_PATTERN ENABLED="true">
-            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-          </COVERAGE_PATTERN>
-        </EXTENSION>
-        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Core/FindStrKey/find_str_key.rb" />
-        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
-        <method />
-      </configuration>
       <configuration default="false" name="applocale" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
         <module name="AppLocale" />
         <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -95,6 +19,82 @@
           </COVERAGE_PATTERN>
         </EXTENSION>
         <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale.rb" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+        <method />
+      </configuration>
+      <configuration default="false" name="config_util" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+        <module name="AppLocale" />
+        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Util" />
+        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+        <envs />
+        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+          <COVERAGE_PATTERN ENABLED="true">
+            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+          </COVERAGE_PATTERN>
+        </EXTENSION>
+        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Util/config_util.rb" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+        <method />
+      </configuration>
+      <configuration default="false" name="init" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+        <module name="AppLocale" />
+        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Core" />
+        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+        <envs />
+        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+          <COVERAGE_PATTERN ENABLED="true">
+            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+          </COVERAGE_PATTERN>
+        </EXTENSION>
+        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Core/init.rb" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+        <method />
+      </configuration>
+      <configuration default="false" name="setting" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+        <module name="AppLocale" />
+        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Core" />
+        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+        <envs />
+        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+          <COVERAGE_PATTERN ENABLED="true">
+            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+          </COVERAGE_PATTERN>
+        </EXTENSION>
+        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Core/setting.rb" />
+        <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
+        <method />
+      </configuration>
+      <configuration default="false" name="parse_xlsx_module" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+        <module name="AppLocale" />
+        <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+        <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/lib/applocale/Core/ParseXLSX" />
+        <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+        <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+        <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+        <envs />
+        <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+        <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+        <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+          <COVERAGE_PATTERN ENABLED="true">
+            <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+          </COVERAGE_PATTERN>
+        </EXTENSION>
+        <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/lib/applocale/Core/ParseXLSX/parse_xlsx_module.rb" />
         <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
         <method />
       </configuration>

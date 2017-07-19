@@ -9,21 +9,26 @@ module Applocale
     DIRNAME_ANDROID = 'Android'
     FILENAME_CONFIG = 'AppLocaleFile.yaml'
     FILENAME_XLSX = 'string.xlsx'
+    GOOGLE_CREDENTIALS = 'google_credentials.yaml'
 
-    def self.default_filename_config
+    def self.get_proj_absoluat_path(proj_path)
+      path = proj_path
+      if !(Pathname.new proj_path).absolute?
+        path = File.expand_path(proj_path,Dir.pwd)
+      end
+      return path
+    end
+
+    def self.default_google_credentials_filename
+      return GOOGLE_CREDENTIALS
+    end
+
+    def self.default_config_filename
       return FILENAME_CONFIG
     end
 
-    def self.default_mainfolder_pathstr
-      pathstr = File.join(Dir.pwd, DIRNAME_MAIN)
-      Dir.mkdir pathstr unless File.exist?(pathstr)
-      return pathstr
-    end
-
-    def self.default_configfile_pathstr
-      filename = self.default_filename_config
-      pathstr = File.join(self.mainfolder_pathstr, filename)
-      return pathstr
+    def self.default_mainfolder
+      return DIRNAME_MAIN
     end
 
     def self.default_localefile_relative_pathstr(platform, lang)
@@ -42,6 +47,13 @@ module Applocale
     def self.default_xlsx_relativepath_str
       filename = FILENAME_XLSX
       return filename
+    end
+
+    def self.str_to_folderpathstr(str)
+      pathstr = Pathname.new(str.strip)
+      if File.directory?(pathstr)
+        pathstr = File.join(self.configfile_pathstr, FilePathUtil.default_config_filename).to_s
+      end
     end
   end
 end

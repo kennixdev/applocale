@@ -1,4 +1,5 @@
 require 'colorize'
+require File.expand_path('../file_util.rb', __FILE__)
 
 module Applocale
   module ErrorUtil
@@ -25,7 +26,7 @@ module Applocale
     class ConfigFileInValid < CommonError
       def self.raiseArr(list = nil)
         if !list.nil? && list.length > 0
-          puts "*** ConfigError ***".red
+          puts "*** ConfigFile Error ***".red
           list.each do |err|
             puts "#{err.message}".red
           end
@@ -105,7 +106,7 @@ module Applocale
         end
 
         def message
-          "DuplicateKey [#{self.rowinfo.key_str}] - #{self.msg} : duplicateWithSheet: #{self.duplicate_sheetname} Row: #{self.duplicate_rowno+1}"
+          "DuplicateKey [#{self.rowinfo.key_str}] - #{self.msg} : duplicateWithSheet: #{self.duplicate_sheetname} Row: #{self.duplicate_rowno}"
         end
       end
 

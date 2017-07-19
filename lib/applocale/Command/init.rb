@@ -37,18 +37,21 @@ module Applocale
       end
 
       desc "update", "Download xlsx and convert to localization string file"
-      option :local, :desc => "Convert local xlsx file to localization string file"
+      option :path, :desc => "Project dir path"
       def update()
-        is_local = !options[:local].nil?
-        Applocale.start_update(is_local, nil)
+        Applocale.start_update(options[:path])
+      end
+
+      desc "update_local", "Convert local xlsx file to localization string filee"
+      option :path, :desc => "Project dir path"
+      def update_local()
+        Applocale.start_local_update(options[:path], nil)
       end
 
       desc "reverse", "Convert localization string file to xlsx"
       option :skip, :desc => "Skip Error"
       def reverse()
         is_skip = !options[:skip].nil?
-        ConfigUtil.load_and_validate_localefile_to_xlsx()
-        Setting.printlog
         Applocale::start_reverse(is_skip)
       end
 

@@ -1,8 +1,25 @@
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "#{platform}"
-keystr: "Key"
-langlist:
-    zh_TW: ["Chinese(Traditional)", "#{path_zh_TW}"]
-    zh_CN: ["Chinese(Simplified)", "#{path_zh_CN}"]
-    en_US: ["English", "#{path_en_US}"]
 xlsxpath: "#{xlsxpath}"
+google_credentials_path: "#{google_credentials_path}"
+langlist:
+    zh_TW: "#{path_zh_TW}"
+    zh_CN: "#{path_zh_CN}"
+    en_US: "#{path_en_US}"
+sheetname:
+  Section1:
+    key_str: "Key"
+    en_US: "English"
+    zh_TW: "Chinese(Traditional)"
+    zh_CN: "Chinese(Simplified)"
+  Section2:
+    key_str: "Key"
+    en_US: "English"
+    zh_TW: "zh_TW"
+    zh_CN: "zh_CN"
+  Section3:
+    row: "3"
+    key: "A"
+    en_US: "B"
+    zh_TW: "C"
+    zh_CN: "D"

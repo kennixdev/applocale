@@ -6,21 +6,21 @@ require 'colorize'
 module Applocale
   class ConvertToStrFile
 
-    def self.convert(sheetcontent_list, setting = Setting)
-      setting.langlist.each do |lang, langinfo|
-        puts "Start to convert to string file for [\"#{lang}\"] #{langinfo[:path]}...".green
-        if setting.platform == Platform::IOS
-          self.convert_to_localefile(setting.platform, lang, langinfo[:path], sheetcontent_list)
-        elsif setting.platform == Platform::ANDROID
-          self.convert_to_xml(setting.platform, lang, langinfo[:path], sheetcontent_list)
+    def self.convert(platform, lang_path_list, sheetcontent_list)
+      lang_path_list.each do |langpath_obj|
+        puts "Start to convert to string file for [\"#{langpath_obj.lang}\"] #{langpath_obj.filepath}...".green
+        if platform == Platform::IOS
+          self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list)
+        elsif platform == Platform::ANDROID
+          self.convert_to_xml(platform, langpath_obj, sheetcontent_list)
         end
       end
       puts 'Convert Finished !!!'.green
     end
 
-    def self.convert_to_localefile(platform, lang, langfilepath, sheetcontent_list)
-      FileUtils.mkdir_p(File.dirname(langfilepath))
-      target = open(langfilepath, 'w')
+    def self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list)
+      FileUtils.mkdir_p(File.dirname(langpath_obj.filepath))
+      target = open(langpath_obj.filepath, 'w')
       sheetcontent_list.each do |sheetcontent|
         contentlist = sheetcontent.get_rowInfo_sortby_key
         next if contentlist.length <= 0
@@ -29,7 +29,7 @@ module Applocale
         target.puts(' *******************************/')
         target.puts('')
         contentlist.each do |rowinfo|
-          content = rowinfo.content_dict[lang]
+          content = rowinfo.content_dict[langpath_obj.lang]
           value = ContentUtil.add_escape(platform, content)
           target.puts("\"#{rowinfo.key_str}\" = \"#{value}\";")
         end
@@ -38,15 +38,15 @@ module Applocale
       target.close
     end
 
-    def self.convert_to_xml(platform, lang, langfilepath, sheetcontent_list)
-      FileUtils.mkdir_p(File.dirname(langfilepath))
-      target = open(langfilepath, 'w')
+    def self.convert_to_xml(platform, langpath_obj, sheetcontent_list)
+      FileUtils.mkdir_p(File.dirname(langpath_obj.filepath))
+      target = open(langpath_obj.filepath, 'w')
       target.puts('<resources>')
       sheetcontent_list.each do |sheetcontent|
         target.puts("   <!-- #{sheetcontent.comment} -->")
         contentlist = sheetcontent.get_rowInfo_sortby_key
         contentlist.each do |rowinfo|
-          content = rowinfo.content_dict[lang]
+          content = rowinfo.content_dict[langpath_obj.lang]
           value = ContentUtil.add_escape(platform, content)
           target.puts("   <string name=\"#{rowinfo.key_str.downcase}\">#{value}</string>")
         end

@@ -9,15 +9,21 @@ require 'colorize'
 module Applocale
   class ParseXLSX
 
-    @xlsx = nil
     @sheetcontent_list = nil
     @allkey_dict = {}
     @all_error = nil
-    @setting = Setting
 
-    def initialize
-      @setting = Setting
-      puts "Start to Parse XLSX: \"#{@setting.xlsxpath}\" ...".green
+    @platfrom
+    @xlsxpath
+    @langlist
+    @sheetobj_list
+
+    def initialize(platfrom, xlsxpath, langlist, sheetobj_list)
+      @platfrom = platfrom
+      @xlsxpath = xlsxpath
+      @langlist = langlist
+      @sheetobj_list = sheetobj_list
+      puts "Start to Parse XLSX: \"#{@xlsxpath}\" ...".green
       @sheetcontent_list = Array.new
       @allkey_dict = {}
       @all_error = Array.new
@@ -30,29 +36,47 @@ module Applocale
 
     def parse
       begin
-        workbook = RubyXL::Parser.parse(@setting.xlsxpath)
+        workbook = RubyXL::Parser.parse(@xlsxpath)
       rescue
-        ErrorUtil::CannotOpenXlsxFile.new(@setting.xlsxpath).raise
+        ErrorUtil::CannotOpenXlsxFile.new(@xlsxpath).raise
       end
+      sheetnamelist = Applocale::Config::Sheet.get_sheetlist(@sheetobj_list)
       workbook.worksheets.each do |worksheet|
         sheetname = worksheet.sheet_name
+        sheetinfoobj = Applocale::Config::Sheet.get_sheetobj_by_sheetname(@sheetobj_list, sheetname)
+        if sheetinfoobj.nil?
+          next
+        end
+        sheetnamelist.delete(sheetname)
+
         sheetcontent = ParseXLSXModule::SheetContent.new(sheetname)
-        rowno = -1
+        if sheetinfoobj.is_a? Applocale::Config::SheetInfoByRow
+          keycolno = Applocale::ParseXLSXModule::Helper.collabel_to_colno(sheetinfoobj.key_col)
+          sheetinfoobj.to_keyStrWithColNo(sheetcontent)
+        end
+
+        rowno = 0
         worksheet.each {|row|
           rowno += 1
           # colno = 0
-          next if row.nil?
-          cells = row && row.cells
           if sheetcontent.header_rowno.nil?
-            headerinfo = find_header(cells)
-            unless headerinfo.nil?
-              sheetcontent.header_rowno = rowno
-              sheetcontent.keyStr_with_colno = headerinfo[:keystr_colno]
-              sheetcontent.lang_with_colno_list = headerinfo[:lang_colno]
+            if sheetinfoobj.is_a? Applocale::Config::SheetInfoByHeader
+              next if row.nil?
+              cells = row && row.cells
+              headerinfo = find_header(sheetinfoobj, cells)
+              unless headerinfo.nil?
+                sheetcontent.header_rowno = rowno
+                sheetcontent.keyStr_with_colno = headerinfo[:keystr_colno]
+                sheetcontent.lang_with_colno_list = headerinfo[:lang_colno]
+              end
             end
+          elsif sheetcontent.header_rowno > rowno
+            next
           else
+            next if row.nil?
+            cells = row && row.cells
             begin
-              rowcontent = parse_row(sheetname, rowno, worksheet.sheet_data[rowno], sheetcontent.keyStr_with_colno, sheetcontent.lang_with_colno_list)
+              rowcontent = parse_row(sheetname, rowno, cells, sheetcontent.keyStr_with_colno, sheetcontent.lang_with_colno_list)
               unless rowcontent.nil?
                 prev_rowcontent = @allkey_dict[rowcontent.key_str.downcase]
                 if prev_rowcontent.nil?
@@ -82,7 +106,7 @@ module Applocale
 
     def parse_row(sheetname, rowno, cells, keystr_with_colno, lang_with_colno_list)
       begin
-        cell = cells[keystr_with_colno.colno]
+        cell = cells[keystr_with_colno.colno - 1 ]
         val = cell && cell.value
         keystr = to_value_key(val)
       rescue ErrorUtil::ParseXlsxError::InValidKey => e
@@ -93,9 +117,8 @@ module Applocale
 
       unless keystr.nil?
         rowinfo = ParseXLSXModule::RowInfo.new(sheetname, rowno, keystr)
-        (0..lang_with_colno_list.length-1).each do |k|
-          lang_with_colno = lang_with_colno_list[k]
-          cell = cells[lang_with_colno.colno]
+        lang_with_colno_list.each do |lang_with_colno|
+          cell = cells[lang_with_colno.colno - 1]
           val = cell && cell.value
           cell_value = val.to_s
           lang_name = lang_with_colno.lang
@@ -108,7 +131,7 @@ module Applocale
     def to_value_key(value)
       if !value.nil? && value != ''
         new_value = value.to_s
-        if ValidKey.is_validkey(@setting.platform, new_value)
+        if ValidKey.is_validkey(@platfrom, new_value)
           return new_value
         else
           rowinfo = ParseXLSXModule::RowInfo.new(nil, nil, value)
@@ -125,20 +148,20 @@ module Applocale
       end
     end
 
-    def find_header(cells)
+    def find_header(sheetinfoobj, cells)
       keystr_with_colno = nil
       lang_with_colno_list = Array.new
       k_header_lang_dict = []
-      colno = 0
+      colno = 1
       cells.each{ |cell|
         value = cell && cell.value
         unless value.nil?
-          if value == @setting.keystr && keystr_with_colno.nil?
+          if value == sheetinfoobj.key_header && keystr_with_colno.nil?
             keystr_with_colno = ParseXLSXModule::KeyStrWithColNo.new(value, colno)
           else
-            @setting.langlist.each do |lang, info|
-              if value == info[:xlsheader] && k_header_lang_dict.index(lang).nil?
-                lang_with_colno_list.push(ParseXLSXModule::LangWithColNo.new(info[:xlsheader], lang, colno))
+            sheetinfoobj.lang_headers.each do |lang, keyforlang|
+              if value == keyforlang && k_header_lang_dict.index(lang).nil?
+                lang_with_colno_list.push(ParseXLSXModule::LangWithColNo.new(keyforlang, lang, colno))
                 k_header_lang_dict.push(lang)
               end
             end
@@ -146,7 +169,7 @@ module Applocale
         end
         colno += 1
       }
-      if !keystr_with_colno.nil? && lang_with_colno_list.length == @setting.langlist.length
+      if !keystr_with_colno.nil? && lang_with_colno_list.length == sheetinfoobj.lang_headers.length
         return {:keystr_colno => keystr_with_colno, :lang_colno => lang_with_colno_list}
       end
     end
