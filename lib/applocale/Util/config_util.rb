@@ -49,21 +49,31 @@ module Applocale
 
       private
       def load_configfile
+        rubycode = ''
         unless File.exist?(self.configfile_pathstr)
           ErrorUtil::MissingConfigFile.new.raise
         end
         begin
-          config_yaml = YAML.load_file self.configfile_pathstr
+          yaml = ""
+          File.open(self.configfile_pathstr).each do |line|
+            reg = /\w*\s*:\s*"?.*"?/
+            if line.match reg
+              yaml += line
+            else
+              rubycode += line
+            end
+          end
+          config_yaml = YAML.load( yaml)
         rescue
-          ErrorUtil::ConfigFileInValid.new('ConfigFile format is invalid.').raise
+          ErrorUtil::ConfigFileInValid.new('ConfigFile format is invalid.')
         end
-        return config_yaml
+        return config_yaml, rubycode
       end
 
       public
       def load_configfile_to_setting
         error_list = Array.new
-        config_yaml = load_configfile
+        config_yaml, rubycode = load_configfile
         link = config_yaml['link'].to_s.strip
         platform = config_yaml['platform'].to_s.strip
         xlsxpath = config_yaml['xlsxpath'].to_s.strip
@@ -73,6 +83,7 @@ module Applocale
 
 
         setting = Applocale::Config::Setting.new(self.configfile_pathstr)
+        setting.rubycode = rubycode
         unless link.nil? || link.length == 0
           if (link =~ /^https/).nil? && (link =~ /^http/).nil?
             error = ErrorUtil::ConfigFileInValid.new("Invalid link for [link] : #{link}")

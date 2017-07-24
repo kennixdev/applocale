@@ -1,7 +1,7 @@
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "#{platform}"
 xlsxpath: "#{xlsxpath}"
-google_credentials_path: "#{google_credentials_path}"
+＃google_credentials_path: "#{google_credentials_path}"
 langlist:
     zh_TW: "#{path_zh_TW}"
     zh_CN: "#{path_zh_CN}"
@@ -23,3 +23,28 @@ sheetname:
     en_US: "B"
     zh_TW: "C"
     zh_CN: "D"
+
+
+# def convent_to_locale(lang, key, value)
+#     return value
+# end
+
+# def before_convent_to_locale(lang, key, value)
+#     return value
+# end
+
+# def after_convent_to_locale(lang, key, value)
+#     return value
+# end
+
+# def parse_from_locale(lang, key, value)
+#     return value
+# end
+
+# def before_parse_from_locale(lang, key, value)
+#     return value
+# end
+
+# def after_parse_from_locale(lang, key, value)
+#     return value
+# end

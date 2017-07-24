@@ -6,6 +6,7 @@ require File.expand_path('../../../Util/regex_util.rb', __FILE__)
 require 'rubyXL'
 require 'colorize'
 
+
 module Applocale
   class ParseXLSX
 
@@ -13,13 +14,13 @@ module Applocale
     @allkey_dict = {}
     @all_error = nil
 
-    @platfrom
+    @platform
     @xlsxpath
     @langlist
     @sheetobj_list
 
     def initialize(platfrom, xlsxpath, langlist, sheetobj_list)
-      @platfrom = platfrom
+      @platform = platfrom
       @xlsxpath = xlsxpath
       @langlist = langlist
       @sheetobj_list = sheetobj_list
@@ -131,7 +132,7 @@ module Applocale
     def to_value_key(value)
       if !value.nil? && value != ''
         new_value = value.to_s
-        if ValidKey.is_validkey(@platfrom, new_value)
+        if ValidKey.is_validkey(@platform, new_value)
           return new_value
         else
           rowinfo = ParseXLSXModule::RowInfo.new(nil, nil, value)

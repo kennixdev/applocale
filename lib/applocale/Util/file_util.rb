@@ -7,7 +7,7 @@ module Applocale
     DIRNAME_MAIN = 'AppLocale'
     DIRNAME_IOS = 'IOS'
     DIRNAME_ANDROID = 'Android'
-    FILENAME_CONFIG = 'AppLocaleFile.yaml'
+    FILENAME_CONFIG = 'AppLocaleFile'
     FILENAME_XLSX = 'string.xlsx'
     GOOGLE_CREDENTIALS = 'google_credentials.yaml'
 

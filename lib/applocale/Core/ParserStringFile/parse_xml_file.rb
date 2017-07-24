@@ -5,19 +5,20 @@ require File.expand_path('../../../Util/regex_util.rb', __FILE__)
 module Applocale
 
   class ParseXMLFile
-    attr_reader :strings_keys, :errorlist, :in_multiline_comments, :keys_list, :platform
+    attr_reader :strings_keys, :errorlist, :in_multiline_comments, :keys_list, :platform, :injectobj
 
-    def initialize()
+    def initialize(platform, langpathobj_list, injectobj)
       @strings_keys = {}
       @keys_list = Array.new
       @errorlist = Array.new()
-      @platform = Setting.platform
-      self.to_parse_files(Setting.langlist)
+      @platform = platform
+      @injectobj = injectobj
+      self.to_parse_files(langpathobj_list)
     end
 
-    def to_parse_files(lang_list)
-      lang_list.each do |key, langinfo|
-        self.to_parse_strings_file(key, langinfo[:path])
+    def to_parse_files(langpathobj_list)
+      langpathobj_list.each do |langpathobj|
+        self.to_parse_strings_file(langpathobj.lang, langpathobj.filepath)
       end
     end
 
@@ -37,13 +38,29 @@ module Applocale
           end
           if @strings_keys[key][lang.to_s].nil?
             @strings_keys[key][lang.to_s] = Hash.new
-            @strings_keys[key][lang.to_s][:value] = ContentUtil.remove_escape(@platform, value)
+            @strings_keys[key][lang.to_s][:value] = self.remove_escape(lang, key, value)
           else
             error = ErrorUtil::ParseLocalizedError::DuplicateKey.new(key, -1, strings_path, lang, -1)
             @errorlist.push(error)
           end
         end
       end
+    end
+
+    def remove_escape(lang, key, content)
+      value = content
+      if @injectobj.has_before_parse_from_locale
+        value = @injectobj.load_before_parse_from_locale(lang.to_s, key,  value)
+      end
+      if @injectobj.has_parse_from_locale
+        value = @injectobj.load_parse_from_locale(lang.to_s, key,  value)
+      else
+        value = ContentUtil.remove_escape(@platform, value)
+      end
+      if @injectobj.has_after_parse_from_locale
+        value = @injectobj.load_after_parse_from_locale(lang.to_s, key,  value)
+      end
+      return value
     end
 
   end

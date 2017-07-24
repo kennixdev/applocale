@@ -37,33 +37,35 @@ module Applocale
     end
 
     def self.add_escaped_android(content)
-      # \u \U \0 don't know
-      reg = /(?<!\\)((?:\\{2})+)*\\[c-eg-mo-qsw-zA-TW-Z!$%()*+,-.\/;:>\[\]^_`{|}~89]/
-      new_value = content.gsub(reg) {|match|
-        match.slice!(0)
-        match
-      }
+      new_value = content
+      new_value = new_value.gsub(/'/, "\\'")
       reg = /(?<!\\)((?:\\{2})+)*(\\r)/
       new_value = new_value.gsub(reg) {|match|
         match.slice!(-1)
         match + 'n'
       }
+      reg = /(?<!\\)((?:\\{2})+)"|(?<!\\)"|^"/
+      new_value = new_value.gsub(reg) {|match|
+        "\\" + match
+      }
       new_value = new_value.gsub(/&/, '&amp;')
+      new_value = new_value.gsub(/%@/, '%s')
       new_value = new_value.gsub(/</, '&lt;')
-      # new_value = new_value.gsub(/>/, "&gt;")
+      new_value = new_value.gsub(/>/, '&gt;')
       return new_value
     end
 
     def self.remove_escaped_android(content)
-      new_value = content.gsub(/&lt;/, '<')
-      new_value = new_value.gsub(/&amp;/, '&')
-      puts "test=#{content}==#{new_value}"
+      new_value = content
+      new_value = new_value.gsub(/%s/, '%@')
+      new_value = new_value.gsub(/\\'/, "'")
       return new_value
     end
 
     def self.add_escaped_double_quote(content)
+      new_value = content
       reg = /(?<!\\)((?:\\{2})+)"|(?<!\\)"|^"/
-      new_value = content.gsub(reg) {|match|
+      new_value = new_value.gsub(reg) {|match|
           "\\" + match
       }
       return new_value
@@ -90,31 +92,3 @@ module Applocale
     end
   end
 end
-
-# test = "aasb\\c"
-# new = test.slice(-1)
-# test.slice!(-2)
-# puts test
-# puts new
-
-# ex = "\\"
-# qu = "&"
-#
-# (0..10).each do |i|
-#   test = ([ex]*i).join("") + qu + "abcd" + ([ex]*i).join("") + qu + "def"
-#   puts "#{test}"
-#   puts Applocale::ContentUtil.addEscapedForAndroid(test)
-#   puts "------------------------------------"
-# end
-
-
-#
-# #
-# #
-# # test = qu
-# # test1 = ex + qu
-# # test2 = ex + ex + qu
-# # test3 = ex + ex + ex + qu
-# # test4 = ex + ex + ex + ex + qu
-# #
-# # Applocale::ContentUtil.removeEscapeFroXlsx(test)

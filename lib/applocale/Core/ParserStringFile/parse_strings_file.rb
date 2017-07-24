@@ -1,35 +1,37 @@
 require File.expand_path('../../setting.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../../Util/regex_util.rb', __FILE__)
+require File.expand_path('../../../Util/injection.rb', __FILE__)
 
 module Applocale
   class ParseStringsFile
 
-    attr_reader :strings_keys, :errorlist, :in_multiline_comments, :keys_list, :platform
+    attr_reader :strings_keys, :errorlist, :in_multiline_comments, :keys_list, :platform, :injectobj
 
-    def initialize()
+    def initialize(platform, langpathobj_list, injectobj)
       @strings_keys = {}
       @keys_list = Array.new
       @errorlist = Array.new()
-      @platform = Setting.platform
-      self.to_parse_files(Setting.langlist)
+      @platform = platform
+      @injectobj = injectobj
+      self.to_parse_files(langpathobj_list)
     end
 
-    def to_parse_files(lang_list)
-      lang_list.each do |key, langinfo|
-        self.to_parse_strings_file(key, langinfo[:path])
+    def to_parse_files(langpathobj_list)
+      langpathobj_list.each do |langpathobj|
+        self.to_parse_strings_file(langpathobj.lang, langpathobj.filepath)
       end
     end
 
-    def to_parse_strings_file(lang, strings_path)
-      puts "Start to Parse strings file: \"#{strings_path}\" ...".green
+    def to_parse_strings_file(lang, strings_filepath)
+      puts "Start to Parse strings file: \"#{strings_filepath}\" ...".green
 
       @in_multiline_comments = false
       keyrowno = {}
       linenum = 0
       begin
 
-      IO.foreach(strings_path, mode: 'r:bom|utf-8') {|line|
+      IO.foreach(strings_filepath, mode: 'r:bom|utf-8') {|line|
         linenum += 1
         line.strip!
         if !@in_multiline_comments
@@ -41,25 +43,25 @@ module Applocale
         end
         while true
 
-          key, line = parse_token(linenum, line, "=", lang, strings_path)
+          key, line = parse_token(linenum, line, "=", lang, strings_filepath)
           line.strip!
 
           if not line.start_with?("=")
             if !@in_multiline_comments && line.length > 0
-              error = ErrorUtil::ParseLocalizedError::WrongFormat.new(strings_path, lang, linenum)
+              error = ErrorUtil::ParseLocalizedError::WrongFormat.new(strings_filepath, lang, linenum)
               @errorlist.push(error)
             end
             break
           end
           line.slice!(0)
 
-          value, line = parse_token(linenum, line, ";", lang, strings_path)
+          value, line = parse_token(linenum, line, ";", lang, strings_filepath)
           line.strip!
 
           if line.start_with?(";")
             line.slice!(0)
           else
-            error = ErrorUtil::ParseLocalizedError::WrongFormat.new(strings_path, lang, linenum)
+            error = ErrorUtil::ParseLocalizedError::WrongFormat.new(strings_filepath, lang, linenum)
             @errorlist.push(error)
             key = nil
             value = nil
@@ -67,7 +69,7 @@ module Applocale
           end
 
           if !ValidKey.is_validkey(@platform, key)
-            error = ErrorUtil::ParseLocalizedError::InvalidKey.new(key, strings_path, lang, linenum)
+            error = ErrorUtil::ParseLocalizedError::InvalidKey.new(key, strings_filepath, lang, linenum)
             @errorlist.push(error)
             break
           end
@@ -78,10 +80,10 @@ module Applocale
           if @strings_keys[key][lang.to_s].nil?
             @strings_keys[key][lang.to_s] = Hash.new
             @strings_keys[key][lang.to_s][:rowno] = linenum
-            @strings_keys[key][lang.to_s][:value] = ContentUtil.remove_escape(@platform, value)
+            @strings_keys[key][lang.to_s][:value] = self.remove_escape(lang, key, value)
             keyrowno[key] = linenum
           else
-            error = ErrorUtil::ParseLocalizedError::DuplicateKey.new(key, keyrowno[key], strings_path, lang, linenum)
+            error = ErrorUtil::ParseLocalizedError::DuplicateKey.new(key, keyrowno[key], strings_filepath, lang, linenum)
             @errorlist.push(error)
           end
           if line.length <= 0
@@ -89,8 +91,9 @@ module Applocale
           end
         end
       }
-      rescue
-        ErrorUtil::ParseLocalizedError::InvalidFile.new(strings_path).raise
+      rescue Exception => e
+        puts e.message
+        ErrorUtil::ParseLocalizedError::InvalidFile.new(strings_filepath).raise
       end
     end
 
@@ -157,6 +160,22 @@ module Applocale
         end
       end
       return value, line[n..-1]
+    end
+
+    def remove_escape(lang, key, content)
+      value = content
+      if @injectobj.has_before_parse_from_locale
+        value = @injectobj.load_before_parse_from_locale(lang.to_s, key,  value)
+      end
+      if @injectobj.has_parse_from_locale
+        value = @injectobj.load_parse_from_locale(lang.to_s, key,  value)
+      else
+        value = ContentUtil.remove_escape(@platform, value)
+      end
+      if @injectobj.has_after_parse_from_locale
+        value = @injectobj.load_after_parse_from_locale(lang.to_s, key,  value)
+      end
+      return value
     end
 
   end

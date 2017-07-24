@@ -21,7 +21,7 @@ require 'colorize'
 module Applocale
   module Config
     class Setting
-      attr_accessor :configfile_pathstr, :link, :platform, :xlsxpath, :google_credentials_path, :lang_path_list, :sheet_obj_list
+      attr_accessor :configfile_pathstr, :link, :platform, :xlsxpath, :google_credentials_path, :lang_path_list, :sheet_obj_list, :rubycode
       def initialize(configfile_pathstr)
         self.configfile_pathstr = configfile_pathstr
         self.lang_path_list = Array.new
@@ -43,6 +43,8 @@ module Applocale
         self.sheet_obj_list.each do |sheet_obj|
           puts "    #{sheet_obj.to_s}"
         end
+
+        # puts self.rubycode
 
       end
     end

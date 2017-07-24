@@ -4,6 +4,7 @@ require File.expand_path('../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../Util/config_util.rb', __FILE__)
 require File.expand_path('../GoogleHepler/google_helper.rb', __FILE__)
 require File.expand_path('../ParseXLSX/parse_xlsx', __FILE__)
+require File.expand_path('../ParserStringFile/parse_localized_resource.rb', __FILE__)
 require File.expand_path('../convert_to_localefile', __FILE__)
 require 'open-uri'
 
@@ -57,25 +58,39 @@ module Applocale
       setting = obj.load_configfile_to_setting
     end
     parse_xlsx = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list)
-    ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parse_xlsx.result)
+    ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parse_xlsx.result, setting.rubycode)
   end
 
-  def self.start_reverse(is_skip)
+  def self.start_reverse(proj_path = Dir.pwd, is_skip)
     proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
     obj = Applocale::Config::ConfigUtil.new(proj_apath)
     setting = obj.load_configfile_to_setting
-    Applocale::ParseLocalizedResource.new(proj_path = Dir.pwd,is_skip)
+    Applocale::ParseLocalizedResource.new(is_skip,setting.platform,setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list, setting.rubycode )
   end
+#
+# def self.eval_file(file)
+#   instance_eval read(file), file
+# end
+  
   #
-  # def self.genxlsx_from_source_code(path, platformStr = nil)
+# def self.genxlsx_from_source_code(path, platformStr = nil)
   #
   # end
 
 end
 
 path = "/Users/kennix.chui/Documents/Development/iOS"
-Applocale.start_reverse()
+apath = "/Users/kennix.chui/Documents/Development/iOS/AppLocale/AppLocaleFile"
+
+Applocale.start_reverse(path, true)
+# def from_file file
+#   new File.read(file), file
+# end
+# from_file(apath)
+
+
+
 # Applocale.create_config_file(path)
 # Applocale.start_local_update(path)
 # Applocale.start_update(path)
-# Applocale.create_config_file()
+# Applocale.create_config_file(path)

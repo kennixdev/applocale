@@ -3,6 +3,7 @@ require File.expand_path('../../../Util/platform.rb', __FILE__)
 require File.expand_path('../../ParseXLSX/parse_xlsx_module', __FILE__)
 require File.expand_path('../parse_strings_file', __FILE__)
 require File.expand_path('../parse_xml_file', __FILE__)
+require File.expand_path('../../../Util/injection.rb', __FILE__)
 
 require 'rubyXL'
 require 'colorize'
@@ -10,32 +11,41 @@ require 'colorize'
 module Applocale
   class ParseLocalizedResource
     @skip_error = false
-    @setting = Setting
+    @platform
+    @xlsxpath
+    @langpathobj_list
+    @sheetobj_list
+    @injectobj
 
-    def initialize(skip_error = false)
+    def initialize(skip_error = false, platform, xlsxpath, langpathobj_list, sheetobj_list, rubycode)
       @skip_error = skip_error
-      @setting = Setting
-      FileUtils.mkdir_p(File.dirname(@setting.xlsxpath))
-      FileUtils.rm(@setting.xlsxpath) if File.exist? @setting.xlsxpath
-      keystr_with_colno = ParseXLSXModule::KeyStrWithColNo.new(@setting.keystr, 0)
-      lang_with_colno_list = Array.new
-      colno = 1
-      @setting.langlist.each do |key, langinfo|
-        langwith_colno = ParseXLSXModule::LangWithColNo.new(langinfo[:xlsheader], key, colno)
-        colno+=1
-        lang_with_colno_list.push(langwith_colno)
-      end
-      if @setting.platform == Platform::IOS
+      @platform = platform
+      @xlsxpath = xlsxpath
+      @langpathobj_list = langpathobj_list
+      @sheetobj_list = sheetobj_list
+      @injectobj = Applocale::Injection.load(rubycode)
+      startParse()
+    end
+
+    def startParse
+      puts "Start to Parse StringFile .... ".green
+
+      FileUtils.mkdir_p(File.dirname(@xlsxpath))
+      FileUtils.rm(@xlsxpath) if File.exist? @xlsxpath
+
+      sheetobj = @sheetobj_list[0]
+
+      if @platform == Platform::IOS
         result = self.parse_ios
-        write_to_xlsx(@setting.xlsxpath, keystr_with_colno, lang_with_colno_list, result[:errorlist], result[:content], result[:keylist])
+        write_to_xlsx(@xlsxpath, sheetobj, result[:errorlist], result[:content], result[:keylist])
       else
         result = self.parse_android
-        write_to_xlsx(@setting.xlsxpath, keystr_with_colno, lang_with_colno_list, result[:errorlist], result[:content], result[:keylist])
+        write_to_xlsx(@xlsxpath, sheetobj, result[:errorlist], result[:content], result[:keylist])
       end
     end
 
     def parse_ios
-      result = ParseStringsFile.new
+      result = ParseStringsFile.new(@platform, @langpathobj_list, @injectobj)
       errorlist = result.errorlist
       content = result.strings_keys
       keylist = result.keys_list
@@ -43,30 +53,47 @@ module Applocale
     end
 
     def parse_android
-      result = ParseXMLFile.new
+      result = ParseXMLFile.new(@platform, @langpathobj_list, @injectobj)
       errorlist = result.errorlist
       content = result.strings_keys
       keylist = result.keys_list
       return {:errorlist => errorlist, :content => content, :keylist => keylist}
     end
 
-    def write_to_xlsx(path, keystrwithColNo, langwithColNolist, errorlist, content, keylist)
+    def write_to_xlsx(path, sheetobj, errorlist, content, keylist)
       ErrorUtil::ParseLocalizedError::ParseLocalizedError.raiseArr(errorlist, !@skip_error)
       puts "Start write to file: \"#{path}\" ...".green
       workbook = RubyXL::Workbook.new
       worksheet = workbook.worksheets[0]
+      worksheet.sheet_name = sheetobj.sheetname
       rowno = 0
-      worksheet.add_cell(rowno, keystrwithColNo.colno, keystrwithColNo.header_str)
-      langwithColNolist.each do |langwithColNo|
-        worksheet.add_cell(rowno, langwithColNo.colno, langwithColNo.header_str)
+
+      keycolno = 0
+      langcolno_dict = {}
+
+      sheet_info_obj = sheetobj.obj
+      if sheet_info_obj.is_a? Applocale::Config::SheetInfoByHeader
+        worksheet.add_cell(rowno, keycolno, sheet_info_obj.key_header)
+        langcolno = keycolno + 1
+        sheet_info_obj.lang_headers.each do  |key, header|
+          worksheet.add_cell(rowno, langcolno, header)
+          langcolno_dict[key] = langcolno
+          langcolno += 1
+        end
+        rowno+=1
+      elsif sheet_info_obj.is_a? Applocale::Config::SheetInfoByRow
+        rowno = sheet_info_obj.row - 1
+        keycolno = Applocale::ParseXLSXModule::Helper.collabel_to_colno(sheet_info_obj.key_col) - 1
+        sheet_info_obj.lang_cols.each do |lang, collabel|
+          langcolno_dict[lang] = Applocale::ParseXLSXModule::Helper.collabel_to_colno(collabel) - 1
+        end
       end
-      rowno+=1
+
       keylist.each do |key|
-        worksheet.add_cell(rowno, keystrwithColNo.colno, key)
+        worksheet.add_cell(rowno, keycolno, key)
         unless content[key].nil?
-          langwithColNolist.each do |langwithColNo|
-            lang = langwithColNo.lang.to_s
-            worksheet.add_cell(rowno, langwithColNo.colno, content[key][lang][:value]) if !content[key][lang].nil? && !content[key][lang][:value].nil?
+          langcolno_dict.each do |lang, colno|
+            worksheet.add_cell(rowno, colno, content[key][lang][:value]) if !content[key][lang].nil? && !content[key][lang][:value].nil?
           end
         end
         rowno+=1
