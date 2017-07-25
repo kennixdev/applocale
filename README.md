@@ -33,21 +33,21 @@ Or install it yourself as:
 ## Steps:
 
 For XLSX To localization String files: 
-`
+```
 Step1: create config file:
 	$ applocale init IOS
 Step2: edit config file:
 Step3: Download and convert xlsx to strings file
 	$ applocale update
-`
+```
 For localization String files To XLSX : 
-`
+```
 Step1: create config file:
 	$ applocale init IOS
 Step2: edit config file
 Step3: convert to xlsx 
 	$ applocale reverse
-`
+```
 *** Note that, the special character handling in xlsx is base on strings file(IOS) format.
 
 ## ConfigFile:
@@ -85,17 +85,17 @@ langlist:
 	zh_CN: "IOS/zh_CN.strings"
 	en_US: "IOS/en_US.strings"
 sheetname:
-		Section1:
-			key_str: "Key"
-			en_US: "English"
+	Section1:
+		key_str: "Key"
+		en_US: "English"
 		zh_TW: "Chinese(Traditional)"
 		zh_CN: "Chinese(Simplified)"
-		Section2:
+	Section2:
 		key_str: "Key"
 		en_US: "English"
 		zh_TW: "zh_TW"
 		zh_CN: "zh_CN"
-		Section3:
+	Section3:
 		row: "3"
 		key: "A"
 		en_US: "B"
@@ -103,7 +103,7 @@ sheetname:
 		zh_CN: "D"
 ``` 
 
-You can also set conversion logic by create method of 'convent_to_locale', 'before_convent_to_locale', 'after_convent_to_locale', 'parse_from_locale', 'before_parse_from_locale', 'after_parse_from_locale'
+*** You can also set conversion logic by create method of 'convent_to_locale', 'before_convent_to_locale', 'after_convent_to_locale', 'parse_from_locale', 'before_parse_from_locale', 'after_parse_from_locale'
 
 
 
