@@ -85,6 +85,7 @@ module Applocale
             return sheet_obj.obj
           end
         end
+        return nil
       end
     end
 

@@ -6,11 +6,15 @@ require File.expand_path('../GoogleHepler/google_helper.rb', __FILE__)
 require File.expand_path('../ParseXLSX/parse_xlsx', __FILE__)
 require File.expand_path('../ParserStringFile/parse_localized_resource.rb', __FILE__)
 require File.expand_path('../convert_to_localefile', __FILE__)
+require File.expand_path('../FindStrKey/find_str_key', __FILE__)
+
 require 'open-uri'
 
 module Applocale
 
-  def self.create_config_file(proj_path = Dir.pwd, platformStr = nil)
+  def self.create_config_file( platformStr = nil, projpath = Dir.pwd)
+    proj_path = projpath
+    proj_path = Dir.pwd if projpath.nil?
     proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
     if platformStr.nil?
       if Dir.glob("#{proj_apath}/**/*.xcodeproj").length > 0 || Dir.glob("#{proj_apath}/*.xcworkspace").length > 0
@@ -30,7 +34,9 @@ module Applocale
     end
   end
 
-  def self.start_update(proj_path = Dir.pwd)
+  def self.start_update(projpath = Dir.pwd)
+    proj_path = projpath
+    proj_path = Dir.pwd if projpath.nil?
     proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
     obj = Applocale::Config::ConfigUtil.new(proj_apath)
     setting = obj.load_configfile_to_setting
@@ -47,10 +53,12 @@ module Applocale
       download = open(setting.link)
       IO.copy_stream(download, setting.xlsxpath)
     end
-    Applocale.start_local_update(proj_path, setting)
+    Applocale.start_local_update( setting, proj_path)
   end
 
-  def self.start_local_update(proj_path = Dir.pwd, asetting = nil)
+  def self.start_local_update(asetting = nil, projpath = Dir.pwd)
+    proj_path = projpath
+    proj_path = Dir.pwd if projpath.nil?
     proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
     setting = asetting
     if setting.nil?
@@ -61,36 +69,22 @@ module Applocale
     ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parse_xlsx.result, setting.rubycode)
   end
 
-  def self.start_reverse(proj_path = Dir.pwd, is_skip)
+  def self.start_reverse( is_skip, projpath = Dir.pwd)
+    proj_path = projpath
+    proj_path = Dir.pwd if projpath.nil?
     proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
     obj = Applocale::Config::ConfigUtil.new(proj_apath)
     setting = obj.load_configfile_to_setting
     Applocale::ParseLocalizedResource.new(is_skip,setting.platform,setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list, setting.rubycode )
   end
-#
-# def self.eval_file(file)
-#   instance_eval read(file), file
-# end
-  
-  #
-# def self.genxlsx_from_source_code(path, platformStr = nil)
-  #
-  # end
 
+  def self.findkey( key, projpath = Dir.pwd)
+    proj_path = projpath
+    proj_path = Dir.pwd if projpath.nil?
+    proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
+    obj = Applocale::Config::ConfigUtil.new(proj_apath)
+    report_folder = File.dirname(obj.configfile_pathstr)
+    findobj = FindStrKey::FindValue.new(Applocale::Platform::IOS, proj_apath, report_folder, key)
+    findobj.find
+  end
 end
-
-path = "/Users/kennix.chui/Documents/Development/iOS"
-apath = "/Users/kennix.chui/Documents/Development/iOS/AppLocale/AppLocaleFile"
-
-Applocale.start_reverse(path, true)
-# def from_file file
-#   new File.read(file), file
-# end
-# from_file(apath)
-
-
-
-# Applocale.create_config_file(path)
-# Applocale.start_local_update(path)
-# Applocale.start_update(path)
-# Applocale.create_config_file(path)

@@ -5,7 +5,11 @@ require File.expand_path('../../../Util/regex_util.rb', __FILE__)
 
 require 'rubyXL'
 require 'colorize'
+module Applocale
+  class Injeust
 
+  end
+end
 
 module Applocale
   class ParseXLSX

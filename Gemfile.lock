@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    applocale (0.1.6)
+    applocale (0.2.0)
       colorize (~> 0.8.1)
       google-api-client (~> 0.9.2)
       rubyXL (~> 3.3, >= 3.3.23)

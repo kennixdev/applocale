@@ -6,4 +6,6 @@ module Applocale
   # Your code goes here...
 end
 
-Applocale::Command::Init.start(ARGV)
+if ARGV.length > 0
+  Applocale::Command::Init.start(ARGV)
+end
