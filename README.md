@@ -53,32 +53,32 @@ Step3: convert to xlsx
 *** Note that, the special character handling in xlsx is base on strings file(IOS) format.
 
 ## ConfigFile:
-```ruby
-link: [link]	//download link for xlsx, it support google spreadsheet
-platform: [android|ios]		//It can be android or ios
-xlsxpath: [xlsxpath]	//local path for save or read xlsx
-google_credentials_path: [google_credentials_path]		//optional: google credentials file path
+```yaml
+link: [link]	#download link for xlsx, it support google spreadsheet
+platform: [android|ios]		#It can be android or ios
+xlsxpath: [xlsxpath]	#local path for save or read xlsx
+google_credentials_path: [google_credentials_path]		#optional: google credentials file path
 langlist: 
-	[lang1]: [lang1_path]	//localization strings file path for lang1
-	[lang2]: [lang2_path]	//localization strings file path for lang2
-	[lang3]: [lang3_path]	//localization strings file path for lang3
+	[lang1]: [lang1_path]	#localization strings file path for lang1
+	[lang2]: [lang2_path]	#localization strings file path for lang2
+	[lang3]: [lang3_path]	#localization strings file path for lang3
 sheetname:
-	[Section1]: //sheetname
-		key_str: [header]	//header str for key
-		[lang1]: [header]	//header str for lang1
-		[lang2]: [header]	//header str for lang2
-		[lang3]: [header]	//header str for lang3
-	[Section3]: //sheetname
-		row: [row]	//first row number
-		key: [col]	//col label or number for key
-		[lang1]: [col]	//col label or number for lang1
-		[lang2]: [col]	//col label or number for lang2
-		[lang3]: [col]	//col label or number for lang3
+	[Section1]: #sheetname
+		key_str: [header]	#header str for key
+		[lang1]: [header]	#header str for lang1
+		[lang2]: [header]	#header str for lang2
+		[lang3]: [header]	#header str for lang3
+	[Section3]: #sheetname
+		row: [row]	#first row number
+		key: [col]	#col label or number for key
+		[lang1]: [col]	#col label or number for lang1
+		[lang2]: [col]	#col label or number for lang2
+		[lang3]: [col]	#col label or number for lang3
 ```
 *** Note that, for format in sheetname, it can be either by header or row and col lable
 
 for example:
-```ruby
+```yaml
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "ios"
 xlsxpath: "string.xlsx"
