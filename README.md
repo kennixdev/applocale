@@ -53,7 +53,7 @@ Step3: convert to xlsx
 *** Note that, the special character handling in xlsx is base on strings file(IOS) format.
 
 ## ConfigFile:
-```yaml
+```ruby
 link: [link]	#download link for xlsx, it support google spreadsheet
 platform: [android|ios]		#It can be android or ios
 xlsxpath: [xlsxpath]	#local path for save or read xlsx
@@ -78,7 +78,7 @@ sheetname:
 *** Note that, for format in sheetname, it can be either by header or row and col lable
 
 for example:
-```yaml
+```ruby
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "ios"
 xlsxpath: "string.xlsx"
