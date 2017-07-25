@@ -3,7 +3,11 @@
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Install it yourself as:
+
+    $ gem install applocale
+
+Or add this line to your application's Gemfile:
 
 ```ruby
 gem 'applocale'
@@ -13,9 +17,7 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
 
-    $ gem install applocale
 
 ## Usage
 
@@ -34,15 +36,15 @@ Or install it yourself as:
 
 For XLSX To localization String files: 
 ```
-Step1: create config file:
+Step1: create config file in default path 'AppLocale/AppLocaleFile':
 	$ applocale init IOS
-Step2: edit config file:
+Step2: edit config file
 Step3: Download and convert xlsx to strings file
 	$ applocale update
 ```
 For localization String files To XLSX : 
 ```
-Step1: create config file:
+Step1: create config file in default path 'AppLocale/AppLocaleFile':
 	$ applocale init IOS
 Step2: edit config file
 Step3: convert to xlsx 
