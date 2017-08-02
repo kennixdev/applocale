@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["kennixdev@gmail.com"]
 
   spec.summary       = %q{for mobile application to manage locale}
-  spec.description   = %q{It can convert file between string and xlsx, also support download xlsx from google. You can also setup conversion logic for string value of each project}
+  spec.description   = %q{It can convert file between string and xlsx, also support download xlsx from google. You can also setup conversion logic for string value of each project. Support ios and android.}
   spec.homepage      = "https://github.com/kennixdev/applocale"
   spec.license  = "MIT"
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

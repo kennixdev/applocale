@@ -25,7 +25,7 @@ module Applocale
         Applocale::ErrorUtil::CommandError.new("Mssing [platform] : ios | android ").raise
       end
     else
-      platformsybom = Platform.init(platform.strip)
+      platformsybom = Platform.init(platformStr.strip)
     end
     if platformsybom.nil?
       ErrorUtil::CommandError.new("Invalid [platform] : ios | android ").raise
