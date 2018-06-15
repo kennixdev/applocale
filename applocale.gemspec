@@ -13,6 +13,8 @@ Gem::Specification.new do |spec|
   spec.description   = %q{It can convert file between string and xlsx, also support download xlsx from google. You can also setup conversion logic for string value of each project. Support ios and android.}
   spec.homepage      = "https://github.com/kennixdev/applocale"
   spec.license  = "MIT"
+  spec.required_ruby_version = '>= 2.3.1'
+
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   # if spec.respond_to?(:metadata)
@@ -32,7 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest", "~> 5.0"
 
   spec.add_dependency "thor", "~> 0.19.4"
-  spec.add_dependency "google-api-client", '~> 0.9.2'
+  spec.add_dependency "google-api-client", '~> 0.11'
   # spec.add_dependency "google_drive", '~> 2.0'
   spec.add_dependency "colorize", "~> 0.8.1"
   spec.add_dependency "rubyXL", '~> 3.3', '>= 3.3.23'
