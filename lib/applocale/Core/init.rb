@@ -65,8 +65,13 @@ module Applocale
       obj = Applocale::Config::ConfigUtil.new(proj_apath)
       setting = obj.load_configfile_to_setting
     end
-    parse_xlsx = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list)
-    ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parse_xlsx.result, setting.rubycode)
+    case setting.export_format
+    when :csv
+      # TODO: CSV Parser
+    when :xlsx
+      parse_xlsx = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list)
+      ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parse_xlsx.result, setting.rubycode)
+    end
   end
 
   def self.start_reverse( is_skip, projpath = Dir.pwd)
