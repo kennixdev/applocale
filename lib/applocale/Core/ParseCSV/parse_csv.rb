@@ -29,6 +29,7 @@ module Applocale
       parse
     end
 
+    # TODO: Parse CSV file
     def parse
 
       @sheetobj_list.each do |sheet_obj|
