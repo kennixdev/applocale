@@ -50,12 +50,11 @@ module Applocale
       begin
         case export_format
         when :csv
-          Applocale::Config::Sheet.get_sheetlist(sheet_obj_list).each do |sheet_name|
+          sheet_obj_list.each do |sheet_obj|
+            sheet_name = sheet_obj.sheetname
             file_path = File.expand_path("#{sheet_name}.csv", export_to)
-            File.open(file_path, "w") do |f|
-              csv = open("https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=#{authorization.access_token}")
-              IO.copy_stream(csv, f)
-            end
+            csv = open("https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=#{authorization.access_token}")
+            IO.copy_stream(csv, file_path)
           end
         when :xlsx
           service.export_file(self.spreadsheet_id,
@@ -74,8 +73,8 @@ module Applocale
         failauth
       rescue Google::Apis::ServerError => e
         failauth
-      rescue
-        ErrorUtil::DownloadFromGoogleFail.new.raise
+      rescue => execption
+        ErrorUtil.raise(execption)
       end
     end
 

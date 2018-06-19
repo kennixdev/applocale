@@ -4,6 +4,7 @@ require File.expand_path('../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../Util/config_util.rb', __FILE__)
 require File.expand_path('../GoogleHepler/google_helper.rb', __FILE__)
 require File.expand_path('../ParseXLSX/parse_xlsx', __FILE__)
+require File.expand_path('../ParseCSV/parse_csv', __FILE__)
 require File.expand_path('../ParserStringFile/parse_localized_resource.rb', __FILE__)
 require File.expand_path('../convert_to_localefile', __FILE__)
 require File.expand_path('../FindStrKey/find_str_key', __FILE__)
@@ -68,6 +69,8 @@ module Applocale
     case setting.export_format
     when :csv
       # TODO: CSV Parser
+      parse_csv = Applocale::ParseCSV.new(setting.platform, setting.export_to, setting.lang_path_list, setting.sheet_obj_list)
+
     when :xlsx
       parse_xlsx = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list)
       ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parse_xlsx.result, setting.rubycode)
