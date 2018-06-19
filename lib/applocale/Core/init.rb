@@ -53,7 +53,7 @@ module Applocale
       download = open(setting.link)
       IO.copy_stream(download, setting.xlsxpath)
     end
-    Applocale.start_local_update( setting, proj_path)
+    Applocale.start_local_update(setting, proj_path)
   end
 
   def self.start_local_update(asetting = nil, projpath = Dir.pwd)
