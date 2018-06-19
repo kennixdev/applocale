@@ -1,6 +1,8 @@
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "#{platform}"
 xlsxpath: "#{xlsxpath}"
+export_format: :#{export_format}
+export_to: "#{export_to}"
 ＃google_credentials_path: "#{google_credentials_path}"
 langlist:
     zh_TW: "#{path_zh_TW}"

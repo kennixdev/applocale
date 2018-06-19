@@ -48,7 +48,7 @@ module Applocale
         setting.google_credentials_path = File.expand_path(FilePathUtil.default_google_credentials_filename, File.dirname(setting.configfile_pathstr))
       end
       googleobj = Applocale::GoogleHelper.new(setting.link, setting.google_credentials_path, setting.xlsxpath)
-      googleobj.download
+      googleobj.download(setting.sheet_obj_list, export_format: setting.export_format, export_to: setting.export_to)
     else
       download = open(setting.link)
       IO.copy_stream(download, setting.xlsxpath)

@@ -34,6 +34,8 @@ module Applocale
                 newline = newline.gsub("\#{path_en_US}", FilePathUtil.default_localefile_relative_pathstr(platform, Locale::EN_US))
                 newline = newline.gsub("\#{xlsxpath}", FilePathUtil.default_xlsx_relativepath_str)
                 newline = newline.gsub("\#{google_credentials_path}", FilePathUtil.default_google_credentials_filename)
+                newline = newline.gsub("\#{export_format}", FilePathUtil.default_export_format.to_s)
+                newline = newline.gsub("\#{export_to}", FilePathUtil.default_export_to)
                 to.puts(newline)
               end
             end
@@ -80,7 +82,8 @@ module Applocale
         google_credentials_path = config_yaml['google_credentials_path'].to_s.strip
         langlist = config_yaml['langlist']
         sheetname = config_yaml['sheetname']
-
+        export_format = config_yaml['export_format']
+        export_to = config_yaml['export_to']
 
         setting = Applocale::Config::Setting.new(self.configfile_pathstr)
         setting.rubycode = rubycode
@@ -105,9 +108,19 @@ module Applocale
           end
         end
 
+        case export_format
+        when :csv, :xlsx
+          setting.export_format = export_format
+        else
+          error = ErrorUtil::ConfigFileInValid.new("[sheetname] for item can only be :csv or :xlsx ")
+          error_list.push(error)
+        end
+
+        setting.export_to = File.expand_path(export_to || FilePathUtil.default_export_to, FilePathUtil.default_mainfolder)
+
         if !(xlsxpath.nil? || xlsxpath.length == 0)
           if !(Pathname.new xlsxpath).absolute?
-            setting.xlsxpath = File.expand_path(xlsxpath, File.dirname(self.configfile_pathstr))
+            setting.xlsxpath = File.expand_path(xlsxpath, setting.export_to)
           else
             setting.xlsxpath = xlsxpath
           end
