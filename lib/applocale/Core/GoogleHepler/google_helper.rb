@@ -47,7 +47,6 @@ module Applocale
       begin
         case export_format
         when :csv
-          authorization.refresh! if authorization.expired?
           sheet_obj_list.each do |sheet_obj|
             sheet_name = sheet_obj.sheetname
             file_path = File.expand_path("#{sheet_name}.csv", export_to)
@@ -121,6 +120,7 @@ module Applocale
         credentials = authorizer.get_and_store_credentials_from_code(
             user_id: user_id, code: code, base_url: OOB_URI)
       end
+      credentials.refresh! if credentials.expired?
       credentials
     end
 
