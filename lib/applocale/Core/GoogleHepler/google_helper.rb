@@ -44,9 +44,6 @@ module Applocale
       FileUtils.mkdir_p(export_to) unless File.directory?(export_to)
       remove_old_files(from: export_to)
       authorization = authorize
-      service = Google::Apis::DriveV3::DriveService.new
-      service.client_options.application_name = APPLICATION_NAME
-      service.authorization = authorization
       begin
         case export_format
         when :csv
@@ -57,6 +54,9 @@ module Applocale
             IO.copy_stream(csv, file_path)
           end
         when :xlsx
+          service = Google::Apis::DriveV3::DriveService.new
+          service.client_options.application_name = APPLICATION_NAME
+          service.authorization = authorization
           service.export_file(self.spreadsheet_id,
                               'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
                               download_dest: self.xlsx_path)
