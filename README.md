@@ -57,6 +57,7 @@ Step3: convert to xlsx
 link: [link]	#download link for xlsx, it support google spreadsheet
 platform: [android|ios]		#It can be android or ios
 xlsxpath: [xlsxpath]	#local path for save or read xlsx
+export_format: [csv|xlsx] # format of downloaded files.
 google_credentials_path: [google_credentials_path]		#optional: google credentials file path
 langlist: 
 	[lang1]: [lang1_path]	#localization strings file path for lang1
@@ -82,6 +83,7 @@ for example:
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "ios"
 xlsxpath: "string.xlsx"
+export_format: "csv"
 langlist:
 	zh_TW: "IOS/zh_TW.strings"
 	zh_CN: "IOS/zh_CN.strings"
