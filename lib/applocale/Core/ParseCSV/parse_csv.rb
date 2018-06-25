@@ -98,12 +98,7 @@ module Applocale
         raise "ParseCSVError: Invaild Key in sheet #{sheet_name}, row: #{index}, key_str: #{key_str}"
       end
       rowinfo = ParseModelModule::RowInfo.new(sheet_name, index, key_str)
-      language_header_list.each do |language_header|
-        value = row[language_header.colno] || ''
-        # TODO: is it needed?
-        value = ContentUtil.from_excel(value)
-        rowinfo.content_dict[language_header.lang] = value
-      end
+      rowinfo.content_dict = Hash[language_header_list.map { |language_header| [language_header.lang, ContentUtil.from_excel(row[language_header.colno] || '')] }]
       rowinfo
     end
 
