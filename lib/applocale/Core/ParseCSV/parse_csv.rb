@@ -18,7 +18,7 @@ module Applocale
     @sheetobj_list
 
     def initialize(platfrom, csv_directory, langlist, sheetobj_list)
-      @platform = csv_directory
+      @platform = platfrom
       @csv_directory = csv_directory
       @langlist = langlist
       @sheetobj_list = sheetobj_list
