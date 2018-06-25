@@ -1,6 +1,7 @@
 require File.expand_path('../../setting.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../../Util/regex_util.rb', __FILE__)
+require File.expand_path('../../ParseModel/parse_model_module.rb', __FILE__)
 
 require 'colorize'
 require 'csv'
@@ -29,13 +30,10 @@ module Applocale
       parse
     end
 
-    # TODO: Parse CSV file
     def parse
       @sheetcontent_list = @sheetobj_list.map do |sheet_obj|
         sheet_name = sheet_obj.sheetname
-
-        # TODO: not use parseXLSXModule
-        sheet_content = ParseXLSXModule::SheetContent.new(sheet_name)
+        sheet_content = ParseModelModule::SheetContent.new(sheet_name)
 
         csv_path = File.expand_path("#{sheet_name}.csv", @csv_directory)
         unless File.exist? csv_path
@@ -77,13 +75,11 @@ module Applocale
       if header_row_index.nil? || header_column_index.nil?
         raise "ParseCSVError: Header not found in sheet #{sheet_name}"
       end
-      # TODO: not use parseXLSXModule
-      key_header_info = ParseXLSXModule::KeyStrWithColNo.new(sheet_key_header, header_column_index)
+      key_header_info = ParseModelModule::KeyStrWithColNo.new(sheet_key_header, header_column_index)
 
       language_header_list = sheet_language_list.map do |key, value|
         cell_index = header_row_info.index { |cell| cell == value }
-        # TODO: not use parseXLSXModule
-        cell_index.nil? ? nil : ParseXLSXModule::LangWithColNo.new(value, key, cell_index)
+        cell_index.nil? ? nil : ParseModelModule::LangWithColNo.new(value, key, cell_index)
       end.compact
       unless language_header_list.length == sheet_language_list.length
         raise "ParseCSVError: Wrong language keys in sheet #{sheet_name}"
@@ -101,8 +97,7 @@ module Applocale
       unless ValidKey.is_validkey(@platform, key_str)
         raise "ParseCSVError: Invaild Key in sheet #{sheet_name}, row: #{index}, key_str: #{key_str}"
       end
-      # TODO: not use parseXLSXModule
-      rowinfo = ParseXLSXModule::RowInfo.new(sheet_name, index, key_str)
+      rowinfo = ParseModelModule::RowInfo.new(sheet_name, index, key_str)
       language_header_list.each do |language_header|
         value = row[language_header.colno] || ''
         # TODO: is it needed?
