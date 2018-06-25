@@ -36,6 +36,7 @@ module Applocale
         sheet_name = sheet_obj.sheetname
         sheet_info_obj = sheet_obj.obj
 
+        # TODO: not use parseXLSXModule
         sheet_content = ParseXLSXModule::SheetContent.new(sheet_name)
         # keycolno = Applocale::ParseXLSXModule::Helper.collabel_to_colno(sheetinfoobj.key_col)
         # sheet_info_obj.to_keyStrWithColNo(sheet_content)
@@ -45,10 +46,80 @@ module Applocale
           ErrorUtil.warning("File does not exist: #{csv_path}")
           next
         end
-        CSV.foreach(csv_path) do |row|
-          # p row
+        rows = CSV.read(csv_path)
+        header = find_header(sheet_obj, rows)
+        sheet_content.header_rowno = header[:header_row_index]
+        sheet_content.keyStr_with_colno = header[:key_header_info]
+        sheet_content.lang_with_colno_list = header[:language_header_list]
+
+        rows.each_with_index do |row, index|
+          next if sheet_content.header_rowno == index
+          row_content = parse_row(sheet_name, index, row, sheet_content.keyStr_with_colno, sheet_content.lang_with_colno_list)
+          prev_row_content = @allkey_dict[row_content.key_str.downcase]
+          if prev_row_content.nil?
+            @allkey_dict[row_content.key_str.downcase] = row_content
+            sheet_content.rowinfo_list.push(row_content)
+          else
+            raise "ParseCSVError:: Duplicate keys:\n sheet #{row_content.sheetname}, row: #{row_content.rowno}, key_str: #{row_content.key_str}\nduplicateWithSheet: #{prev_row_content.sheetname}, row: #{prev_row_content.rowno}, key_str: #{prev_row_content.key_str}"
+          end
         end
+
+        @sheetcontent_list.push(sheet_content)
       end
+    end
+
+    def result
+      @sheetcontent_list
+    end
+
+    def find_header(sheet, rows)
+      sheet_name = sheet.sheetname
+      sheet_info_obj = sheet.obj
+      sheet_language_list = sheet_info_obj.lang_headers
+      sheet_key_header = sheet_info_obj.key_header
+
+      header_row_index = rows.index do |row|
+        row.include?(sheet_key_header)
+      end
+
+      header_row_info = rows[header_row_index] unless header_row_index.nil?
+      header_column_index = header_row_info&.index { |cell| cell == sheet_key_header }
+      if header_row_index.nil? || header_column_index.nil?
+        raise "ParseCSVError: Header not found in sheet #{sheet_name}"
+      end
+      # TODO: not use parseXLSXModule
+      key_header_info = ParseXLSXModule::KeyStrWithColNo.new(sheet_key_header, header_column_index)
+
+      language_header_list = sheet_language_list.map do |key, value|
+        cell_index = header_row_info.index { |cell| cell == value }
+        # TODO: not use parseXLSXModule
+        cell_index.nil? ? nil : ParseXLSXModule::LangWithColNo.new(value, key, cell_index)
+      end.compact
+      unless language_header_list.length == sheet_language_list.length
+        raise "ParseCSVError: Wrong language keys in sheet #{sheet_name}"
+      end
+      {
+        header_row_index: header_row_index,
+        key_header_info: key_header_info,
+        language_header_list: language_header_list
+      }
+    end
+
+    def parse_row(sheet_name, index, row, key_header_info, language_header_list)
+      key_str = row[key_header_info.colno]
+
+      unless ValidKey.is_validkey(@platform, key_str)
+        raise "ParseCSVError: Invaild Key in sheet #{sheet_name}, row: #{index}, key_str: #{key_str}"
+      end
+      # TODO: not use parseXLSXModule
+      rowinfo = ParseXLSXModule::RowInfo.new(sheet_name, index, key_str)
+      language_header_list.each do |language_header|
+        value = row[language_header.colno] || ''
+        # TODO: is it needed?
+        value = ContentUtil.from_excel(value)
+        rowinfo.content_dict[language_header.lang] = value
+      end
+      rowinfo
     end
   end
 end
