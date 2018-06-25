@@ -11,7 +11,7 @@ module Applocale
     FILENAME_XLSX = 'string.xlsx'
     GOOGLE_CREDENTIALS = 'google_credentials.yaml'
     EXPORT_FORMAT = :xlsx
-    EXPORT_TO = '/assets'
+    EXPORT_TO = '/resources'
 
     def self.get_proj_absoluat_path(proj_path)
       path = proj_path
