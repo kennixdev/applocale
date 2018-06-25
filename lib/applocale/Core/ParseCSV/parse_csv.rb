@@ -31,15 +31,11 @@ module Applocale
 
     # TODO: Parse CSV file
     def parse
-
-      @sheetobj_list.each do |sheet_obj|
+      @sheetcontent_list = @sheetobj_list.map do |sheet_obj|
         sheet_name = sheet_obj.sheetname
-        sheet_info_obj = sheet_obj.obj
 
         # TODO: not use parseXLSXModule
         sheet_content = ParseXLSXModule::SheetContent.new(sheet_name)
-        # keycolno = Applocale::ParseXLSXModule::Helper.collabel_to_colno(sheetinfoobj.key_col)
-        # sheet_info_obj.to_keyStrWithColNo(sheet_content)
 
         csv_path = File.expand_path("#{sheet_name}.csv", @csv_directory)
         unless File.exist? csv_path
@@ -55,16 +51,10 @@ module Applocale
         rows.each_with_index do |row, index|
           next if sheet_content.header_rowno == index
           row_content = parse_row(sheet_name, index, row, sheet_content.keyStr_with_colno, sheet_content.lang_with_colno_list)
-          prev_row_content = @allkey_dict[row_content.key_str.downcase]
-          if prev_row_content.nil?
-            @allkey_dict[row_content.key_str.downcase] = row_content
-            sheet_content.rowinfo_list.push(row_content)
-          else
-            raise "ParseCSVError:: Duplicate keys:\n sheet #{row_content.sheetname}, row: #{row_content.rowno}, key_str: #{row_content.key_str}\nduplicateWithSheet: #{prev_row_content.sheetname}, row: #{prev_row_content.rowno}, key_str: #{prev_row_content.key_str}"
-          end
+          handle_duplicate_key_if_any!(row_content)
+          sheet_content.rowinfo_list.push(row_content)
         end
-
-        @sheetcontent_list.push(sheet_content)
+        sheet_content
       end
     end
 
@@ -120,6 +110,15 @@ module Applocale
         rowinfo.content_dict[language_header.lang] = value
       end
       rowinfo
+    end
+
+    def handle_duplicate_key_if_any!(row_content)
+      previous_row_content = @allkey_dict[row_content.key_str.downcase]
+      if previous_row_content.nil?
+        @allkey_dict[row_content.key_str.downcase] = row_content
+      else
+        raise "ParseCSVError:: Duplicate keys:\n sheet #{row_content.sheetname}, row: #{row_content.rowno}, key_str: #{row_content.key_str}\nduplicateWithSheet: #{previous_row_content.sheetname}, row: #{previous_row_content.rowno}, key_str: #{previous_row_content.key_str}"
+      end
     end
   end
 end
