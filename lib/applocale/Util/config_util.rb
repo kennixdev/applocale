@@ -35,7 +35,6 @@ module Applocale
                 newline = newline.gsub("\#{xlsxpath}", FilePathUtil.default_xlsx_relativepath_str)
                 newline = newline.gsub("\#{google_credentials_path}", FilePathUtil.default_google_credentials_filename)
                 newline = newline.gsub("\#{export_format}", FilePathUtil.default_export_format.to_s)
-                newline = newline.gsub("\#{export_to}", FilePathUtil.default_export_to)
                 to.puts(newline)
               end
             end
@@ -109,14 +108,14 @@ module Applocale
         end
 
         case export_format
-        when :csv, :xlsx
+        when 'csv', 'xlsx'
           setting.export_format = export_format
         else
-          error = ErrorUtil::ConfigFileInValid.new("[sheetname] for item can only be :csv or :xlsx ")
+          error = ErrorUtil::ConfigFileInValid.new("[sheetname] for item can only be 'csv' or 'xlsx' ")
           error_list.push(error)
         end
 
-        setting.export_to = File.expand_path(export_to || FilePathUtil.default_export_to, FilePathUtil.default_mainfolder)
+        setting.export_to = FilePathUtil.default_mainfolder
 
         if !(xlsxpath.nil? || xlsxpath.length == 0)
           if !(Pathname.new xlsxpath).absolute?

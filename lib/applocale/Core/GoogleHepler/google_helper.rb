@@ -36,7 +36,7 @@ module Applocale
 
     private
     def remove_old_files(from:)
-      FileUtils.rm_rf Dir.glob("#{from}/*") if File.directory?(from)
+      FileUtils.rm_rf Dir.glob("#{from}/*.{csv,xlsx}") if File.directory?(from)
     end
 
     public
@@ -46,14 +46,14 @@ module Applocale
       authorization = authorize
       begin
         case export_format
-        when :csv
+        when 'csv'
           sheet_obj_list.each do |sheet_obj|
             sheet_name = sheet_obj.sheetname
             file_path = File.expand_path("#{sheet_name}.csv", export_to)
             csv = open("https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=#{authorization.access_token}")
             IO.copy_stream(csv, file_path)
           end
-        when :xlsx
+        when 'xlsx'
           service = Google::Apis::DriveV3::DriveService.new
           service.client_options.application_name = APPLICATION_NAME
           service.authorization = authorization
