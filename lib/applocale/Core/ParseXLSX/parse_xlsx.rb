@@ -47,7 +47,12 @@ module Applocale
         ErrorUtil::CannotOpenXlsxFile.new(@xlsxpath).raise
       end
       sheetnamelist = Applocale::Config::Sheet.get_sheetlist(@sheetobj_list)
-      workbook.worksheets.each do |worksheet|
+      worksheets = workbook.worksheets
+      sorted_worksheets = sheetnamelist
+        .map { |sheet_name| worksheets.find { |worksheet| worksheet.sheet_name == sheet_name } }
+        .compact
+
+      sorted_worksheets.each do |worksheet|
         sheetname = worksheet.sheet_name
         sheetinfoobj = Applocale::Config::Sheet.get_sheetobj_by_sheetname(@sheetobj_list, sheetname)
         if sheetinfoobj.nil?
