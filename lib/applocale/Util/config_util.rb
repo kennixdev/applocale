@@ -111,11 +111,11 @@ module Applocale
         when 'csv', 'xlsx'
           setting.export_format = export_format
         else
-          error = ErrorUtil::ConfigFileInValid.new("[sheetname] for item can only be 'csv' or 'xlsx' ")
+          error = ErrorUtil::ConfigFileInValid.new("[export_format] for item can only be 'csv' or 'xlsx' ")
           error_list.push(error)
         end
 
-        setting.export_to = FilePathUtil.default_mainfolder
+        setting.export_to = FilePathUtil.default_export_to
 
         if !(xlsxpath.nil? || xlsxpath.length == 0)
           if !(Pathname.new xlsxpath).absolute?

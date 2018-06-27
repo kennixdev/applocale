@@ -28,9 +28,14 @@ module Applocale
       return FILENAME_CONFIG
     end
 
+    def self.default_export_to
+      return DIRNAME_MAIN + "/Resource"
+    end
+
     def self.default_mainfolder
       return DIRNAME_MAIN
     end
+
 
     def self.default_localefile_relative_pathstr(platform, lang)
       if platform == Platform::IOS
