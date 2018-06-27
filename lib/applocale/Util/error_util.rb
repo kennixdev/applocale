@@ -206,3 +206,16 @@ module Applocale
     end
   end
 end
+
+module Applocale
+  module ErrorUtil
+    def self.warning(message)
+      puts "** Warning: #{message}".yellow
+    end
+
+    def self.raise(message)
+      puts "** Error: #{message}".red
+      abort('')
+    end
+  end
+end

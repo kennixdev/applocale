@@ -3,6 +3,7 @@ require 'googleauth'
 require 'googleauth/stores/file_token_store'
 require 'fileutils'
 require 'colorize'
+require 'open-uri'
 require File.expand_path('../../../Util/file_util.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 
@@ -34,23 +35,34 @@ module Applocale
     end
 
     private
-    def removeOldExcel
-      if File.exist? self.xlsx_path
-        FileUtils.rm(self.xlsx_path)
-      end
+    def remove_old_files(from:)
+      FileUtils.rm_rf Dir.glob("#{from}/*.{csv,xlsx}") if File.directory?(from)
     end
 
     public
-    def download
-      removeOldExcel
-      service = Google::Apis::DriveV3::DriveService.new
-      service.client_options.application_name = APPLICATION_NAME
-      service.authorization = authorize
+    def download(sheet_obj_list, export_format:, export_to:)
+      FileUtils.mkdir_p(export_to) unless File.directory?(export_to)
+      remove_old_files(from: export_to)
+      authorization = authorize
       begin
-        service.export_file(self.spreadsheet_id,
-                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                            download_dest: self.xlsx_path)
-        if File.exist? self.xlsx_path
+        case export_format
+        when 'csv'
+          sheet_obj_list.each do |sheet_obj|
+            sheet_name = sheet_obj.sheetname
+            file_path = File.expand_path("#{sheet_name}.csv", export_to)
+            csv = open("https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=#{authorization.access_token}")
+            IO.copy_stream(csv, file_path)
+          end
+        when 'xlsx'
+          service = Google::Apis::DriveV3::DriveService.new
+          service.client_options.application_name = APPLICATION_NAME
+          service.authorization = authorization
+          service.export_file(self.spreadsheet_id,
+                              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                              download_dest: self.xlsx_path)
+        end
+
+        if Dir["#{export_to}/*"].any?
           puts 'Download from google finished'.green
         else
           ErrorUtil::DownloadFromGoogleFail.new.raise
@@ -61,8 +73,8 @@ module Applocale
         failauth
       rescue Google::Apis::ServerError => e
         failauth
-      rescue
-        ErrorUtil::DownloadFromGoogleFail.new.raise
+      rescue => execption
+        ErrorUtil.raise(execption)
       end
     end
 
@@ -108,6 +120,7 @@ module Applocale
         credentials = authorizer.get_and_store_credentials_from_code(
             user_id: user_id, code: code, base_url: OOB_URI)
       end
+      credentials.refresh! if credentials.expired?
       credentials
     end
 

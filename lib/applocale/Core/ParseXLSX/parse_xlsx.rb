@@ -2,6 +2,7 @@ require File.expand_path('../../setting.rb', __FILE__)
 require File.expand_path('../parse_xlsx_module.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../../Util/regex_util.rb', __FILE__)
+require File.expand_path('../../ParseModel/parse_model_module.rb', __FILE__)
 
 require 'rubyXL'
 require 'colorize'
@@ -46,7 +47,12 @@ module Applocale
         ErrorUtil::CannotOpenXlsxFile.new(@xlsxpath).raise
       end
       sheetnamelist = Applocale::Config::Sheet.get_sheetlist(@sheetobj_list)
-      workbook.worksheets.each do |worksheet|
+      worksheets = workbook.worksheets
+      sorted_worksheets = sheetnamelist
+        .map { |sheet_name| worksheets.find { |worksheet| worksheet.sheet_name == sheet_name } }
+        .compact
+
+      sorted_worksheets.each do |worksheet|
         sheetname = worksheet.sheet_name
         sheetinfoobj = Applocale::Config::Sheet.get_sheetobj_by_sheetname(@sheetobj_list, sheetname)
         if sheetinfoobj.nil?
@@ -54,7 +60,7 @@ module Applocale
         end
         sheetnamelist.delete(sheetname)
 
-        sheetcontent = ParseXLSXModule::SheetContent.new(sheetname)
+        sheetcontent = ParseModelModule::SheetContent.new(sheetname)
         if sheetinfoobj.is_a? Applocale::Config::SheetInfoByRow
           keycolno = Applocale::ParseXLSXModule::Helper.collabel_to_colno(sheetinfoobj.key_col)
           sheetinfoobj.to_keyStrWithColNo(sheetcontent)
@@ -121,7 +127,7 @@ module Applocale
       end
 
       unless keystr.nil?
-        rowinfo = ParseXLSXModule::RowInfo.new(sheetname, rowno, keystr)
+        rowinfo = ParseModelModule::RowInfo.new(sheetname, rowno, keystr)
         lang_with_colno_list.each do |lang_with_colno|
           cell = cells[lang_with_colno.colno - 1]
           val = cell && cell.value
@@ -139,7 +145,7 @@ module Applocale
         if ValidKey.is_validkey(@platform, new_value)
           return new_value
         else
-          rowinfo = ParseXLSXModule::RowInfo.new(nil, nil, value)
+          rowinfo = ParseModelModule::RowInfo.new(nil, nil, value)
           raise ErrorUtil::ParseXlsxError::InValidKey.new(rowinfo)
         end
       end
@@ -162,11 +168,11 @@ module Applocale
         value = cell && cell.value
         unless value.nil?
           if value == sheetinfoobj.key_header && keystr_with_colno.nil?
-            keystr_with_colno = ParseXLSXModule::KeyStrWithColNo.new(value, colno)
+            keystr_with_colno = ParseModelModule::KeyStrWithColNo.new(value, colno)
           else
             sheetinfoobj.lang_headers.each do |lang, keyforlang|
               if value == keyforlang && k_header_lang_dict.index(lang).nil?
-                lang_with_colno_list.push(ParseXLSXModule::LangWithColNo.new(keyforlang, lang, colno))
+                lang_with_colno_list.push(ParseModelModule::LangWithColNo.new(keyforlang, lang, colno))
                 k_header_lang_dict.push(lang)
               end
             end

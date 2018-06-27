@@ -4,6 +4,7 @@ require File.expand_path('../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../Util/config_util.rb', __FILE__)
 require File.expand_path('../GoogleHepler/google_helper.rb', __FILE__)
 require File.expand_path('../ParseXLSX/parse_xlsx', __FILE__)
+require File.expand_path('../ParseCSV/parse_csv', __FILE__)
 require File.expand_path('../ParserStringFile/parse_localized_resource.rb', __FILE__)
 require File.expand_path('../convert_to_localefile', __FILE__)
 require File.expand_path('../FindStrKey/find_str_key', __FILE__)
@@ -48,12 +49,12 @@ module Applocale
         setting.google_credentials_path = File.expand_path(FilePathUtil.default_google_credentials_filename, File.dirname(setting.configfile_pathstr))
       end
       googleobj = Applocale::GoogleHelper.new(setting.link, setting.google_credentials_path, setting.xlsxpath)
-      googleobj.download
+      googleobj.download(setting.sheet_obj_list, export_format: setting.export_format, export_to: setting.export_to)
     else
       download = open(setting.link)
       IO.copy_stream(download, setting.xlsxpath)
     end
-    Applocale.start_local_update( setting, proj_path)
+    Applocale.start_local_update(setting, proj_path)
   end
 
   def self.start_local_update(asetting = nil, projpath = Dir.pwd)
@@ -65,8 +66,13 @@ module Applocale
       obj = Applocale::Config::ConfigUtil.new(proj_apath)
       setting = obj.load_configfile_to_setting
     end
-    parse_xlsx = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list)
-    ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parse_xlsx.result, setting.rubycode)
+    case setting.export_format
+    when 'csv'
+      parser = Applocale::ParseCSV.new(setting.platform, setting.export_to, setting.lang_path_list, setting.sheet_obj_list)
+    when 'xlsx'
+      parser = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list)
+    end
+    ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parser.result, setting.rubycode)
   end
 
   def self.start_reverse( is_skip, projpath = Dir.pwd)
