@@ -100,7 +100,7 @@ module Applocale
           error_list.push(error)
         else
           if Platform.init(platform).nil?
-            error = ErrorUtil::ConfigFileInValid.new("[platform] can only be 'ios' or 'android' ")
+            error = ErrorUtil::ConfigFileInValid.new("[platform] can only be 'ios', 'android' or 'json'.")
             error_list.push(error)
           else
             setting.platform = Platform.init(platform)
