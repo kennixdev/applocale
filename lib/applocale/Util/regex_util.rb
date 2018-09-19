@@ -90,5 +90,16 @@ module Applocale
       new_value = new_value.gsub(/\t/, "\\t")
       return new_value
     end
+
+    def self.remove_escaped_new_line(content)
+      reg = /(?<!\\)((?:\\{2})+)*\\"/
+      new_value = content.gsub(reg) {|match|
+        match.slice!(0)
+        match
+      }
+      new_value
+          .gsub(/\\n/, "\n")
+          .gsub(/\\t/, "\t")
+    end
   end
 end
