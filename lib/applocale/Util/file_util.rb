@@ -7,6 +7,7 @@ module Applocale
     DIRNAME_MAIN = 'AppLocale'
     DIRNAME_IOS = 'IOS'
     DIRNAME_ANDROID = 'Android'
+    DIRNAME_JSON = 'locales'
     FILENAME_CONFIG = 'AppLocaleFile'
     FILENAME_XLSX = 'string.xlsx'
     GOOGLE_CREDENTIALS = 'google_credentials.yaml'
@@ -42,6 +43,8 @@ module Applocale
         dirname = DIRNAME_IOS
       elsif platform == Platform::ANDROID
         dirname = DIRNAME_ANDROID
+      elsif platform == Platform::JSON
+        dirname = DIRNAME_JSON
       end
       unless dirname.nil?
         filename = Locale.filename(platform, lang)
