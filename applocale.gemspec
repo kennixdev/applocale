@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "applocale"
   spec.version       = Applocale::VERSION
   spec.authors       = ["Kennix"]
-  spec.email         = ["kennixdev@gmail.com"]
+  spec.email         = ["kennixdev@gmail.com", "johnwongapi@gmail.com"]
 
   spec.summary       = %q{for mobile application to manage locale}
   spec.description   = %q{It can convert file between string and xlsx, also support download xlsx or csv from google. You can also setup conversion logic for string value of each project. Support ios and android.}
