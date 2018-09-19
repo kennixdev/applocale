@@ -38,9 +38,11 @@ module Applocale
       if @platform == Platform::IOS
         result = self.parse_ios
         write_to_xlsx(@xlsxpath, sheetobj, result[:errorlist], result[:content], result[:keylist])
-      else
+      elsif @platform == Platform::ANDROID
         result = self.parse_android
         write_to_xlsx(@xlsxpath, sheetobj, result[:errorlist], result[:content], result[:keylist])
+      else
+        ErrorUtil::CommandError.new('Platform not supported').raise
       end
     end
 
