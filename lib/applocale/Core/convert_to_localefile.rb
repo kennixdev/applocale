@@ -73,7 +73,14 @@ module Applocale
           [row.key_str, value]
         end.to_h
       end.reduce({}, :merge)
+      section_last_row = sheet_content_list
+                              .map {|sheet_content| sheet_content.get_rowInfo_sortby_key.last&.key_str }
+                              .compact
+                              .reverse
+                              .drop(1)
+                              .reverse
       json = JSON.pretty_generate(hash)
+      section_last_row.each { |row| json.gsub!(/(.*)("#{row}")(.*)/, '\1\2\3' + "\n") }
       target = open(lang_path_obj.filepath, 'w')
       target.puts(json)
       target.close
