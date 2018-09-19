@@ -68,7 +68,7 @@ module Applocale
       FileUtils.mkdir_p(File.dirname(lang_path_obj.filepath))
       hash = sheet_content_list.map do |sheet_content|
         sheet_content.get_rowInfo_sortby_key.map do |row|
-          content = row.content_dict[lang_path_obj.lang]
+          content = ContentUtil.remove_escaped_new_line(row.content_dict[lang_path_obj.lang])
           value = add_escape(platform, lang_path_obj.lang, row.key_str, content, inject_obj)
           [row.key_str, value]
         end.to_h
