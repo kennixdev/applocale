@@ -3,12 +3,15 @@ module Applocale
   module Platform
     IOS = :ios
     ANDROID = :Android
+    JSON = :json
 
     def self.init(platform)
       if platform.upcase == 'IOS'
         return Platform::IOS
       elsif platform.upcase == 'ANDROID'
         return Platform::ANDROID
+      elsif platform.upcase == 'JSON'
+        return Platform::JSON
       end
       return nil
     end
@@ -24,6 +27,8 @@ module Applocale
         if extn.downcase == '.xml'
           return true
         end
+      elsif platform == Platform::JSON
+        return extn.downcase == '.json'
       end
       return false
     end

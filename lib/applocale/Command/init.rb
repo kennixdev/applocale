@@ -12,7 +12,7 @@ require 'thor'
 module Applocale
   class Command
     class Init < Thor
-      desc "init [platform]", "Create Config File, platform: ios | android"
+      desc "init [platform]", "Create Config File, platform: ios | android | json"
       option :path, :desc => "Project dir path"
       def init(platform = nil)
         Applocale.create_config_file(platform, options[:path])
