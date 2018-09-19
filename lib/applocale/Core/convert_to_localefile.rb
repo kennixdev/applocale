@@ -4,7 +4,7 @@ require File.expand_path('../../Util/regex_util.rb', __FILE__)
 require File.expand_path('../../Util/injection.rb', __FILE__)
 
 require 'colorize'
-
+require 'json'
 
 module Applocale
   class ConvertToStrFile
@@ -19,6 +19,8 @@ module Applocale
           self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list, injectObj)
         elsif platform == Platform::ANDROID
           self.convert_to_xml(platform, langpath_obj, sheetcontent_list, injectObj)
+        elsif platform == Platform::JSON
+          self.convert_to_json(platform, langpath_obj, sheetcontent_list, injectObj)
         end
       end
       puts 'Convert Finished !!!'.green
@@ -59,6 +61,28 @@ module Applocale
         target.puts('')
       end
       target.puts('</resources>')
+      target.close
+    end
+
+    def self.convert_to_json(platform, lang_path_obj, sheet_content_list, inject_obj)
+      FileUtils.mkdir_p(File.dirname(lang_path_obj.filepath))
+      hash = sheet_content_list.map do |sheet_content|
+        sheet_content.get_rowInfo_sortby_key.map do |row|
+          content = ContentUtil.remove_escaped_new_line(row.content_dict[lang_path_obj.lang])
+          value = add_escape(platform, lang_path_obj.lang, row.key_str, content, inject_obj)
+          [row.key_str, value]
+        end.to_h
+      end.reduce({}, :merge)
+      section_last_row = sheet_content_list
+                              .map {|sheet_content| sheet_content.get_rowInfo_sortby_key.last&.key_str }
+                              .compact
+                              .reverse
+                              .drop(1)
+                              .reverse
+      json = JSON.pretty_generate(hash)
+      section_last_row.each { |row| json.gsub!(/(.*)("#{row}")(.*)/, '\1\2\3' + "\n") }
+      target = open(lang_path_obj.filepath, 'w')
+      target.puts(json)
       target.close
     end
 

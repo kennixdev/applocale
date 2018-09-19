@@ -23,13 +23,13 @@ module Applocale
       elsif Dir.glob("#{proj_apath}/**/*.gradle").length > 0
         platformsybom = Platform::ANDROID
       else
-        Applocale::ErrorUtil::CommandError.new("Mssing [platform] : ios | android ").raise
+        Applocale::ErrorUtil::CommandError.new("Missing [platform] : ios | android | json").raise
       end
     else
       platformsybom = Platform.init(platformStr.strip)
     end
     if platformsybom.nil?
-      ErrorUtil::CommandError.new("Invalid [platform] : ios | android ").raise
+      ErrorUtil::CommandError.new("Invalid [platform] : ios | android | json").raise
     else
       Applocale::Config::ConfigUtil.create_configfile_ifneed(platformsybom,proj_apath.to_s )
     end
