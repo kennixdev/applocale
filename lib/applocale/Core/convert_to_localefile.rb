@@ -28,10 +28,43 @@ module Applocale
 
     def self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list, injectObj)
       FileUtils.mkdir_p(File.dirname(langpath_obj.filepath))
+      file_header_comment = []
+      is_double_dash_comment = false
+      is_multiline_comment = false
+      File.open(langpath_obj.filepath, 'r').each do |line|
+        if is_double_dash_comment
+          break unless line.strip.start_with?('//')
+          file_header_comment.push(line)
+          next
+        end
+
+        if is_multiline_comment
+          file_header_comment.push(line)
+          break if line.include?('*/')
+        end
+
+        unless is_multiline_comment or is_double_dash_comment
+          case
+          when line.chomp.empty?
+            file_header_comment.push(line)
+          when line.strip.start_with?('//')
+            is_double_dash_comment = true
+            file_header_comment.push(line)
+          when line.strip.start_with?('/*') && !line.strip.start_with?('/**')
+            is_multiline_comment = true
+            file_header_comment.push(line)
+          else
+            break
+          end
+        end
+      end
+
       target = open(langpath_obj.filepath, 'w')
-      sheetcontent_list.each do |sheetcontent|
+      sheetcontent_list.each_with_index do |sheetcontent, index|
         contentlist = sheetcontent.get_rowInfo_sortby_key
         next if contentlist.length <= 0
+        target.puts file_header_comment.join('') if is_double_dash_comment or is_multiline_comment
+        target.puts('') if index > 0 or !file_header_comment.empty?
         target.puts('/*******************************')
         target.puts(" *   #{sheetcontent.comment}")
         target.puts(' *******************************/')
@@ -41,7 +74,6 @@ module Applocale
           value = self.add_escape(platform, langpath_obj.lang, rowinfo.key_str, content, injectObj)
           target.puts("\"#{rowinfo.key_str}\" = \"#{value}\";")
         end
-        target.puts('')
       end
       target.close
     end
