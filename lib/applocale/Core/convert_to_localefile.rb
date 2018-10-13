@@ -60,10 +60,10 @@ module Applocale
       end
 
       target = open(langpath_obj.filepath, 'w')
+      target.puts file_header_comment.join('') if is_double_dash_comment or is_multiline_comment
       sheetcontent_list.each_with_index do |sheetcontent, index|
         contentlist = sheetcontent.get_rowInfo_sortby_key
         next if contentlist.length <= 0
-        target.puts file_header_comment.join('') if is_double_dash_comment or is_multiline_comment
         target.puts('') if index > 0 or !file_header_comment.empty?
         target.puts('/*******************************')
         target.puts(" *   #{sheetcontent.comment}")
