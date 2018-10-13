@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    applocale (0.2.5)
+    applocale (0.2.6)
       colorize (~> 0.8.1)
       google-api-client (~> 0.11)
       rubyXL (~> 3.3, >= 3.3.23)
@@ -56,7 +56,7 @@ GEM
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
     retriable (3.1.2)
-    rubyXL (3.3.26)
+    rubyXL (3.3.28)
       nokogiri (>= 1.4.4)
       rubyzip (>= 1.1.6)
     rubyzip (1.2.1)
