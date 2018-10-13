@@ -107,6 +107,7 @@ module Applocale
           end
         end
 
+        export_format = 'xlsx' if export_format.nil?
         case export_format
         when 'csv', 'xlsx'
           setting.export_format = export_format
