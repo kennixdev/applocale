@@ -22,7 +22,7 @@ And then execute:
 ## Usage
 
 	Commands:
-		+ init [platform]  # Create Config File, platform: ios | android
+		+ init [platform]  # Create Config File, platform: ios | android | json
 		+ reverse          # Convert localization string file to xlsx
 			[--skip]  	# Skip Error
 		+ update           # Download xlsx and convert to localization strings file
@@ -55,9 +55,9 @@ Step3: convert to xlsx
 ## ConfigFile:
 ```ruby
 link: [link]	#download link for xlsx, it support google spreadsheet
-platform: [android|ios]		#It can be android or ios
+platform: [android|ios|json]		#It can be android, ios or json
 xlsxpath: [xlsxpath]	#local path for save or read xlsx
-export_format: [csv|xlsx] # format of downloaded files.
+export_format: [csv|xlsx] # format of downloaded files, default option is xlsx.
 google_credentials_path: [google_credentials_path]		#optional: google credentials file path
 langlist: 
 	[lang1]: [lang1_path]	#localization strings file path for lang1
