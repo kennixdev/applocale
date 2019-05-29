@@ -75,7 +75,7 @@ sheetname:
 		[lang1]: [col]	#col label or number for lang1
 		[lang2]: [col]	#col label or number for lang2
 		[lang3]: [col]	#col label or number for lang3
-isSkipEmptyKey: [ture|false] #whether throw error when key is empty
+isSkipEmptyKey: [true|false] #whether throw error when key is empty
 ```
 *** Note that, for format in sheetname, it can be either by header or row and col lable
 
