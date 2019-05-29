@@ -75,6 +75,7 @@ sheetname:
 		[lang1]: [col]	#col label or number for lang1
 		[lang2]: [col]	#col label or number for lang2
 		[lang3]: [col]	#col label or number for lang3
+isSkipEmptyKey: [ture|false] #whether throw error when key is empty
 ```
 *** Note that, for format in sheetname, it can be either by header or row and col lable
 
@@ -105,9 +106,10 @@ sheetname:
 		en_US: "B"
 		zh_TW: "C"
 		zh_CN: "D"
+isSkipEmptyKey: false
 ``` 
 
-*** You can also set conversion logic by create method of 'convent_to_locale', 'before_convent_to_locale', 'after_convent_to_locale', 'parse_from_locale', 'before_parse_from_locale', 'after_parse_from_locale'
+*** You can also set conversion logic by create method of 'convent_to_locale', 'before_convent_to_locale', 'after_convent_to_locale', 'parse_from_locale', 'before_parse_from_locale', 'after_parse_from_locale', 'is_skip_by_key'
 
 
 
