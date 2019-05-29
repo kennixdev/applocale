@@ -1,13 +1,18 @@
 # Applocale
 
+Applocale is a Localization tool,  
+It can generates localized file for ios, android or in json format  
+The input resource can be 'google sheet' or 'xlsx' or 'csv'
 
 ## Installation
 
-Install it yourself as:
+**Option1: Install by command:**
 
     $ gem install applocale
 
-Or add this line to your application's Gemfile:
+**Option2: by Gemfile:**
+
+add this line to your application's Gemfile:
 
 ```ruby
 gem 'applocale'
@@ -34,7 +39,7 @@ And then execute:
 
 ## Steps:
 
-For XLSX To localization String files: 
+For GoogleSheet/XLSX/CSV To localization String files: 
 ```
 Step1: create config file in default path 'AppLocale/AppLocaleFile':
 	$ applocale init IOS

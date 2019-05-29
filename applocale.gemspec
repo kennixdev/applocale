@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Kennix"]
   spec.email         = ["kennixdev@gmail.com", "johnwongapi@gmail.com"]
 
-  spec.summary       = %q{for mobile application to manage locale}
-  spec.description   = %q{It can convert file between string and xlsx, also support download xlsx or csv from google. You can also setup conversion logic for string value of each project. Support ios and android.}
+  spec.summary       = %q{for mobile application to manage localization}
+  spec.description   = %q{Applocale is a localization tool, It can convert file between string and xlsx ,csv, also support download xlsx or csv from google. You can also setup conversion logic for string value of each project. Support ios and android.}
   spec.homepage      = "https://github.com/kennixdev/applocale"
   spec.license  = "MIT"
   spec.required_ruby_version = '>= 2.3.1'
