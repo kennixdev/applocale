@@ -1,0 +1,30 @@
+/*******************************
+ *   Section1
+ *******************************/
+
+"content" = "This is a \"content\"";
+"content2" = "";
+"content3" = "This is test \n\r in new line";
+"good_morning" = "GoodMorning";
+"hello" = "hello";
+
+/*******************************
+ *   Section2
+ *******************************/
+
+"section_title" = "Section2";
+
+/*******************************
+ *   Section3
+ *******************************/
+
+"name3" = "Chan Tai Man3\nChan Tai Man";
+"section_title3" = "Section3";
+
+/*******************************
+ *   Section4
+ *******************************/
+
+"name_tes3" = "Chan Tai Man55";
+"name_tes5" = "Chan Tai Man55";
+"section_title_test" = "Section233";

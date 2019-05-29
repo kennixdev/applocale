@@ -68,9 +68,9 @@ module Applocale
     end
     case setting.export_format
     when 'csv'
-      parser = Applocale::ParseCSV.new(setting.platform, setting.export_to, setting.lang_path_list, setting.sheet_obj_list)
+      parser = Applocale::ParseCSV.new(setting.platform, setting.export_to, setting.lang_path_list, setting.sheet_obj_list, setting.is_skip_empty_key)
     when 'xlsx'
-      parser = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list)
+      parser = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list, setting.is_skip_empty_key)
     end
     ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parser.result, setting.rubycode)
   end

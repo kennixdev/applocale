@@ -9,3 +9,4 @@ end
 if ARGV.length > 0
   Applocale::Command::Init.start(ARGV)
 end
+

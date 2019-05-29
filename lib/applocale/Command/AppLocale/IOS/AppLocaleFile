@@ -1,12 +1,12 @@
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
-platform: "#{platform}"
-xlsxpath: "#{xlsxpath}"
-export_format: "#{export_format}"
-＃google_credentials_path: "#{google_credentials_path}"
+platform: "ios"
+xlsxpath: "string.xlsx"
+export_format: "xlsx"
+＃google_credentials_path: "google_credentials.yaml"
 langlist:
-    zh_TW: "#{path_zh_TW}"
-    zh_CN: "#{path_zh_CN}"
-    en_US: "#{path_en_US}"
+    zh_TW: "IOS/zh_TW.strings"
+    zh_CN: "IOS/zh_CN.strings"
+    en_US: "IOS/en_US.strings"
 sheetname:
   Section1:
     key_str: "Key"
@@ -24,7 +24,12 @@ sheetname:
     en_US: "B"
     zh_TW: "C"
     zh_CN: "D"
-isSkipEmptyKey: false
+  Section4:
+    key_str: "Key"
+    en_US: "English"
+    zh_TW: "zh_TW"
+    zh_CN: "zh_CN"
+isSkipEmptyKey: true
 
 
 # def convent_to_locale(lang, key, value)
@@ -51,6 +56,9 @@ isSkipEmptyKey: false
 #     return value
 # end
 
-# def is_skip_by_key(sheetname, lang, key)
-#     return true
-# end
+def is_skip_by_key(sheetname, lang, key)
+    if sheetname == 'Section2' && key == 'name'
+        return true
+    end
+    return false
+end

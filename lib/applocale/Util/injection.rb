@@ -75,5 +75,14 @@ module Applocale
       return after_parse_from_locale(lang, key, value)
     end
 
+    public
+    def has_is_skip_by_key
+      return defined?(is_skip_by_key) == 'method'
+    end
+
+    public
+    def load_is_skip_by_key(sheetname, lang, key)
+      return is_skip_by_key(sheetname, lang, key)
+    end
   end
 end

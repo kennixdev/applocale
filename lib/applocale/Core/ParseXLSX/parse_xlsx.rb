@@ -23,8 +23,9 @@ module Applocale
     @xlsxpath
     @langlist
     @sheetobj_list
+    @is_skip_empty_key
 
-    def initialize(platfrom, xlsxpath, langlist, sheetobj_list)
+    def initialize(platfrom, xlsxpath, langlist, sheetobj_list, is_skip_empty_key)
       @platform = platfrom
       @xlsxpath = xlsxpath
       @langlist = langlist
@@ -33,6 +34,7 @@ module Applocale
       @sheetcontent_list = Array.new
       @allkey_dict = {}
       @all_error = Array.new
+      @is_skip_empty_key = is_skip_empty_key
       self.parse
     end
 
@@ -124,6 +126,10 @@ module Applocale
         e.rowinfo.sheetname = sheetname
         e.rowinfo.rowno = rowno
         raise e
+      end
+
+      if keystr.nil? && !@is_skip_empty_key
+        raise "ParseCSVError: Key can not be empty, in sheet #{sheetname}, row: #{rowno}, key_str: #{keystr}"
       end
 
       unless keystr.nil?

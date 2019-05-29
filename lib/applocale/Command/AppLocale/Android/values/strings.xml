@@ -1,0 +1,21 @@
+<resources>
+   <!-- Section1 -->
+   <string name="content">This is a \"content\"</string>
+   <string name="content2"></string>
+   <string name="content3">This is test \n\n in new line</string>
+   <string name="good_morning">GoodMorning</string>
+   <string name="hello">hello</string>
+
+   <!-- Section2 -->
+   <string name="section_title">Section2</string>
+
+   <!-- Section3 -->
+   <string name="name3">Chan Tai Man3\nChan Tai Man</string>
+   <string name="section_title3">Section3</string>
+
+   <!-- Section4 -->
+   <string name="name_tes3">Chan Tai Man55</string>
+   <string name="name_tes5">Chan Tai Man55</string>
+   <string name="section_title_test">Section233</string>
+
+</resources>

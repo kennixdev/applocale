@@ -83,7 +83,7 @@ module Applocale
         sheetname = config_yaml['sheetname']
         export_format = config_yaml['export_format']
         export_to = config_yaml['export_to']
-
+        isSkipEmptyKey = config_yaml['isSkipEmptyKey']
         setting = Applocale::Config::Setting.new(self.configfile_pathstr)
         setting.rubycode = rubycode
         unless link.nil? || link.length == 0
@@ -207,6 +207,14 @@ module Applocale
           end
         end
 
+        if isSkipEmptyKey.nil?
+          setting.is_skip_empty_key = true
+        elsif isSkipEmptyKey.to_s.downcase == "true" || isSkipEmptyKey.to_s.downcase == "false"
+          setting.is_skip_empty_key = isSkipEmptyKey
+        else
+          error = ErrorUtil::ConfigFileInValid.new("[isSkipEmptyKey] must be boolean ")
+          error_list.push(error)
+        end
         setting.printlog
         ErrorUtil::ConfigFileInValid.raiseArr(error_list)
         return setting
