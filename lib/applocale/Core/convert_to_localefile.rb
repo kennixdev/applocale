@@ -112,40 +112,30 @@ module Applocale
 
     def self.convert_to_json(platform, lang_path_obj, sheet_content_list, inject_obj)
       FileUtils.mkdir_p(File.dirname(lang_path_obj.filepath))
-      puts "HI"
       hash = sheet_content_list.map do |sheet_content|
-        sheet_content.get_rowInfo_sortby_key.select do |row|
-          puts row
-          if inject_obj.has_is_skip_by_key
-            is_skip_by_key = inject_obj.load_is_skip_by_key(sheet_content.sheetname, lang_path_obj.lang, row.key_str)
-            if is_skip_by_key.to_s.downcase == "true"
-              return false
-            end
-          end
-          return true
-        end.map do |row|
+        newResult = sheet_content.get_rowInfo_sortby_key.map do |row|
           content = ContentUtil.remove_escaped_new_line(row.content_dict[lang_path_obj.lang])
           value = add_escape(platform, lang_path_obj.lang, row.key_str, content, inject_obj)
           [row.key_str, value]
         end.to_h
-        # sheet_content.get_rowInfo_sortby_key.map do |row|
-        #   if inject_obj.has_is_skip_by_key
-        #     is_skip_by_key = inject_obj.load_is_skip_by_key(sheet_content.sheetname, lang_path_obj.lang, row.key_str)
-        #     if is_skip_by_key.to_s.downcase == "true"
-        #       return []
-        #     end
-        #   end
-        #   content = ContentUtil.remove_escaped_new_line(row.content_dict[lang_path_obj.lang])
-        #   value = add_escape(platform, lang_path_obj.lang, row.key_str, content, inject_obj)
-        #   [row.key_str, value]
-        # end.to_h
+        newResult = newResult.select do |key, value|
+          to_skip = false
+          if inject_obj.has_is_skip_by_key
+            is_skip_by_key = inject_obj.load_is_skip_by_key(sheet_content.sheetname, lang_path_obj.lang, key)
+            if is_skip_by_key.to_s.downcase == "true"
+              to_skip = true
+            end
+          end
+          !to_skip
+        end
+        newResult
       end.reduce({}, :merge)
       section_last_row = sheet_content_list
-                              .map {|sheet_content| sheet_content.get_rowInfo_sortby_key.last.key_str}
-                              .compact
-                              .reverse
-                              .drop(1)
-                              .reverse
+                             .map {|sheet_content| sheet_content.get_rowInfo_sortby_key.last.key_str }
+                             .compact
+                             .reverse
+                             .drop(1)
+                             .reverse
       json = JSON.pretty_generate(hash)
       section_last_row.each { |row| json.gsub!(/(.*)("#{row}")(.*)/, '\1\2\3' + "\n") }
       target = open(lang_path_obj.filepath, 'w')

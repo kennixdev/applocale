@@ -57,5 +57,4 @@ module Applocale
   end
 end
 
-# Applocale.create_config_file('json')
-Applocale.start_update(nil)
+
