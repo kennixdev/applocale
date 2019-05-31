@@ -24,17 +24,19 @@ module Applocale
     @langlist
     @sheetobj_list
     @is_skip_empty_key
+    @injectobj
 
-    def initialize(platfrom, xlsxpath, langlist, sheetobj_list, is_skip_empty_key)
-      @platform = platfrom
-      @xlsxpath = xlsxpath
-      @langlist = langlist
-      @sheetobj_list = sheetobj_list
+    def initialize(setting)
+      @platform = setting.platform
+      @xlsxpath = setting.xlsxpath
+      @langlist = setting.lang_path_list
+      @sheetobj_list = setting.sheet_obj_list
       puts "Start to Parse XLSX: \"#{@xlsxpath}\" ...".green
       @sheetcontent_list = Array.new
       @allkey_dict = {}
       @all_error = Array.new
-      @is_skip_empty_key = is_skip_empty_key
+      @is_skip_empty_key = setting.is_skip_empty_key
+      @injectobj = setting.injection
       self.parse
     end
 
@@ -133,6 +135,12 @@ module Applocale
       end
 
       unless keystr.nil?
+        if @injectobj.has_is_skip_by_key
+          is_skip_by_key = @injectobj.load_is_skip_by_key(sheetname, keystr)
+          if is_skip_by_key.to_s.downcase == "true"
+            return nil
+          end
+        end
         rowinfo = ParseModelModule::RowInfo.new(sheetname, rowno, keystr)
         lang_with_colno_list.each do |lang_with_colno|
           cell = cells[lang_with_colno.colno - 1]

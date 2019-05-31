@@ -24,7 +24,7 @@ sheetname:
     en_US: "B"
     zh_TW: "C"
     zh_CN: "D"
-isSkipEmptyKey: false
+isSkipEmptyKey: true
 
 
 # def convent_to_locale(lang, key, value)
@@ -51,6 +51,7 @@ isSkipEmptyKey: false
 #     return value
 # end
 
-# def is_skip_by_key(sheetname, lang, key)
+# def is_skip_by_key(sheetname, key)
 #     return true
 # end
+

@@ -3,6 +3,7 @@ require File.expand_path('../file_util.rb', __FILE__)
 require File.expand_path('../error_util.rb', __FILE__)
 require File.expand_path('../platform.rb', __FILE__)
 require File.expand_path('../../Core/setting.rb', __FILE__)
+require File.expand_path('../injection.rb', __FILE__)
 
 require 'pathname'
 
@@ -86,6 +87,8 @@ module Applocale
         isSkipEmptyKey = config_yaml['isSkipEmptyKey']
         setting = Applocale::Config::Setting.new(self.configfile_pathstr)
         setting.rubycode = rubycode
+        setting.injection = Applocale::Injection.load(rubycode)
+
         unless link.nil? || link.length == 0
           if (link =~ /^https/).nil? && (link =~ /^http/).nil?
             error = ErrorUtil::ConfigFileInValid.new("Invalid link for [link] : #{link}")

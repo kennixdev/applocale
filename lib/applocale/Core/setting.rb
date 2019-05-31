@@ -21,7 +21,7 @@ require 'colorize'
 module Applocale
   module Config
     class Setting
-      attr_accessor :configfile_pathstr, :link, :platform, :xlsxpath, :google_credentials_path, :lang_path_list, :sheet_obj_list, :rubycode, :export_format, :export_to, :is_skip_empty_key
+      attr_accessor :configfile_pathstr, :link, :platform, :xlsxpath, :google_credentials_path, :lang_path_list, :sheet_obj_list, :rubycode, :export_format, :export_to, :is_skip_empty_key, :injection
       def initialize(configfile_pathstr)
         self.configfile_pathstr = configfile_pathstr
         self.lang_path_list = Array.new

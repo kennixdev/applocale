@@ -68,11 +68,11 @@ module Applocale
     end
     case setting.export_format
     when 'csv'
-      parser = Applocale::ParseCSV.new(setting.platform, setting.export_to, setting.lang_path_list, setting.sheet_obj_list, setting.is_skip_empty_key)
+      parser = Applocale::ParseCSV.new(setting)
     when 'xlsx'
-      parser = Applocale::ParseXLSX.new(setting.platform, setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list, setting.is_skip_empty_key)
+      parser = Applocale::ParseXLSX.new(setting)
     end
-    ConvertToStrFile.convert(setting.platform, setting.lang_path_list,parser.result, setting.rubycode)
+    ConvertToStrFile.convert(setting, parser.result)
   end
 
   def self.start_reverse( is_skip, projpath = Dir.pwd)

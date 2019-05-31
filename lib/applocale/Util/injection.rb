@@ -81,8 +81,9 @@ module Applocale
     end
 
     public
-    def load_is_skip_by_key(sheetname, lang, key)
-      return is_skip_by_key(sheetname, lang, key)
+    def load_is_skip_by_key(sheetname, key)
+      return is_skip_by_key(sheetname, key)
     end
+
   end
 end

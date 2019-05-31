@@ -18,16 +18,19 @@ module Applocale
     @langlist
     @sheetobj_list
     @is_skip_empty_key
+    @injectobj
 
-    def initialize(platfrom, csv_directory, langlist, sheetobj_list, is_skip_empty_key)
-      @platform = platfrom
-      @csv_directory = csv_directory
-      @langlist = langlist
-      @sheetobj_list = sheetobj_list
+
+    def initialize(setting)
+      @platform = setting.platform
+      @csv_directory = setting.export_to
+      @langlist = setting.lang_path_list
+      @sheetobj_list = setting.sheet_obj_list
       @sheetcontent_list = Array.new
       @allkey_dict = {}
       @all_error = Array.new
-      @is_skip_empty_key = is_skip_empty_key
+      @is_skip_empty_key = setting.is_skip_empty_key
+      @injectobj = setting.injection
       # puts "Start to Parse CSV: \"#{csv_directory}\" ...".green
       parse
     end
@@ -51,8 +54,18 @@ module Applocale
         rows.each_with_index do |row, index|
           next if sheet_content.header_rowno == index
           row_content = parse_row(sheet_name, index, row, sheet_content.keyStr_with_colno, sheet_content.lang_with_colno_list)
-          handle_duplicate_key_if_any!(row_content)
-          sheet_content.rowinfo_list.push(row_content)
+          next if row_content.nil?
+          toskip = false
+          if @injectobj.has_is_skip_by_key
+            is_skip_by_key = @injectobj.load_is_skip_by_key(sheet_name, row_content.key_str)
+            if is_skip_by_key.to_s.downcase == "true"
+              toskip = true
+            end
+          end
+          if !toskip
+            handle_duplicate_key_if_any!(row_content)
+            sheet_content.rowinfo_list.push(row_content)
+          end
         end
         sheet_content
       end
@@ -116,6 +129,8 @@ module Applocale
         if (key_str.nil? || key_str.length == 0)
           if !@is_skip_empty_key
             raise "ParseCSVError: Key can not be empty, in sheet #{sheet_name}, row: #{index}, key_str: #{key_str}"
+          else
+            return
           end
         else
           raise "ParseCSVError: Invaild Key in sheet #{sheet_name}, row: #{index}, key_str: #{key_str}"

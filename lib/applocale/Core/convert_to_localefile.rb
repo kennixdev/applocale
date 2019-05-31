@@ -9,9 +9,12 @@ require 'json'
 module Applocale
   class ConvertToStrFile
 
-    def self.convert(platform, lang_path_list, sheetcontent_list, rubycode)
 
-      injectObj = Applocale::Injection.load(rubycode)
+    def self.convert(setting, sheetcontent_list)
+
+      platform = setting.platform
+      lang_path_list =  setting.lang_path_list
+      injectObj = setting.injection
 
       lang_path_list.each do |langpath_obj|
         puts "Start to convert to string file for [\"#{langpath_obj.lang}\"] #{langpath_obj.filepath}...".green
@@ -73,12 +76,6 @@ module Applocale
         target.puts('')
         contentlist.each do |rowinfo|
           content = rowinfo.content_dict[langpath_obj.lang]
-          if injectObj.has_is_skip_by_key
-            is_skip_by_key = injectObj.load_is_skip_by_key(sheetcontent.sheetname, langpath_obj.lang, rowinfo.key_str)
-            if is_skip_by_key.to_s.downcase == "true"
-              next
-            end
-          end
           value = self.add_escape(platform, langpath_obj.lang, rowinfo.key_str, content, injectObj)
           target.puts("\"#{rowinfo.key_str}\" = \"#{value}\";")
         end
@@ -95,12 +92,6 @@ module Applocale
         contentlist = sheetcontent.get_rowInfo_sortby_key
         contentlist.each do |rowinfo|
           content = rowinfo.content_dict[langpath_obj.lang]
-          if injectObj.has_is_skip_by_key
-            is_skip_by_key = injectObj.load_is_skip_by_key(sheetcontent.sheetname, langpath_obj.lang, rowinfo.key_str)
-            if is_skip_by_key.to_s.downcase == "true"
-              next
-            end
-          end
           value = self.add_escape(platform, langpath_obj.lang, rowinfo.key_str, content, injectObj)
           target.puts("   <string name=\"#{rowinfo.key_str}\">#{value}</string>")
         end
@@ -118,16 +109,6 @@ module Applocale
           value = add_escape(platform, lang_path_obj.lang, row.key_str, content, inject_obj)
           [row.key_str, value]
         end.to_h
-        newResult = newResult.select do |key, value|
-          to_skip = false
-          if inject_obj.has_is_skip_by_key
-            is_skip_by_key = inject_obj.load_is_skip_by_key(sheet_content.sheetname, lang_path_obj.lang, key)
-            if is_skip_by_key.to_s.downcase == "true"
-              to_skip = true
-            end
-          end
-          !to_skip
-        end
         newResult
       end.reduce({}, :merge)
       section_last_row = sheet_content_list
