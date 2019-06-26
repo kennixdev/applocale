@@ -130,7 +130,10 @@ module Applocale
         value = injectObj.load_before_convent_to_locale(lang.to_s, key,  value)
       end
       if injectObj.has_convent_to_locale
-        value = injectObj.load_convent_to_locale(lang.to_s, key,  value)
+        tvalue = injectObj.load_convent_to_locale(lang.to_s, key,  value)
+        if !tvalue.nil?
+          value = tvalue
+        end
       else
         value = ContentUtil.add_escape(platform, value)
       end

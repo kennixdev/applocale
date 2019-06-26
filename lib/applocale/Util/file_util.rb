@@ -62,12 +62,12 @@ module Applocale
       EXPORT_FORMAT
     end
 
-    def self.str_to_folderpathstr(str)
-      pathstr = Pathname.new(str.strip)
-      if File.directory?(pathstr)
-        pathstr = File.join(self.configfile_pathstr, FilePathUtil.default_config_filename).to_s
-      end
-    end
+    # def self.str_to_folderpathstr(str)
+    #   pathstr = Pathname.new(str.strip)
+    #   if File.directory?(pathstr)
+    #     pathstr = File.join(self.configfile_pathstr, FilePathUtil.default_config_filename).to_s
+    #   end
+    # end
   end
 end
 

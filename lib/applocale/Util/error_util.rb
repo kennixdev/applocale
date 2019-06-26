@@ -50,6 +50,19 @@ module Applocale
         "Can't open xlsx file #{self.path}"
       end
     end
+
+    class FileNotExist < CommandError
+      def message
+        "File not exist"
+      end
+    end
+
+    class FileMustSameExt < CommandError
+      def message
+        "Two file format not same"
+      end
+    end
+
   end
 end
 

@@ -4,7 +4,7 @@ require File.expand_path('../platform.rb', __FILE__)
 
 module Applocale
   class ValidKey
-    REGEX_KEYSTR_IOS = /\A[0-9a-zA-Z_]+\z/
+    REGEX_KEYSTR_IOS = /\A[0-9a-zA-Z_\/]+\z/
 
     def self.is_validkey(platfrom, key)
       return false if key.nil?

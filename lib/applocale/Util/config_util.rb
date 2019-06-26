@@ -10,12 +10,13 @@ require 'pathname'
 module Applocale
   module Config
     class ConfigUtil
-      attr_accessor :configfile_pathstr
+      attr_accessor :configfile_pathstr, :configFile
 
-      def initialize(projectdir_path)
+      def initialize(projectdir_path, config_filename)
         projpath = Pathname.new(projectdir_path.strip)
         if File.directory?(projpath)
-          self.configfile_pathstr = File.join(projpath, FilePathUtil.default_mainfolder, FilePathUtil.default_config_filename)
+          self.configFile = config_filename
+          self.configfile_pathstr = File.join(projpath, FilePathUtil.default_mainfolder, config_filename)
           FileUtils.mkdir_p(File.dirname(self.configfile_pathstr))
         else
           ErrorUtil::ConfigFileInValid.new('Project Path is invalid.').raise
@@ -25,7 +26,7 @@ module Applocale
       public
       def create_configfile(platform)
         if !File.exist?(self.configfile_pathstr)
-          src_pathstr = File.expand_path("../../#{FilePathUtil.default_config_filename}", __FILE__)
+          src_pathstr = File.expand_path("../../#{self.configFile}", __FILE__)
           File.open(src_pathstr, 'r') do |form|
             File.open(configfile_pathstr, 'w') do |to|
               form.each_line do |line|
@@ -44,8 +45,8 @@ module Applocale
       end
 
       public
-      def self.create_configfile_ifneed(platform, projectdir_path)
-        config = ConfigUtil.new(projectdir_path)
+      def self.create_configfile_ifneed(platform, projectdir_path, config_filename)
+        config = ConfigUtil.new(projectdir_path, config_filename)
         config.create_configfile(platform)
       end
 

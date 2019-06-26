@@ -14,28 +14,32 @@ module Applocale
     class Init < Thor
       desc "init [platform]", "Create Config File, platform: ios | android | json"
       option :path, :desc => "Project dir path"
+      option :config_file, :desc => "the filename of config, default AppLocaleFile"
       def init(platform = nil)
-        Applocale.create_config_file(platform, options[:path])
+        Applocale.create_config_file(platform, options[:path], options[:config_file])
       end
 
       desc "update", "Download xlsx and convert to localization string file"
       option :path, :desc => "Project dir path"
+      option :config_file, :desc => "the filename of config, default AppLocaleFile"
       def update()
-        Applocale.start_update(options[:path])
+        Applocale.start_update(options[:path],options[:config_file])
       end
 
       desc "update_local", "Convert local xlsx file to localization string file"
       option :path, :desc => "Project dir path"
+      option :config_file, :desc => "the filename of config, default AppLocaleFile"
       def update_local()
-        Applocale.start_local_update(nil,options[:path])
+        Applocale.start_local_update(nil,options[:path], options[:config_file])
       end
 
       desc "reverse", "Convert localization string file to xlsx"
       option :skip, :desc => "Skip Error"
       option :path, :desc => "Project dir path"
+      option :config_file, :desc => "the filename of config, default AppLocaleFile"
       def reverse()
         is_skip = !options[:skip].nil?
-        Applocale::start_reverse(is_skip, options[:path])
+        Applocale::start_reverse(is_skip, options[:path],options[:config_file])
       end
 
       desc "version", "show the AppLocale verions"
@@ -50,9 +54,35 @@ module Applocale
 
       desc "findkey [key]", "findkey for ios and convert to xlsx"
       option :path, :desc => "Project dir path"
+      option :config_file, :desc => "the filename of config, default AppLocaleFile"
       def findkey(key)
-        Applocale::findkey(key, options[:path])
+        Applocale::findkey(key, options[:path], options[:config_file])
       end
+
+
+      desc "compare two string file", "compare two string file"
+      option :file2, :desc => "second file path"
+      def compare(file1, file2)
+        Applocale::compare(file1, file2)
+      end
+
     end
   end
 end
+
+lang = "values"
+# lang = "values-zh-rCN"
+# lang = "values-zh-rTW"
+# file1 = "/Users/kennix.chui/Documents/GT/GT_Project/HASE_STMA/SourceCode/Android/hase-mobile-stma-android/AppLocale/test/#{lang}/strings_share.xml"
+# file2 = "/Users/kennix.chui/Documents/GT/GT_Project/HASE_STMA/SourceCode/Android/hase-mobile-stma-android/AppLocale/string/#{lang}/strings_share.xml"
+# Applocale::compare(file1, file2)
+
+path = "/Users/kennix.chui/Documents/GT/GT_Project/HASE_STMA/SourceCode/Android/hase-mobile-stma-android"
+file = "App3"
+# Applocale.start_update(path, file)
+#
+Applocale.start_local_update(nil, path, file)
+
+# d = "We're sorry"
+# puts d
+# puts d.gsub(/'/, "\\\\'")
