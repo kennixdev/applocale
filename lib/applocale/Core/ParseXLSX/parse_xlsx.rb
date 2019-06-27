@@ -3,6 +3,7 @@ require File.expand_path('../parse_xlsx_module.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../../Util/regex_util.rb', __FILE__)
 require File.expand_path('../../ParseModel/parse_model_module.rb', __FILE__)
+require File.expand_path('../../../Util/convert_util.rb', __FILE__)
 
 require 'rubyXL'
 require 'colorize'
@@ -24,7 +25,7 @@ module Applocale
     @langlist
     @sheetobj_list
     @is_skip_empty_key
-    @injectobj
+    @convert_file
 
     def initialize(setting)
       @platform = setting.platform
@@ -36,7 +37,7 @@ module Applocale
       @allkey_dict = {}
       @all_error = Array.new
       @is_skip_empty_key = setting.is_skip_empty_key
-      @injectobj = setting.injection
+      @convert_file = setting.convert_file
       self.parse
     end
 
@@ -135,8 +136,8 @@ module Applocale
       end
 
       unless keystr.nil?
-        if @injectobj.has_is_skip_by_key
-          is_skip_by_key = @injectobj.load_is_skip_by_key(sheetname, keystr)
+        if @convert_file.has_is_skip_by_key
+          is_skip_by_key = @convert_file.load_is_skip_by_key(sheetname, keystr)
           if is_skip_by_key.to_s.downcase == "true"
             return nil
           end
@@ -147,7 +148,7 @@ module Applocale
           val = cell && cell.value
           cell_value = val.to_s
           lang_name = lang_with_colno.lang
-          rowinfo.content_dict[lang_name] = convert_contect(cell_value)
+          rowinfo.content_dict[lang_name] = convert_contect(sheetname,keystr, cell_value)
         end
         return rowinfo
       end
@@ -165,11 +166,16 @@ module Applocale
       end
     end
 
-    def convert_contect(cell_value)
+    def convert_contect(sheetname, key, cell_value)
       if cell_value.nil?
         return ''
       else
-        return ContentUtil.from_excel(cell_value)
+        value = ContentUtil.from_excel(cell_value)
+        if @convert_file.has_parse_from_excel_or_csv
+          return @convert_file.load_parse_from_excel_or_csv(sheetname, key, cell_value, value)
+        else
+          return value
+        end
       end
     end
 

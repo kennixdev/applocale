@@ -4,6 +4,11 @@ Applocale is a Localization tool,
 It can generates localized file for ios, android or in json format  
 The input resource can be 'google sheet' or 'xlsx' or 'csv'
 
+## What's news
+0.4.1:  
+1. can multiple config file in one project
+2. separate conversion logic in ruby file
+
 ## Installation
 
 **Option1: Install by command:**
@@ -36,6 +41,7 @@ And then execute:
 		+ findkey [key]    # Findkey and gen report for ios and convert to xlsx
 	Optional:
 	 	[--path]    # Project Path
+	 	[--config_file]  #Config File Name
 
 ## Steps:
 
@@ -61,6 +67,7 @@ Step3: convert to xlsx
 ```ruby
 link: [link]	#download link for xlsx, it support google spreadsheet
 platform: [android|ios|json]		#It can be android, ios or json
+resource_folder: [resource_folder]  #the folder to store resource, should xlsx or csv
 xlsxpath: [xlsxpath]	#local path for save or read xlsx
 export_format: [csv|xlsx] # format of downloaded files, default option is xlsx.
 google_credentials_path: [google_credentials_path]		#optional: google credentials file path
@@ -81,6 +88,7 @@ sheetname:
 		[lang2]: [col]	#col label or number for lang2
 		[lang3]: [col]	#col label or number for lang3
 isSkipEmptyKey: [true|false] #whether throw error when key is empty
+convertFile: [convertFile path]  #should be convert script, if any customer convert need, enable this param
 ```
 *** Note that, for format in sheetname, it can be either by header or row and col lable
 
@@ -88,6 +96,7 @@ for example:
 ```ruby
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "ios"
+resource_folder: "ResourceAOS"
 xlsxpath: "string.xlsx"
 export_format: "csv"
 langlist:
@@ -112,9 +121,35 @@ sheetname:
 		zh_TW: "C"
 		zh_CN: "D"
 isSkipEmptyKey: false
+convertFile: "convert_aos.rb"
 ``` 
 
-*** You can also set conversion logic by create method of 'convent_to_locale', 'before_convent_to_locale', 'after_convent_to_locale', 'parse_from_locale', 'before_parse_from_locale', 'after_parse_from_locale', 'is_skip_by_key'
+## Customer conversion logic:
+```ruby
+class Convert
+
+ # def convent_to_locale(lang, key, before_convert_value, after_convert_value)
+ #  return new_value
+ # end
+
+ # def parse_from_locale(lang, key, before_convert_value, after_convert_value)
+ #     return value
+ # end
+
+ # def is_skip_by_key(sheetname, key)
+ #     return true
+ # end
+
+ # def parse_from_excel_or_csv(sheetname, key, before_convert_value, after_convert_value)
+ #     return value
+ # end
+
+ # def append_other(lang, target)
+ #
+ # end
+
+end
+``` 
 
 
 

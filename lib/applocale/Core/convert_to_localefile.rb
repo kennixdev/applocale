@@ -1,7 +1,7 @@
 require File.expand_path('../setting.rb', __FILE__)
 require File.expand_path('../../Util/platform.rb', __FILE__)
 require File.expand_path('../../Util/regex_util.rb', __FILE__)
-require File.expand_path('../../Util/injection.rb', __FILE__)
+require File.expand_path('../../Util/convert_util.rb', __FILE__)
 
 require 'colorize'
 require 'json'
@@ -14,22 +14,21 @@ module Applocale
 
       platform = setting.platform
       lang_path_list =  setting.lang_path_list
-      injectObj = setting.injection
 
       lang_path_list.each do |langpath_obj|
         puts "Start to convert to string file for [\"#{langpath_obj.lang}\"] #{langpath_obj.filepath}...".green
         if platform == Platform::IOS
-          self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list, injectObj)
+          self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list, setting.convert_file)
         elsif platform == Platform::ANDROID
-          self.convert_to_xml(platform, langpath_obj, sheetcontent_list, injectObj)
+          self.convert_to_xml(platform, langpath_obj, sheetcontent_list, setting.convert_file)
         elsif platform == Platform::JSON
-          self.convert_to_json(platform, langpath_obj, sheetcontent_list, injectObj)
+          self.convert_to_json(platform, langpath_obj, sheetcontent_list, setting.convert_file)
         end
       end
       puts 'Convert Finished !!!'.green
     end
 
-    def self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list, injectObj)
+    def self.convert_to_stringfile(platform, langpath_obj, sheetcontent_list, convert_file)
       FileUtils.mkdir_p(File.dirname(langpath_obj.filepath))
       file_header_comment = []
       is_double_dash_comment = false
@@ -76,14 +75,17 @@ module Applocale
         target.puts('')
         contentlist.each do |rowinfo|
           content = rowinfo.content_dict[langpath_obj.lang]
-          value = self.add_escape(platform, langpath_obj.lang, rowinfo.key_str, content, injectObj)
+          value = self.add_escape(platform, langpath_obj.lang, rowinfo.key_str, content, convert_file)
           target.puts("\"#{rowinfo.key_str}\" = \"#{value}\";")
         end
+      end
+      if convert_file.has_append_other
+        convert_file.load_append_other(langpath_obj.lang.to_s,target)
       end
       target.close
     end
 
-    def self.convert_to_xml(platform, langpath_obj, sheetcontent_list, injectObj)
+    def self.convert_to_xml(platform, langpath_obj, sheetcontent_list, convert_file)
       FileUtils.mkdir_p(File.dirname(langpath_obj.filepath))
       target = open(langpath_obj.filepath, 'w')
       target.puts('<resources>')
@@ -92,21 +94,28 @@ module Applocale
         contentlist = sheetcontent.get_rowInfo_sortby_key
         contentlist.each do |rowinfo|
           content = rowinfo.content_dict[langpath_obj.lang]
-          value = self.add_escape(platform, langpath_obj.lang, rowinfo.key_str, content, injectObj)
+          value = self.add_escape(platform, langpath_obj.lang, rowinfo.key_str, content, convert_file)
           target.puts("   <string name=\"#{rowinfo.key_str}\">#{value}</string>")
         end
         target.puts('')
       end
+
+      if convert_file.has_append_other
+        convert_file.load_append_other(langpath_obj.lang.to_s, target)
+      end
+
+
+
       target.puts('</resources>')
       target.close
     end
 
-    def self.convert_to_json(platform, lang_path_obj, sheet_content_list, inject_obj)
+    def self.convert_to_json(platform, lang_path_obj, sheet_content_list, convert_file)
       FileUtils.mkdir_p(File.dirname(lang_path_obj.filepath))
       hash = sheet_content_list.map do |sheet_content|
         newResult = sheet_content.get_rowInfo_sortby_key.map do |row|
           content = ContentUtil.remove_escaped_new_line(row.content_dict[lang_path_obj.lang])
-          value = add_escape(platform, lang_path_obj.lang, row.key_str, content, inject_obj)
+          value = add_escape(platform, lang_path_obj.lang, row.key_str, content, convert_file)
           [row.key_str, value]
         end.to_h
         newResult
@@ -124,24 +133,12 @@ module Applocale
       target.close
     end
 
-    def self.add_escape(platform, lang, key, content, injectObj)
-      value = content
-      if injectObj.has_before_convent_to_locale
-        value = injectObj.load_before_convent_to_locale(lang.to_s, key,  value)
-      end
-      if injectObj.has_convent_to_locale
-        tvalue = injectObj.load_convent_to_locale(lang.to_s, key,  value)
-        if !tvalue.nil?
-          value = tvalue
-        end
-      else
-        value = ContentUtil.add_escape(platform, value)
-      end
-      if injectObj.has_after_convent_to_locale
-        value = injectObj.load_after_convent_to_locale(lang.to_s, key,  value)
+    def self.add_escape(platform, lang, key, content, convert_file)
+      value = ContentUtil.add_escape(platform, content)
+      if convert_file.has_convent_to_locale
+        return convert_file.load_convent_to_locale(lang.to_s, key,  content, value)
       end
       return value
     end
-
   end
 end

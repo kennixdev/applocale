@@ -1,4 +1,6 @@
 require 'colorize'
+require File.expand_path('../../Util/convert_util.rb', __FILE__)
+
 # module Applocale
 #   class Setting
 #     class <<self
@@ -21,7 +23,7 @@ require 'colorize'
 module Applocale
   module Config
     class Setting
-      attr_accessor :configfile_pathstr, :link, :platform, :xlsxpath, :google_credentials_path, :lang_path_list, :sheet_obj_list, :rubycode, :export_format, :export_to, :is_skip_empty_key, :injection
+      attr_accessor :configfile_pathstr, :resource_folder,:link, :platform, :xlsxpath, :google_credentials_path, :lang_path_list, :sheet_obj_list, :rubycode, :export_format, :export_to, :is_skip_empty_key, :convert_file
       def initialize(configfile_pathstr)
         self.configfile_pathstr = configfile_pathstr
         self.lang_path_list = Array.new
@@ -32,6 +34,7 @@ module Applocale
         puts ' In Setting'
         puts "  link = #{self.link}"
         puts "  platform = #{self.platform}"
+        puts "  resource_folder = #{self.resource_folder}"
         puts "  xlsxpath = #{self.xlsxpath}"
         puts "  google_credentials_path = #{self.google_credentials_path} "
 
@@ -47,6 +50,7 @@ module Applocale
         puts " export_format: #{export_format}"
         puts " export_to: #{export_to}"
         puts " is_skip_empty_key: #{self.is_skip_empty_key} "
+        puts " convertFile: #{self.convert_file.filepath}"
         # puts self.rubycode
 
       end

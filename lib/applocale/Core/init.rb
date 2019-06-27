@@ -44,7 +44,7 @@ module Applocale
     proj_path = projpath
     proj_path = Dir.pwd if projpath.nil?
     proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
-    obj = Applocale::Config::ConfigUtil.new(proj_apath, configFile)
+    obj = Applocale::Config::ConfigUtil.new(proj_apath, configfile_name)
     setting = obj.load_configfile_to_setting
     if setting.link.to_s.length <= 0
       ErrorUtil::ConfigFileInValid.new('[link] is missing in config file ').raise
@@ -90,7 +90,7 @@ module Applocale
     proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
     obj = Applocale::Config::ConfigUtil.new(proj_apath, configfile_name)
     setting = obj.load_configfile_to_setting
-    Applocale::ParseLocalizedResource.new(is_skip,setting.platform,setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list, setting.rubycode )
+    Applocale::ParseLocalizedResource.new(is_skip,setting.platform,setting.xlsxpath, setting.lang_path_list, setting.sheet_obj_list, setting.convert_file )
   end
 
   def self.findkey( key, projpath = Dir.pwd, configFile = FilePathUtil.default_config_filename)

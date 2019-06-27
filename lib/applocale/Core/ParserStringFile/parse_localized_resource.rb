@@ -3,7 +3,6 @@ require File.expand_path('../../../Util/platform.rb', __FILE__)
 require File.expand_path('../../ParseXLSX/parse_xlsx_module', __FILE__)
 require File.expand_path('../parse_strings_file', __FILE__)
 require File.expand_path('../parse_xml_file', __FILE__)
-require File.expand_path('../../../Util/injection.rb', __FILE__)
 
 require 'rubyXL'
 require 'colorize'
@@ -15,15 +14,15 @@ module Applocale
     @xlsxpath
     @langpathobj_list
     @sheetobj_list
-    @injectobj
+    @convert_file
 
-    def initialize(skip_error = false, platform, xlsxpath, langpathobj_list, sheetobj_list, rubycode)
+    def initialize(skip_error = false, platform, xlsxpath, langpathobj_list, sheetobj_list, convert_file)
       @skip_error = skip_error
       @platform = platform
       @xlsxpath = xlsxpath
       @langpathobj_list = langpathobj_list
       @sheetobj_list = sheetobj_list
-      @injectobj = Applocale::Injection.load(rubycode)
+      @convert_file = convert_file
       startParse()
     end
 
@@ -47,7 +46,7 @@ module Applocale
     end
 
     def parse_ios
-      result = ParseStringsFile.new(@platform, @langpathobj_list, @injectobj)
+      result = ParseStringsFile.new(@platform, @langpathobj_list, @convert_file)
       errorlist = result.errorlist
       content = result.strings_keys
       keylist = result.keys_list
@@ -55,7 +54,7 @@ module Applocale
     end
 
     def parse_android
-      result = ParseXMLFile.new(@platform, @langpathobj_list, @injectobj)
+      result = ParseXMLFile.new(@platform, @langpathobj_list,@convert_file)
       errorlist = result.errorlist
       content = result.strings_keys
       keylist = result.keys_list

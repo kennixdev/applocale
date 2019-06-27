@@ -2,6 +2,7 @@ require File.expand_path('../../setting.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 require File.expand_path('../../../Util/regex_util.rb', __FILE__)
 require File.expand_path('../../ParseModel/parse_model_module.rb', __FILE__)
+require File.expand_path('../../../Util/convert_util.rb', __FILE__)
 
 require 'colorize'
 require 'csv'
@@ -18,7 +19,7 @@ module Applocale
     @langlist
     @sheetobj_list
     @is_skip_empty_key
-    @injectobj
+    @convertFile
 
 
     def initialize(setting)
@@ -30,7 +31,7 @@ module Applocale
       @allkey_dict = {}
       @all_error = Array.new
       @is_skip_empty_key = setting.is_skip_empty_key
-      @injectobj = setting.injection
+      @convertFile = setting.convert_file
       # puts "Start to Parse CSV: \"#{csv_directory}\" ...".green
       parse
     end
@@ -56,8 +57,8 @@ module Applocale
           row_content = parse_row(sheet_name, index, row, sheet_content.keyStr_with_colno, sheet_content.lang_with_colno_list)
           next if row_content.nil?
           toskip = false
-          if @injectobj.has_is_skip_by_key
-            is_skip_by_key = @injectobj.load_is_skip_by_key(sheet_name, row_content.key_str)
+          if @convertFile.has_is_skip_by_key
+            is_skip_by_key = @convertFile.load_is_skip_by_key(sheet_name, row_content.key_str)
             if is_skip_by_key.to_s.downcase == "true"
               toskip = true
             end
@@ -137,7 +138,19 @@ module Applocale
         end
       end
       rowinfo = ParseModelModule::RowInfo.new(sheet_name, index, key_str)
-      rowinfo.content_dict = Hash[language_header_list.map { |language_header| [language_header.lang, ContentUtil.from_excel(row[language_header.colno] || '')] }]
+
+      arr = Array.new
+      language_header_list.each do |language_header|
+        value = row[language_header.colno] || ''
+        after_value = ContentUtil.from_excel(value)
+        if @convertFile.has_parse_from_excel_or_csv
+          value =  @convertFile.load_parse_from_excel_or_csv(sheet_name, key_str, value, after_value)
+        else
+          value = after_value
+        end
+        arr.push([language_header.lang, value])
+      end
+      rowinfo.content_dict = Hash[arr]
       rowinfo
     end
 

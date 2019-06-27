@@ -1,5 +1,6 @@
 link: "https://docs.google.com/spreadsheets/d/1Wy2gN_DSw-TCU2gPCzqvYxLfFG5fyK5rodXs5MLUy8w"
 platform: "#{platform}"
+resource_folder: "#{resource_folder}"
 xlsxpath: "#{xlsxpath}"
 export_format: "#{export_format}"
 ＃google_credentials_path: "#{google_credentials_path}"
@@ -25,33 +26,4 @@ sheetname:
     zh_TW: "C"
     zh_CN: "D"
 isSkipEmptyKey: true
-
-
-# def convent_to_locale(lang, key, value)
-#     return value
-# end
-
-# def before_convent_to_locale(lang, key, value)
-#     return value
-# end
-
-# def after_convent_to_locale(lang, key, value)
-#     return value
-# end
-
-# def parse_from_locale(lang, key, value)
-#     return value
-# end
-
-# def before_parse_from_locale(lang, key, value)
-#     return value
-# end
-
-# def after_parse_from_locale(lang, key, value)
-#     return value
-# end
-
-# def is_skip_by_key(sheetname, key)
-#     return true
-# end
-
+# convertFile: "convert.rb"

@@ -70,19 +70,3 @@ module Applocale
   end
 end
 
-lang = "values"
-# lang = "values-zh-rCN"
-# lang = "values-zh-rTW"
-# file1 = "/Users/kennix.chui/Documents/GT/GT_Project/HASE_STMA/SourceCode/Android/hase-mobile-stma-android/AppLocale/test/#{lang}/strings_share.xml"
-# file2 = "/Users/kennix.chui/Documents/GT/GT_Project/HASE_STMA/SourceCode/Android/hase-mobile-stma-android/AppLocale/string/#{lang}/strings_share.xml"
-# Applocale::compare(file1, file2)
-
-path = "/Users/kennix.chui/Documents/GT/GT_Project/HASE_STMA/SourceCode/Android/hase-mobile-stma-android"
-file = "App3"
-# Applocale.start_update(path, file)
-#
-Applocale.start_local_update(nil, path, file)
-
-# d = "We're sorry"
-# puts d
-# puts d.gsub(/'/, "\\\\'")

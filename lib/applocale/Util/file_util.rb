@@ -12,6 +12,7 @@ module Applocale
     FILENAME_XLSX = 'string.xlsx'
     GOOGLE_CREDENTIALS = 'google_credentials.yaml'
     EXPORT_FORMAT = 'xlsx'
+    RESOURCE_FOLDER = 'Resource'
 
     def self.get_proj_absoluat_path(proj_path)
       path = proj_path
@@ -30,7 +31,7 @@ module Applocale
     end
 
     def self.default_export_to
-      return DIRNAME_MAIN + "/Resource"
+      return RESOURCE_FOLDER
     end
 
     def self.default_mainfolder
