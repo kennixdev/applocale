@@ -1,4 +1,5 @@
 require 'google/apis/drive_v3'
+require 'google/apis/sheets_v4'
 require 'googleauth'
 require 'googleauth/stores/file_token_store'
 require 'fileutils'
@@ -46,13 +47,45 @@ module Applocale
       authorization = authorize
       begin
         case export_format
-        when 'csv'
-          sheet_obj_list.each do |sheet_obj|
+          when 'csv'
+            service = Google::Apis::SheetsV4::SheetsService.new
+            service.client_options.application_name = APPLICATION_NAME
+            service.authorization = authorization
+            sheets = service.get_spreadsheet(self.spreadsheet_id).sheets
+            sheetMap = {}
+            sheets.each do |sheet|
+              sheetMap[sheet.properties.title.to_s] = sheet.properties.sheet_id
+            end
+
+            index = 0
+            sheet_obj_list.each do |sheet_obj|
             sheet_name = sheet_obj.sheetname
             file_path = File.expand_path("#{sheet_name}.csv", export_to)
-            csv = open("https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=#{authorization.access_token}")
-            IO.copy_stream(csv, file_path)
-          end
+            if sheetMap[sheet_name].nil?
+              ErrorUtil::SheetNotExist.new(sheet_name).raise
+            end
+            puts "to download sheet: #{sheet_name}"
+            if !sheet_obj.obj.use_export
+              link = "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=#{authorization.access_token}"
+              puts "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=xxxxx"
+              csv = open(link)
+              IO.copy_stream(csv, file_path)
+            else
+              if index % 3 == 0
+                puts "please wait ... "
+                sleep(5)
+              else
+                puts "please wait .. "
+                sleep(2)
+              end
+              link =  "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/export?format=csv&gid=#{sheetMap[sheet_name]}&access_token=#{authorization.access_token}"
+              puts "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/export?format=csv&gid=#{sheetMap[sheet_name]}&access_token=xxxxx"
+              File.open(file_path, "wb") do |file|
+                file.write open(link).read
+              end
+              index = index + 1
+            end
+            end
         when 'xlsx'
           service = Google::Apis::DriveV3::DriveService.new
           service.client_options.application_name = APPLICATION_NAME

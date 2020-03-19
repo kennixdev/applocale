@@ -201,12 +201,17 @@ module Applocale
               info_row = infos['row'].to_s.strip
               info_key = infos['key'].to_s.strip
               info_key_str = infos['key_str'].to_s.strip
+              info_use_export = infos["use_export"]
+              if info_use_export.nil?
+                info_use_export = "false"
+              end
+              info_use_export_bool = info_use_export.to_s.downcase == "true"
               if info_row.length > 0 && info_key.length > 0
-                obj = SheetInfoByRow.new(info_row.to_i, info_key, lang_header_key_dict)
+                obj = SheetInfoByRow.new(info_row.to_i, info_key, lang_header_key_dict, info_use_export_bool)
                 sheet = Sheet.new(sheetname,obj)
                 setting.sheet_obj_list.push(sheet)
               elsif info_key_str.length > 0
-                obj = SheetInfoByHeader.new(info_key_str, lang_header_key_dict)
+                obj = SheetInfoByHeader.new(info_key_str, lang_header_key_dict, info_use_export_bool)
                 sheet = Sheet.new(sheetname,obj)
                 setting.sheet_obj_list.push(sheet)
               else

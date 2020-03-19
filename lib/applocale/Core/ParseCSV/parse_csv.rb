@@ -47,6 +47,7 @@ module Applocale
           next
         end
         rows = CSV.read(csv_path)
+
         header = find_header(sheet_obj, rows)
         sheet_content.header_rowno = header[:header_row_index]
         sheet_content.keyStr_with_colno = header[:key_header_info]
@@ -84,19 +85,30 @@ module Applocale
         sheet_language_list = sheet_info_obj.lang_headers
         sheet_key_header = sheet_info_obj.key_header
 
-        header_row_index = rows.index do |row|
-          row.include?(sheet_key_header)
-        end
+        header_row_index = nil
+
+        rows.each_with_index {|row,index |
+          row.each do |rowValue|
+            if rowValue.to_s.strip == sheet_key_header.to_s
+              header_row_index = index
+              break
+            end
+            break if !header_row_index.nil?
+          end
+        }
 
         header_row_info = rows[header_row_index] unless header_row_index.nil?
-        header_column_index = header_row_info.index { |cell| cell == sheet_key_header }
+        if header_row_info.nil?
+          raise "ParseCSVError: Header not found in sheet: #{sheet_name}"
+        end
+        header_column_index = header_row_info.index { |cell| cell.to_s.strip == sheet_key_header }
         if header_row_index.nil? || header_column_index.nil?
           raise "ParseCSVError: Header not found in sheet #{sheet_name}"
         end
         key_header_info = ParseModelModule::KeyStrWithColNo.new(sheet_key_header, header_column_index)
 
         language_header_list = sheet_language_list.map do |key, value|
-          cell_index = header_row_info.index { |cell| cell == value }
+          cell_index = header_row_info.index { |cell| cell.to_s.strip == value }
           cell_index.nil? ? nil : ParseModelModule::LangWithColNo.new(value, key, cell_index)
         end.compact
         unless language_header_list.length == sheet_language_list.length

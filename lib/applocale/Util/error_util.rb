@@ -41,6 +41,16 @@ module Applocale
       end
     end
 
+    class SheetNotExist < CommonError
+      attr_accessor :sheetname
+      def initialize(sheetname)
+        @sheetname = sheetname
+      end
+      def message
+        "Can't find sheet: #{self.sheetname}"
+      end
+    end
+
     class CannotOpenXlsxFile < CommonError
       attr_accessor :path
       def initialize(path)

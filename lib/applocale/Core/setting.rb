@@ -97,29 +97,31 @@ module Applocale
     end
 
     class SheetInfoByHeader
-      attr_accessor :key_header, :lang_headers
+      attr_accessor :key_header, :lang_headers, :use_export
 
-      def initialize(key_header, lang_headers)
+      def initialize(key_header, lang_headers, use_export)
         self.key_header = key_header
         self.lang_headers = lang_headers
+        self.use_export = use_export
       end
 
       def to_s
-        return "key_header: #{self.key_header} | headers: #{self.lang_headers.to_s}"
+        return "key_header: #{self.key_header} | headers: #{self.lang_headers.to_s} | use_export: #{self.use_export}"
       end
     end
 
     class SheetInfoByRow
-      attr_accessor  :row, :key_col, :lang_cols
+      attr_accessor  :row, :key_col, :lang_cols, :use_export
 
-      def initialize(row, key_col, lang_cols)
+      def initialize(row, key_col, lang_cols, use_export)
         self.row = row
         self.key_col = key_col
         self.lang_cols = lang_cols
+        self.use_export = use_export
       end
 
       def to_s
-        return "row: #{self.row} | key_col: #{self.key_col} | lang_cols: #{self.lang_cols.to_s}"
+        return "row: #{self.row} | key_col: #{self.key_col} | lang_cols: #{self.lang_cols.to_s} | use_export: #{self.use_export}"
       end
     end
 
