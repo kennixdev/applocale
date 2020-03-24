@@ -5,6 +5,7 @@ require 'googleauth/stores/file_token_store'
 require 'fileutils'
 require 'colorize'
 require 'open-uri'
+require 'parallel'
 require File.expand_path('../../../Util/file_util.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 
@@ -58,7 +59,7 @@ module Applocale
             end
 
             index = 0
-            sheet_obj_list.each do |sheet_obj|
+            Parallel.each(sheet_obj_list) do |sheet_obj|
             sheet_name = sheet_obj.sheetname
             file_path = File.expand_path("#{sheet_name}.csv", export_to)
             if sheetMap[sheet_name].nil?

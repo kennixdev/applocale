@@ -38,4 +38,5 @@ Gem::Specification.new do |spec|
   # spec.add_dependency "google_drive", '~> 2.0'
   spec.add_dependency "colorize", "~> 0.8.1"
   spec.add_dependency "rubyXL", '~> 3.3', '>= 3.3.23'
+  spec.add_dependency "parallel", '1.11.2'
 end
