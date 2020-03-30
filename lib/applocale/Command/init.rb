@@ -66,7 +66,7 @@ module Applocale
         Applocale::compare(file1, file2)
       end
 
-      desc "local compare two AppLocale files", "local compare two AppLocale files"
+      desc "compare the local results of two AppLocale files", "compare the local results of two AppLocale files"
       option :path, :desc => "Project dir path"
       option :result_file, :desc => "Comparison Result file path"
       def compare_local(file1, file2)
