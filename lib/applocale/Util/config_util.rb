@@ -75,7 +75,7 @@ module Applocale
       end
 
       public
-      def load_configfile_to_setting
+      def load_configfile_to_setting(printSetting = true)
         error_list = Array.new
         config_yaml = load_configfile
         link = config_yaml['link'].to_s.strip
@@ -230,7 +230,9 @@ module Applocale
           error = ErrorUtil::ConfigFileInValid.new("[isSkipEmptyKey] must be boolean ")
           error_list.push(error)
         end
-        setting.printlog
+        if printSetting
+          setting.printlog
+        end
         ErrorUtil::ConfigFileInValid.raiseArr(error_list)
         return setting
       end

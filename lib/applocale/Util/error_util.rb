@@ -23,6 +23,18 @@ module Applocale
       end
     end
 
+    class MissingComparisonResultFilePath < CommonError
+      def message
+        'Missing Comparison Result File path'
+      end
+    end
+
+    class NotSupportComparisonResultFileExtension < CommonError
+      def message
+        'Only support .csv for Comparison Result File'
+      end
+    end
+
     class ConfigFileInValid < CommonError
       def self.raiseArr(list = nil)
         if !list.nil? && list.length > 0
@@ -73,6 +85,11 @@ module Applocale
       end
     end
 
+    class FileMustSamePlatform < CommandError
+      def message
+        'Two platforms not same'
+      end
+    end
   end
 end
 
