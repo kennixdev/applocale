@@ -3,31 +3,34 @@ require File.expand_path('../../../Util/platform.rb', __FILE__)
 module Applocale
   class CompareStringFile
 
-    attr_reader  :in_multiline_comments, :platform, :file1, :file2, :errorlist
+    attr_reader  :in_multiline_comments, :platform, :file1, :file2, :errorlist, :print_result, :lang
 
-    def initialize(platform, file1, file2)
+    def initialize(platform, file1, file2, lang = nil, print_result = true)
       @platform = platform
       @file1 = file1
-      @file12 = file2
-
-
+      @file2 = file2
       @errorlist = Array.new()
       @platform = platform
-
-      obj1 = {}
-      obj2 = {}
-      if platform == Platform::IOS
-        obj1 = parse_ios_file(file1)
-        obj2 = parse_ios_file(file2)
-      elsif platform == Platform::ANDROID
-        obj1 = parse_aos_file(file1)
-        obj2 = parse_aos_file(file2)
-      end
-      compare(obj1,obj2)
+      @print_result = print_result
+      @lang = lang
     end
 
+    def self.compare(lang_path_obj)
+      Applocale::CompareStringFile.new(lang_path_obj.platform, lang_path_obj.filepath1, lang_path_obj.filepath2, lang_path_obj.lang, false).compare
+    end
 
-    def compare(obj1, obj2)
+    def compare
+      obj1 = {}
+      obj2 = {}
+      if @platform == Platform::IOS
+        obj1 = parse_ios_file(@file1)
+        obj2 = parse_ios_file(@file2)
+      elsif @platform == Platform::ANDROID
+        obj1 = parse_aos_file(@file1)
+        obj2 = parse_aos_file(@file2)
+      end
+
+
       missingkeyInObj2 = Array.new
       mismatch = Array.new
       duplicateKey = Array.new
@@ -49,20 +52,28 @@ module Applocale
         end
         nobj2.delete(key)
       end
-      puts "==> not Same value:"
-      notSame.each do |key, value|
-        puts "key = #{key}"
-        puts "#{value[:obj1]}<"
-        puts "#{value[:obj2]}<"
+      missingKeyInObj1 = nobj2.keys
+      notSameKeys = notSame.keys
+      comparison_result = Applocale::Config::LangPathComparisonResult.init(@platform, @lang, @file1, @file2, notSameKeys, duplicateKey, mismatch, missingKeyInObj1, missingkeyInObj2)
+
+      if @print_result
+        puts "==> not Same value:"
+        notSame.each do |key, value|
+          puts "key = #{key}"
+          puts "#{value[:obj1]}<"
+          puts "#{value[:obj2]}<"
+        end
+        puts "==> duplicateKey"
+        puts duplicateKey
+        puts "==> mismatch"
+        puts mismatch
+        puts "==> missingkeyInObj2"
+        puts missingkeyInObj2
+        puts "==> missingKeyInObj1"
+        puts missingKeyInObj1
       end
-      puts "==> duplicateKey"
-      puts duplicateKey
-      puts "==> mismatch"
-      puts mismatch
-      puts "==> missingkeyInObj2"
-      puts missingkeyInObj2
-      puts "==> missingKeyInObj1"
-      puts nobj2
+
+      comparison_result
     end
 
 
@@ -102,43 +113,13 @@ module Applocale
 
     def parse_ios_file(path)
       strings_keys = {}
-      @in_multiline_comments = false
-      linenum = 0
       begin
       IO.foreach(path, mode: 'r:bom|utf-8') {|line|
-        linenum += 1
         line.strip!
-        if !@in_multiline_comments
-          next if line.start_with?('#')
-          next if line.start_with?('//')
-        end
-        if line.length <= 0
-          next
-        end
-
-        while true
-          key, line = parse_token(linenum, line, "=", path)
-          line.strip!
-
-          if not line.start_with?("=")
-            if !@in_multiline_comments && line.length > 0
-              error = ErrorUtil::ParseLocalizedError::WrongFormat.new(path, "", linenum).raise
-            end
-            break
-          end
-          line.slice!(0)
-
-          value, line = parse_token(linenum, line, ";", path)
-          line.strip!
-
-          if line.start_with?(";")
-            line.slice!(0)
-          else
-            error = ErrorUtil::ParseLocalizedError::WrongFormat.new(path, "", linenum).raise
-            key = nil
-            value = nil
-            break
-          end
+        match = line.match(/"(.*?)" = "(.*)";/)
+        unless match.nil?
+          key = match.captures[0]
+          value = match.captures[1]
           if strings_keys[key].nil?
             strings_keys[key] = Array.new
           end

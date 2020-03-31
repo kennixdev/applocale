@@ -9,6 +9,7 @@ require File.expand_path('../ParserStringFile/parse_localized_resource.rb', __FI
 require File.expand_path('../convert_to_localefile', __FILE__)
 require File.expand_path('../FindStrKey/find_str_key', __FILE__)
 require File.expand_path('../CompareStringFile/compare_string_file', __FILE__)
+require File.expand_path('../CompareStringFile/compare_string_files', __FILE__)
 
 require 'open-uri'
 
@@ -128,6 +129,30 @@ module Applocale
       platformsybom = Platform::ANDROID
     end
 
-    Applocale::CompareStringFile.new(platformsybom,file1_path,file2_path)
+    Applocale::CompareStringFile.new(platformsybom,file1_path,file2_path).compare
+  end
+
+  def self.compare_local(file1, file2, projpath = Dir.pwd, result_file)
+    puts 'Reminder: run `update` for both files before `compare`'.yellow
+    proj_path = projpath
+    proj_path = Dir.pwd if projpath.nil?
+    proj_apath = Applocale::FilePathUtil.get_proj_absoluat_path(proj_path)
+    obj1 = Applocale::Config::ConfigUtil.new(proj_apath, file1)
+    obj2 = Applocale::Config::ConfigUtil.new(proj_apath, file2)
+    setting1 = obj1.load_configfile_to_setting(false)
+    setting2 = obj2.load_configfile_to_setting(false)
+    platform1 = setting1.platform
+    platform2 = setting2.platform
+    if platform1 != platform2
+      ErrorUtil::FileMustSamePlatform.new.raise
+    end
+    if result_file.nil?
+      ErrorUtil::MissingComparisonResultFilePath.new.raise
+    end
+    if File.extname(result_file).strip.downcase[1..-1].downcase != 'csv'
+      ErrorUtil::NotSupportComparisonResultFileExtension.new.raise
+    end
+    result_file_path = File.join(proj_apath, FilePathUtil.default_mainfolder, result_file)
+    Applocale::CompareStringFiles.new(platform1, file1, file2, setting1, setting2, result_file_path)
   end
 end

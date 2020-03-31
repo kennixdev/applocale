@@ -39,6 +39,9 @@ And then execute:
 		+ update_local     # Convert local xlsx file to localization string file
 		+ version     	   # Show the AppLocale verions
 		+ findkey [key]    # Findkey and gen report for ios and convert to xlsx
+		+ compare_local    # Compare the local results of two AppLocale files
+		    [file1] [file2] # AppLocale files for comparison
+		    [--result-file] # Comparison Result file, only support .csv
 	Optional:
 	 	[--path]    # Project Path
 	 	[--config_file]  #Config File Name
