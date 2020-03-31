@@ -5,6 +5,7 @@ require 'googleauth/stores/file_token_store'
 require 'fileutils'
 require 'colorize'
 require 'open-uri'
+require 'parallel'
 require File.expand_path('../../../Util/file_util.rb', __FILE__)
 require File.expand_path('../../../Util/error_util.rb', __FILE__)
 
@@ -58,16 +59,15 @@ module Applocale
             end
 
             index = 0
-            sheet_obj_list.each do |sheet_obj|
+            Parallel.each(sheet_obj_list) do |sheet_obj|
             sheet_name = sheet_obj.sheetname
             file_path = File.expand_path("#{sheet_name}.csv", export_to)
             if sheetMap[sheet_name].nil?
               ErrorUtil::SheetNotExist.new(sheet_name).raise
             end
-            puts "to download sheet: #{sheet_name}"
             if !sheet_obj.obj.use_export
               link = "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=#{authorization.access_token}"
-              puts "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=xxxxx"
+              puts "\nto download sheet: #{sheet_name}\nhttps://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/gviz/tq?tqx=out:csv&sheet=#{sheet_name}&access_token=xxxxx"
               csv = open(link)
               IO.copy_stream(csv, file_path)
             else
@@ -79,7 +79,7 @@ module Applocale
                 sleep(2)
               end
               link =  "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/export?format=csv&gid=#{sheetMap[sheet_name]}&access_token=#{authorization.access_token}"
-              puts "https://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/export?format=csv&gid=#{sheetMap[sheet_name]}&access_token=xxxxx"
+              puts "\nto download sheet: #{sheet_name}\nhttps://docs.google.com/spreadsheets/d/#{self.spreadsheet_id}/export?format=csv&gid=#{sheetMap[sheet_name]}&access_token=xxxxx"
               File.open(file_path, "wb") do |file|
                 file.write open(link).read
               end
