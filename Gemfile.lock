@@ -45,7 +45,7 @@ GEM
       mini_portile2 (~> 2.2.0)
     os (1.0.1)
     public_suffix (3.1.0)
-    rake (10.5.0)
+    rake (13.0.1)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
@@ -70,7 +70,7 @@ DEPENDENCIES
   applocale!
   bundler (~> 1.12)
   minitest (~> 5.0)
-  rake (~> 10.0)
+  rake (~> 13.0)
 
 BUNDLED WITH
    1.16.2
